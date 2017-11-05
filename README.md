@@ -1,4 +1,4 @@
-[![PyPI](https://img.shields.io/pypi/v/nine.svg)](https://github.com/jhotujec/crispy-forms-bulma)
+[![PyPI](https://img.shields.io/pypi/v/nine.svg)](https://pypi.python.org/pypi/crispy-forms-bulma/1.1.1)
 
 crispy-forms-bulma
 ==
