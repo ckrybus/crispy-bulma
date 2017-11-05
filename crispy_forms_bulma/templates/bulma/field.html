@@ -1,0 +1,46 @@
+{% load crispy_forms_bulma_field %}
+
+{% if field.is_hidden %}
+    {{ field }}
+{% else %}
+    <div id="div_{{ field.auto_id }}"
+         class="field{% if wrapper_class %} {{ wrapper_class }}{% endif %}">
+        {% spaceless %}
+
+            {% if field.label %}
+                {% if field|is_checkbox %}
+                    {% crispy_field field %}
+                {% endif %}
+
+                <label for="" class="label">
+                    {{ field.label|safe }}
+                    {% if field.field.required %}
+                        <span class="asterisk">*</span>
+                    {% endif %}
+                </label>
+            {% endif %}
+
+            {% if field|is_select %}
+                <div class="select">
+                    {% crispy_field field %}
+                </div>
+            {% endif %}
+
+            {% if not field|is_checkbox and not field|is_checkboxselectmultiple and not field|is_select %}
+                {% crispy_field field %}
+            {% endif %}
+
+            {% if form_show_errors %}
+                {% for error in field.errors %}
+                    <p id="error_{{ forloop.counter }}_{{ field.auto_id }}"
+                       class="help is-danger">
+                        {{ error }}
+                    </p>
+                {% endfor %}
+            {% endif %}
+
+            {% if field.help_text %}
+                <p id="hint_{{ field.auto_id }}" class="help">{{ field.help_text|safe }}</p>
+            {% endif %}
+        {% endspaceless %}</div>
+{% endif %}
