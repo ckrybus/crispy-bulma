@@ -10,5 +10,3 @@ Install package from pip or clone it from github
 
 Add package settings to your project settings file  
 `from crispy_forms_bulma.settings import *`
-
-Enjoy
