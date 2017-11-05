@@ -1,5 +1,3 @@
-[![PyPI](https://img.shields.io/pypi/v/nine.svg)](https://pypi.python.org/pypi/crispy-forms-bulma/1.1.1)
-
 crispy-forms-bulma
 ==
 
