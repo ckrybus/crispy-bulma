@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='crispy-forms-bulma',
-    version='0.1.0',
+    version='1.1.1',
     description='Bulma',
     long_description=open('README.md').read(),
     author='Jure Hotujec',
