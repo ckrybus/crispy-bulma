@@ -1,1 +1,0 @@
-crispy_forms_bulma
