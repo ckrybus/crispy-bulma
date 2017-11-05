@@ -1,7 +1,10 @@
-### crispy-forms-bulma
+crispy-forms-bulma
+==
+
+### About
 This is a `Django`_ application to add `django-crispy-forms` layout objects for [Bulma](https://bulma.io/).
 
-###### Installation
+### Installation
 Install package from pip or clone it from github  
 `pip install crispy-forms-bulma`
 
