@@ -1,0 +1,32 @@
+{% load crispy_forms_bulma_field %}
+
+{% if field.is_hidden %}
+    {{ field }}
+{% else %}
+    <div id="div_{{ field.auto_id }}"
+         class="field {% if field.css_classes %} {{ field.css_classes }}{% endif %}">
+
+        {% if field.label and form_show_labels %}
+            <label for="{{ field.id_for_label }}"
+                   class="label{% if field.field.required %} requiredField{% endif %}">
+                {{ field.label|safe }}{% if field.field.required %}
+                    <span class="asteriskField">*</span>{% endif %}
+            </label>
+        {% endif %}
+
+        <div class="control {% if icon_prepend %}has-icons-left{% endif %}
+                            {% if icon_append %} has-icons-right {% endif %}">
+            {% crispy_field field %}
+            {% if icon_prepend %}
+                <span class="icon is-small is-left">
+                    <i class="fa fa-{{ icon_prepend }}"></i>
+                </span>
+            {% endif %}
+            {% if icon_append %}
+                <span class="icon is-small is-right">
+                    <i class="fa fa-{{ icon_append }}"></i>
+                </span>
+            {% endif %}
+        </div>
+    </div>
+{% endif %}

@@ -76,7 +76,7 @@ class CrispyBulmaFieldNode(template.Node):
         self.html5_required = 'html5_required'
 
     def render(self, context):
-        # Nodes are not threadsafe so we must store and look up our instance
+        # Nodes are not thread-safe so we must store and look up our instance
         # variables in the current rendering context first
         if self not in context.render_context:
             context.render_context[self] = (
