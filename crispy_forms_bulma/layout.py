@@ -250,7 +250,7 @@ class Reset(BaseInput):
     input_type = 'reset'
 
     def __init__(self, *args, **kwargs):
-        self.field_classes = 'button is-light'
+        self.field_classes = 'button is-text'
         super(Reset, self).__init__(*args, **kwargs)
 
 
