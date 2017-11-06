@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 1.1.3
+
+* Added input with icons
+
 ## Version 1.1.2
 
 * Added template for non-field errors
