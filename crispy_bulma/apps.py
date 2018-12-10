@@ -5,4 +5,4 @@ from django.apps import AppConfig
 
 
 class CrispyFormsBulmaConfig(AppConfig):
-    name = 'crispy_forms_bulma'
+    name = 'crispy_bulma'

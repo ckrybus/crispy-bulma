@@ -1,4 +1,7 @@
 *.pyc
 .idea
-/dist
-/crispy_forms_bulma.egg-info
+.venv
+
+build/
+dist/
+crispy_forms_bulma.egg-info/
