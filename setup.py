@@ -29,6 +29,23 @@ setup(
         'Django>=2.0',
         'django-crispy-forms==1.7.2'
     ],
+    extras_require={
+        "dev": [
+            "flake8",
+            "flake8-bugbear",
+            "flake8-docstrings",
+            "flake8-import-order",
+            "flake8-quotes",
+            "flake8-tidy-imports",
+            "flake8-todo",
+            "flake8-type-annotations",
+            "flake8-string-format",
+
+            "pdoc",
+            "PyGithub",
+            "wheel",
+        ]
+    },
     include_package_data=True,
     zip_safe=False
 )
