@@ -18,56 +18,56 @@ __all__ = [
 class Submit(BaseInput):
     """
     Used to create a Submit button descriptor for the {% crispy %} template tag.
-    >>> submit = Submit('Search the Site', 'search this site')
+    >>> submit = Submit("Search the Site", "search this site")
 
     The first argument is also slugified and turned into the id for the submit button.
     """
 
-    field_classes = 'button is-primary'
-    input_type = 'submit'
+    field_classes = "button is-primary"
+    input_type = "submit"
 
 
 class Button(BaseInput):
     """
     Used to create a Submit input descriptor for the {% crispy %} template tag.
-    >>> button = Button('Button 1', 'Press Me!')
+    >>> button = Button("Button 1", "Press Me!")
 
     The first argument is also slugified and turned into the id for the button.
     """
 
-    field_classes = 'button'
-    input_type = 'button'
+    field_classes = "button"
+    input_type = "button"
 
 
 class Reset(BaseInput):
     """
     Used to create a Reset button input descriptor for the {% crispy %} template tag.
-    >>> reset = Reset('Reset This Form', 'Revert Me!')
+    >>> reset = Reset("Reset This Form", "Revert Me!")
 
     The first argument is also slugified and turned into the id for the button.
     """
 
-    field_classes = 'button is-text'
-    input_type = 'reset'
+    field_classes = "button is-text"
+    input_type = "reset"
 
 
 class Row(Div):
     """
     Layout object. It wraps fields in a div whose default class is "columns".
-    >>> Row('form_field_1', 'form_field_2', 'form_field_3')
+    >>> Row("form_field_1", "form_field_2", "form_field_3")
     """
 
-    css_class = 'columns'
+    css_class = "columns"
 
 
 class Column(Div):
     """
     Layout object. It wraps fields in a div whose default class is "column".
 
-    >>> Column('form_field_1', 'form_field_2')
+    >>> Column("form_field_1", "form_field_2")
     """
 
-    css_class = 'column'
+    css_class = "column"
 
 
 class IconField(Field):
@@ -83,8 +83,8 @@ class IconField(Field):
                extra_context=None, **kwargs):
         extra_context = extra_context.copy() if extra_context is not None else {}
         extra_context.update({
-            'icon_prepend': self.icon_prepend,
-            'icon_append': self.icon_append,
+            "icon_prepend": self.icon_prepend,
+            "icon_append": self.icon_append,
         })
         template = self.get_template_name(template_pack)
 
@@ -93,4 +93,3 @@ class IconField(Field):
             template=template,
             template_pack=template_pack, extra_context=extra_context, **kwargs
         )
-

@@ -3,11 +3,9 @@ try:
 except ImportError:
     izip = zip
 
+from crispy_forms.utils import TEMPLATE_PACK
 from django import forms, template
 from django.conf import settings
-from django.template import Context, loader
-
-from crispy_forms.utils import TEMPLATE_PACK, get_template_pack
 
 register = template.Library()
 
@@ -52,7 +50,7 @@ def classes(field):
     """
     Returns CSS classes of a field
     """
-    return field.widget.attrs.get('class', None)
+    return field.widget.attrs.get("class", None)
 
 
 @register.filter
@@ -73,7 +71,7 @@ class CrispyBulmaFieldNode(template.Node):
     def __init__(self, field, attrs):
         self.field = field
         self.attrs = attrs
-        self.html5_required = 'html5_required'
+        self.html5_required = "html5_required"
 
     def render(self, context):
         # Nodes are not thread-safe so we must store and look up our instance
@@ -93,43 +91,43 @@ class CrispyBulmaFieldNode(template.Node):
             html5_required = False
 
         # If template pack has been overridden in FormHelper we can pick it from context
-        template_pack = context.get('template_pack', TEMPLATE_PACK)
+        template_pack = context.get("template_pack", TEMPLATE_PACK)
 
         # There are special django widgets that wrap actual widgets,
         # such as forms.widgets.MultiWidget, admin.widgets.RelatedFieldWidgetWrapper
-        widgets = getattr(field.field.widget, 'widgets',
-                          [getattr(field.field.widget, 'widget', field.field.widget)])
+        widgets = getattr(field.field.widget, "widgets",
+                          [getattr(field.field.widget, "widget", field.field.widget)])
 
         if isinstance(attrs, dict):
             attrs = [attrs] * len(widgets)
 
         converters = {
-            'textinput': 'input',
-            'fileinput': 'fileinput fileUpload',
-            'passwordinput': 'input',
+            "textinput": "input",
+            "fileinput": "fileinput fileUpload",
+            "passwordinput": "input",
         }
-        converters.update(getattr(settings, 'CRISPY_CLASS_CONVERTERS', {}))
+        converters.update(getattr(settings, "CRISPY_CLASS_CONVERTERS", {}))
 
         for widget, attr in zip(widgets, attrs):
             class_name = widget.__class__.__name__.lower()
             class_name = converters.get(class_name, class_name)
-            css_class = widget.attrs.get('class', '')
+            css_class = widget.attrs.get("class", "")
             if css_class:
                 if css_class.find(class_name) == -1:
                     css_class += " %s" % class_name
             else:
                 css_class = class_name
 
-            if template_pack in ['bulma']:
+            if template_pack in ["bulma"]:
                 if field.errors:
-                    css_class += ' is-danger'
+                    css_class += " is-danger"
 
-            widget.attrs['class'] = css_class
+            widget.attrs["class"] = css_class
 
             # HTML5 required attribute
-            if html5_required and field.field.required and 'required' not in widget.attrs:
-                if field.field.widget.__class__.__name__ is not 'RadioSelect':
-                    widget.attrs['required'] = 'required'
+            if html5_required and field.field.required and "required" not in widget.attrs:
+                if field.field.widget.__class__.__name__ is not "RadioSelect":
+                    widget.attrs["required"] = "required"
 
             for attribute_name, attribute in attr.items():
                 attribute_name = template.Variable(attribute_name).resolve(context)
