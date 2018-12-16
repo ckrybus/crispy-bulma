@@ -1,7 +1,7 @@
 from crispy_forms.layout import (
     BaseInput, ButtonHolder, Div, Field,
     Fieldset, HTML, Hidden, Layout, MultiField,
-    MultiWidgetField, Reset
+    MultiWidgetField
 )
 
 __all__ = [
