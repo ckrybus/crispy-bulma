@@ -7,12 +7,11 @@ from crispy_forms.utils import TEMPLATE_PACK, render_field
 
 __all__ = [
     # Defined in this file
-    "Button", "Column", "Reset", "Row", "Submit",
-    "IconField",
+    "Button", "Column", "IconField", "Reset", "Row", "Submit",
 
     # Imported from CrispyForms itself
-    "Div", "Field", "HTML", "Layout", "ButtonHolder",
-    "Hidden", "Fieldset", "MultiField", "MultiWidgetField"
+    "ButtonHolder", "Div", "Field", "Fieldset", "Hidden", "HTML", "Layout",
+    "MultiField", "MultiWidgetField"
 ]
 
 
