@@ -1,20 +1,25 @@
-from crispy_forms.layout import BaseInput, Div, Field
-
+from crispy_forms.layout import (
+    BaseInput, ButtonHolder, Div, Field,
+    Fieldset, HTML, Hidden, Layout, MultiField,
+    MultiWidgetField, Reset
+)
 
 __all__ = [
+    # Defined in this file
     "Button", "Column", "Reset", "Row", "Submit",
 
-    "Div", "Field"
+    # Imported from CrispyForms itself
+    "Div", "Field", "HTML", "Layout", "ButtonHolder",
+    "Hidden", "Fieldset", "MultiField", "MultiWidgetField"
 ]
 
 
 class Submit(BaseInput):
     """
-    Used to create a Submit button descriptor for the {% crispy %} template tag::
+    Used to create a Submit button descriptor for the {% crispy %} template tag.
+    >>> submit = Submit('Search the Site', 'search this site')
 
-        submit = Submit('Search the Site', 'search this site')
-
-    .. note:: The first argument is also slugified and turned into the id for the submit button.
+    The first argument is also slugified and turned into the id for the submit button.
     """
 
     field_classes = 'button is-primary'
@@ -23,11 +28,10 @@ class Submit(BaseInput):
 
 class Button(BaseInput):
     """
-    Used to create a Submit input descriptor for the {% crispy %} template tag::
+    Used to create a Submit input descriptor for the {% crispy %} template tag.
+    >>> button = Button('Button 1', 'Press Me!')
 
-        button = Button('Button 1', 'Press Me!')
-
-    .. note:: The first argument is also slugified and turned into the id for the button.
+    The first argument is also slugified and turned into the id for the button.
     """
 
     field_classes = 'button'
@@ -36,11 +40,10 @@ class Button(BaseInput):
 
 class Reset(BaseInput):
     """
-    Used to create a Reset button input descriptor for the {% crispy %} template tag::
+    Used to create a Reset button input descriptor for the {% crispy %} template tag.
+    >>> reset = Reset('Reset This Form', 'Revert Me!')
 
-        reset = Reset('Reset This Form', 'Revert Me!')
-
-    .. note:: The first argument is also slugified and turned into the id for the reset.
+    The first argument is also slugified and turned into the id for the button.
     """
 
     field_classes = 'button is-text'
@@ -49,9 +52,8 @@ class Reset(BaseInput):
 
 class Row(Div):
     """
-    Layout object. It wraps fields in a div whose default class is "formRow". Example::
-
-        Row('form_field_1', 'form_field_2', 'form_field_3')
+    Layout object. It wraps fields in a div whose default class is "columns".
+    >>> Row('form_field_1', 'form_field_2', 'form_field_3')
     """
 
     css_class = 'columns'
@@ -59,9 +61,9 @@ class Row(Div):
 
 class Column(Div):
     """
-    Layout object. It wraps fields in a div whose default class is "formColumn". Example::
+    Layout object. It wraps fields in a div whose default class is "column".
 
-        Column('form_field_1', 'form_field_2')
+    >>> Column('form_field_1', 'form_field_2')
     """
 
     css_class = 'column'
