@@ -7,12 +7,22 @@ from crispy_forms.utils import TEMPLATE_PACK, render_field
 
 __all__ = [
     # Defined in this file
-    "Button", "Column", "IconField", "Reset", "Row", "Submit",
+    "Button", "Column", "IconField", "Reset", "Row", "Submit", "UploadField",
 
     # Imported from CrispyForms itself
     "ButtonHolder", "Div", "Field", "Fieldset", "Hidden", "HTML", "Layout",
-    "MultiField", "MultiWidgetField"
+    "MultiField", "MultiWidgetField",
 ]
+
+
+class UploadField(Field):
+    def __init__(self, *args, **kwargs):
+        if 'css_class' in kwargs:
+            kwargs['css_class'] += " file-input"
+        else:
+            kwargs['css_class'] = "file-input"
+
+        super().__init__(*args, **kwargs)
 
 
 class Submit(BaseInput):
