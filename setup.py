@@ -2,13 +2,13 @@ from setuptools import find_packages, setup
 
 setup(
     name='django-crispy-bulma',
-    version='0.0.2',
+    version='0.0.3',
     description='Django application to add \'django-crispy-forms\' layout objects for Bulma.io',
     long_description=open('README.md').read(),
     long_description_content_type="text/markdown",
     author='Python Discord',
     author_email='staff@pythondiscord.com',
-    url='http://pypi.python.org/pypi/crispy-bulma',
+    url='https://github.com/python-discord/django-crispy-bulma',
     license='MIT',
     packages=find_packages(),
     classifiers=[
