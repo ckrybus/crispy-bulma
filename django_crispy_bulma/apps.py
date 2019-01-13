@@ -4,5 +4,5 @@ from __future__ import unicode_literals
 from django.apps import AppConfig
 
 
-class CrispyBulmaConfig(AppConfig):
-    name = "crispy_bulma"
+class DjangoCrispyBulmaConfig(AppConfig):
+    name = "django_crispy_bulma"

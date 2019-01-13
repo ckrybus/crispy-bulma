@@ -63,7 +63,7 @@ jobs:
 
   # region: Documentation
 
-  - script: pdoc crispy_bulma --html --html-dir doc
+  - script: pdoc django_crispy_bulma --html --html-dir doc
     displayName: 'Build documentation'
 
   - script: |
