@@ -1,8 +1,6 @@
 # django-crispy-bulma
 
-**This project is a work in progress. We'll remove this header when it's ready to use.**
-
-Release 0.0.1 is simply a structural/branding change.
+**This project is an early work in progress. You should not use this package yet, as it is poorly documented and is missing many important features. We'll remove this header when it's ready to use.**
 
 ## About
 
@@ -12,10 +10,10 @@ of adding support for Django 2.0+, as well as for components found in the bulma-
 
 ## Installation
 
-Clone it from github. Installation via `pip` coming soon!
+You can install it from [PyPI](https://pypi.org/project/django-crispy-bulma/) with `pip install django-crispy-bulma`
 
 Add package settings to your project settings file  
-`from crispy_forms_bulma.settings import *` #TODO: Find a linter-friendly way to do this
+`from crispy_forms_bulma.settings import *`  **# TODO: Find a linter-friendly way to do this**
 
 UploadField
 -----------
