@@ -26,12 +26,12 @@ if len(sys.argv) > 2:
     print("Usage: github-release.py [token]")
     exit(1)
 
-if not os.path.exists("Bot Core/meta/meta.json"):
-    print("No such file: Bot Core/meta/meta.json")
+if not os.path.exists("Django Crispy Bulma/meta/meta.json"):
+    print("No such file: Django Crispy Bulma/meta/meta.json")
     exit(1)
 
 
-with open("Bot Core/meta/meta.json") as fh:
+with open("Django Crispy Bulma/meta/meta.json") as fh:
     metadata = json.load(fh)
 
 sha = metadata["hash"]
@@ -39,7 +39,7 @@ tag = metadata["tag"]
 token = sys.argv[1]
 
 g = Github("pydis-bot", token)
-repo: Repository = g.get_repo("python-discord/pydis-bot-core")
+repo: Repository = g.get_repo("python-discord/django-crispy-bulma")
 
 print(f"Creating tag: {tag}")
 repo.create_git_ref(f"refs/tags/{tag}", sha)
@@ -47,11 +47,11 @@ repo.create_git_ref(f"refs/tags/{tag}", sha)
 print(f"Creating release: {tag}")
 release: GitRelease = repo.create_git_release(tag, f"Release: {tag}", MESSAGE, target_commitish=sha)
 
-for file in os.listdir("Bot Core/build"):
+for file in os.listdir("Django Crispy Bulma/build"):
     print(f"Uploading: {file}")
-    release.upload_asset(f"Bot Core/build/{file}")
+    release.upload_asset(f"Django Crispy Bulma/build/{file}")
 
 print("Uploading: doc.zip")
-release.upload_asset("Bot Core/documentation/doc.zip")
+release.upload_asset("Django Crispy Bulma/documentation/doc.zip")
 
 print(f"Released: {release.html_url}")

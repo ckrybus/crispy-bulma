@@ -42,7 +42,7 @@ jobs:
 
   # region: Binary/source distributions
 
-  - script: python setup.py build bdist_wheel
+  - script: python setup.py build sdist bdist_wheel
 
     displayName: 'Build distribution'
 
