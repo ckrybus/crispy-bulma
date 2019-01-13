@@ -27,6 +27,9 @@ jobs:
   displayName: 'Build Distribution'
   dependsOn: 'test'
 
+  variables:
+    DJANGO_SETTINGS_MODULE: "django_crispy_bulma.settings"
+
   steps:
   - task: UsePythonVersion@0
     displayName: 'Set Python version'
