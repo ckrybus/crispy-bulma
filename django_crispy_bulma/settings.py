@@ -9,14 +9,4 @@ pdoc will fail with django.core.exceptions.ImproperlyConfigured:
 Requested settings, but settings are not configured.
 """
 
-CRISPY_ALLOWED_TEMPLATE_PACKS = (
-    "bootstrap",
-    "uni_form",
-    "bootstrap3",
-    "bootstrap4",
-    "bulma",
-)
-
-CRISPY_TEMPLATE_PACK = "bulma"
-
 SECRET_KEY = "I'm sure there's a better way to do this..."

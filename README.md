@@ -12,8 +12,21 @@ of adding support for Django 2.0+, as well as for components found in the bulma-
 
 You can install it from [PyPI](https://pypi.org/project/django-crispy-bulma/) with `pip install django-crispy-bulma`
 
-Add package settings to your project settings file  
-`from crispy_forms_bulma.settings import *`  **# TODO: Find a linter-friendly way to do this**
+First make sure you have `django-crispy-forms` installed, as this will not work without it.
+
+In order to activate it, you should add the following to your project `settings.py` file:
+```python
+CRISPY_ALLOWED_TEMPLATE_PACKS = (
+    "bootstrap",
+    "uni_form",
+    "bootstrap3",
+    "bootstrap4",
+    "bulma",
+)
+
+CRISPY_TEMPLATE_PACK = "bulma"
+```
+
 
 UploadField
 -----------
