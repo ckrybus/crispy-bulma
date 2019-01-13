@@ -1,4 +1,4 @@
-from setuptools import setup, find_packages
+from setuptools import find_packages, setup
 
 setup(
     name='django-crispy-bulma',
@@ -33,14 +33,10 @@ setup(
         "dev": [
             "flake8",
             "flake8-bugbear",
-            "flake8-docstrings",
             "flake8-import-order",
-            "flake8-quotes",
             "flake8-tidy-imports",
             "flake8-todo",
-            "flake8-type-annotations",
             "flake8-string-format",
-
             "pdoc",
             "PyGithub",
             "wheel",
