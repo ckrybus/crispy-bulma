@@ -1,4 +1,4 @@
-# crispy-bulma
+# django-crispy-bulma
 
 **This project is a work in progress. We'll remove this header when it's ready to use.**
 
