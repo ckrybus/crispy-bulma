@@ -2,7 +2,7 @@ from setuptools import find_packages, setup
 
 setup(
     name='django-crispy-bulma',
-    version='0.1.0',
+    version='0.1.1',
     description='Django application to add \'django-crispy-forms\' layout objects for Bulma.io',
     long_description=open('README.md').read(),
     long_description_content_type="text/markdown",

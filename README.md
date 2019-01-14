@@ -10,11 +10,19 @@ of adding support for Django 2.0+, as well as for components found in the bulma-
 
 ## Installation
 
-You can install it from [PyPI](https://pypi.org/project/django-crispy-bulma/) with `pip install django-crispy-bulma`
+You can install `django-crispy-bulma` from [PyPI](https://pypi.org/project/django-crispy-bulma/) by running `pip install django-crispy-bulma`. Make sure you also have `django-crispy-forms` installed, as it will not work without it. In order to activate it, you'll need to modify your projects `settings.py` file. 
 
-First make sure you have `django-crispy-forms` installed, as this will not work without it.
+First, add `django-crispy-bulma` to your `INSTALLED_APPS`:
 
-In order to activate it, you should add the following to your project `settings.py` file:
+```python
+INSTALLED_APPS = [
+    'crispy_forms',
+    'django_crispy_bulma',
+    # ...
+]
+```
+
+Next, add the following to the bottom of the file in order to configure `crispy_forms` to use the **bulma** template pack:
 ```python
 CRISPY_ALLOWED_TEMPLATE_PACKS = (
     "bootstrap",
@@ -27,6 +35,7 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = (
 CRISPY_TEMPLATE_PACK = "bulma"
 ```
 
+You may also need to use Layout objects or form objects from `django_crispy_bulma` in order to build certain objects, like the UploadField. See the documentation below for specifics on objects like these.
 
 UploadField
 -----------
