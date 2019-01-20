@@ -38,6 +38,7 @@ setup(
             "flake8-todo",
             "flake8-string-format",
             "pdoc",
+            "pre-commit",
             "PyGithub",
             "wheel",
         ]
