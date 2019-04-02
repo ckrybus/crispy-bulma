@@ -37,6 +37,60 @@ CRISPY_TEMPLATE_PACK = "bulma"
 
 You may also need to use Layout objects or form objects from `django_crispy_bulma` in order to build certain objects, like the UploadField. See the documentation below for specifics on objects like these.
 
+EmailField
+----------
+
+The EmailField looks like this:
+
+![EmailField](https://i.imgur.com/IBioO0Y.gif)
+
+An EmailField can be created simply, like any other field in your form. For example:
+
+```python
+from django.forms import Form
+from django_crispy_bulma.forms import EmailField
+
+class MyForm(Form):
+    my_email = EmailField(
+        label="email",
+        required=True
+    )
+```
+
+
+IconField
+---------
+
+If you'd like to render a field with an icon in it, you'll need to make use of the Crispy Forms layout object,
+and the `IconField` from our package. See below for an example:
+
+![IconField](https://i.imgur.com/tHsPHrM.png)
+
+```python
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout
+from django.forms import Form, CharField
+
+from django_crispy_bulma.layout import IconField
+
+class SetupForm(Form):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.helper = FormHelper(self)
+
+        self.helper.layout = Layout(
+            IconField("username", icon_prepend="user"),
+        )
+
+    username = CharField(
+        label="Username",
+        required=True,
+    )
+```
+
+Note that `IconField` also supports an `icon_append` keyword argument. This field only supports font-awesome icons.
+
 UploadField
 -----------
 
