@@ -64,7 +64,7 @@ IconField
 If you'd like to render a field with an icon in it, you'll need to make use of the Crispy Forms layout object,
 and the `IconField` from our package. See below for an example:
 
-![IconField](https://i.imgur.com/dLs78nW.png)
+![IconField](https://i.imgur.com/tHsPHrM.png)
 
 ```python
 from crispy_forms.helper import FormHelper
