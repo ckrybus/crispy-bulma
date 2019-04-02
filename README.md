@@ -80,7 +80,7 @@ class SetupForm(Form):
         self.helper = FormHelper(self)
 
         self.helper.layout = Layout(
-            IconField("username", icon_prepend="user", title="Username"),
+            IconField("username", icon_prepend="user"),
         )
 
     username = CharField(
@@ -88,6 +88,8 @@ class SetupForm(Form):
         required=True,
     )
 ```
+
+Note that `IconField` also supports an `icon_append` keyword argument. This field only supports font-awesome icons.
 
 UploadField
 -----------
