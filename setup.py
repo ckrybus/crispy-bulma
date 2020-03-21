@@ -14,8 +14,8 @@ setup(
     classifiers=[
         "Environment :: Web Environment",
         "Framework :: Django",
-        "Framework :: Django :: 2.0",
-        "Framework :: Django :: 2.1",
+        "Framework :: Django :: 2.2",
+        "Framework :: Django :: 3.0",
         "License :: OSI Approved :: BSD License",
         "Operating System :: OS Independent",
         "Programming Language :: Python",
@@ -26,8 +26,8 @@ setup(
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
     install_requires=[
-        'Django>=2.0',
-        'django-crispy-forms==1.7.2'
+        'Django>=2.2',
+        'django-crispy-forms~=1.9.0'
     ],
     extras_require={
         "dev": [
