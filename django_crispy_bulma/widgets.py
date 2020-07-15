@@ -13,7 +13,6 @@ class EmailInput(DjangoEmailInput):
         if "emailinput" in classes:
             # Django includes this class; it's not the end of the world to keep it
             # but we remove it to keep things clean and avoid accidental styling
-
             classes.remove("emailinput")
 
         # The correct class to use with Bulma is "input", so we just need to add it
