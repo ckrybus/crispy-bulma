@@ -1,26 +1,45 @@
 from crispy_forms.layout import (
-    BaseInput, ButtonHolder, Div, Field,
-    Fieldset, HTML, Hidden, Layout, MultiField,
-    MultiWidgetField
+    HTML,
+    BaseInput,
+    ButtonHolder,
+    Div,
+    Field,
+    Fieldset,
+    Hidden,
+    Layout,
+    MultiField,
+    MultiWidgetField,
 )
 from crispy_forms.utils import TEMPLATE_PACK, render_field
 
 __all__ = [
     # Defined in this file
-    "Button", "Column", "IconField", "Reset", "Row", "Submit", "UploadField",
-
+    "Button",
+    "Column",
+    "IconField",
+    "Reset",
+    "Row",
+    "Submit",
+    "UploadField",
     # Imported from CrispyForms itself
-    "ButtonHolder", "Div", "Field", "Fieldset", "Hidden", "HTML", "Layout",
-    "MultiField", "MultiWidgetField",
+    "ButtonHolder",
+    "Div",
+    "Field",
+    "Fieldset",
+    "Hidden",
+    "HTML",
+    "Layout",
+    "MultiField",
+    "MultiWidgetField",
 ]
 
 
 class UploadField(Field):
     def __init__(self, *args, **kwargs):
-        if 'css_class' in kwargs:
-            kwargs['css_class'] += " file-input"
+        if "css_class" in kwargs:
+            kwargs["css_class"] += " file-input"
         else:
-            kwargs['css_class'] = "file-input"
+            kwargs["css_class"] = "file-input"
 
         super().__init__(*args, **kwargs)
 
@@ -89,17 +108,31 @@ class IconField(Field):
         self.icon_append = icon_append
         super().__init__(*args, **kwargs)
 
-    def render(self, form, form_style, context, template_pack=TEMPLATE_PACK,
-               extra_context=None, **kwargs):
+    def render(
+        self,
+        form,
+        form_style,
+        context,
+        template_pack=TEMPLATE_PACK,
+        extra_context=None,
+        **kwargs
+    ):
         extra_context = extra_context.copy() if extra_context is not None else {}
-        extra_context.update({
-            "icon_prepend": self.icon_prepend,
-            "icon_append": self.icon_append,
-        })
+        extra_context.update(
+            {
+                "icon_prepend": self.icon_prepend,
+                "icon_append": self.icon_append,
+            }
+        )
         template = self.get_template_name(template_pack)
 
         return render_field(
-            self.field, form, form_style, context,
+            self.field,
+            form,
+            form_style,
+            context,
             template=template,
-            template_pack=template_pack, extra_context=extra_context, **kwargs
+            template_pack=template_pack,
+            extra_context=extra_context,
+            **kwargs
         )

@@ -23,4 +23,4 @@ class EmailInput(DjangoEmailInput):
 
 
 class FileUploadInput(ClearableFileInput):
-    template_name = 'bulma/widgets/file_upload_input.html'
+    template_name = "bulma/widgets/file_upload_input.html"

@@ -3,9 +3,10 @@ try:
 except ImportError:
     izip = zip
 
-from crispy_forms.utils import TEMPLATE_PACK
 from django import forms, template
 from django.conf import settings
+
+from crispy_forms.utils import TEMPLATE_PACK
 
 register = template.Library()
 
@@ -80,7 +81,7 @@ class CrispyBulmaFieldNode(template.Node):
             context.render_context[self] = (
                 template.Variable(self.field),
                 self.attrs,
-                template.Variable(self.html5_required)
+                template.Variable(self.html5_required),
             )
 
         field, attrs, html5_required = context.render_context[self]
@@ -95,8 +96,11 @@ class CrispyBulmaFieldNode(template.Node):
 
         # There are special django widgets that wrap actual widgets,
         # such as forms.widgets.MultiWidget, admin.widgets.RelatedFieldWidgetWrapper
-        widgets = getattr(field.field.widget, "widgets",
-                          [getattr(field.field.widget, "widget", field.field.widget)])
+        widgets = getattr(
+            field.field.widget,
+            "widgets",
+            [getattr(field.field.widget, "widget", field.field.widget)],
+        )
 
         if isinstance(attrs, dict):
             attrs = [attrs] * len(widgets)
@@ -125,7 +129,11 @@ class CrispyBulmaFieldNode(template.Node):
             widget.attrs["class"] = css_class
 
             # HTML5 required attribute
-            if html5_required and field.field.required and "required" not in widget.attrs:
+            if (
+                html5_required
+                and field.field.required
+                and "required" not in widget.attrs
+            ):
                 if field.field.widget.__class__.__name__ != "RadioSelect":
                     widget.attrs["required"] = "required"
 
@@ -133,10 +141,13 @@ class CrispyBulmaFieldNode(template.Node):
                 attribute_name = template.Variable(attribute_name).resolve(context)
 
                 if attribute_name in widget.attrs:
-                    widget.attrs[attribute_name] += " " + template.Variable(attribute).resolve(
-                        context)
+                    widget.attrs[attribute_name] += " " + template.Variable(
+                        attribute
+                    ).resolve(context)
                 else:
-                    widget.attrs[attribute_name] = template.Variable(attribute).resolve(context)
+                    widget.attrs[attribute_name] = template.Variable(attribute).resolve(
+                        context
+                    )
 
         return field
 

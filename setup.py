@@ -1,15 +1,15 @@
 from setuptools import find_packages, setup
 
 setup(
-    name='django-crispy-bulma',
-    version='0.3',
-    description='Django application to add \'django-crispy-forms\' layout objects for Bulma.io',
-    long_description=open('README.md').read(),
+    name="django-crispy-bulma",
+    version="0.3",
+    description="Django application to add 'django-crispy-forms' layout objects for Bulma.io",
+    long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
-    author='Python Discord',
-    author_email='staff@pythondiscord.com',
-    url='https://github.com/python-discord/django-crispy-bulma',
-    license='MIT',
+    author="Python Discord",
+    author_email="staff@pythondiscord.com",
+    url="https://github.com/python-discord/django-crispy-bulma",
+    license="MIT",
     packages=find_packages(),
     classifiers=[
         "Development Status :: 3 - Alpha",
@@ -28,10 +28,7 @@ setup(
         "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
-    install_requires=[
-        'Django>=2.2',
-        'django-crispy-forms~=1.9.0'
-    ],
+    install_requires=["Django>=2.2", "django-crispy-forms~=1.9.0"],
     extras_require={
         "dev": [
             "flake8~=3.7",
@@ -47,5 +44,5 @@ setup(
         ]
     },
     include_package_data=True,
-    zip_safe=False
+    zip_safe=False,
 )
