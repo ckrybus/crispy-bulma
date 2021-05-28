@@ -1,7 +1,40 @@
-*.pyc
-.idea
-.venv
+# buildout's specific
+.installed.cfg
+eggs/*
+bin/*
+build/*
+dist/*
+develop-eggs/*
+parts/*
+downloads/*
 
-build/
-dist/
-django_crispy_bulma.egg-info/
+# egg's specific
+*.egg-info
+
+# defaults
+*.pyc
+*.pyo
+__pycache__
+
+# temp file
+tempfile
+*.swp
+
+# testing
+.tox/
+
+# coverage
+.coverage
+htmlcov
+_build
+
+# OSX
+*.DS_Store
+
+# editors
+.project
+.pydevproject
+.settings/
+/.pytest_cache
+.vscode
+/.python-version
