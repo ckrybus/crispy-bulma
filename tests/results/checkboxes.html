@@ -1,19 +1,25 @@
 <form method="post">
-    <div class="mb-3" id="div_id_checkboxes">
-        <label class="form-label requiredField">Checkboxes<span class="asteriskField">*</span></label>
-        <div>
-            <div class="form-check">
-                <input checked="checked" class="form-check-input" id="id_checkboxes_0" name="checkboxes" type="checkbox"
-                    value="1" /><label class="form-check-label" for="id_checkboxes_0">Option one</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" id="id_checkboxes_1" name="checkboxes" type="checkbox"
-                    value="2" /><label class="form-check-label" for="id_checkboxes_1">Option two</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" id="id_checkboxes_2" name="checkboxes" type="checkbox"
-                    value="3" /><label class="form-check-label" for="id_checkboxes_2">Option three</label>
-            </div>
-        </div>
+  <div class="field" id="div_id_checkboxes">
+    <label class="label">
+      Checkboxes<span class="asterisk">*</span>
+    </label>
+    <div class="control">
+      <label class="checkbox" for="id_checkboxes_0">
+        <input checked="checked" id="id_checkboxes_0" name="checkboxes" type="checkbox" value="1" />
+        Option one
+      </label>
     </div>
+    <div class="control">
+      <label class="checkbox" for="id_checkboxes_1">
+        <input id="id_checkboxes_1" name="checkboxes" type="checkbox" value="2" />
+        Option two
+      </label>
+    </div>
+    <div class="control">
+      <label class="checkbox" for="id_checkboxes_2">
+          <input id="id_checkboxes_2" name="checkboxes" type="checkbox" value="3" />
+        Option three
+      </label>
+    </div>
+  </div>
 </form>

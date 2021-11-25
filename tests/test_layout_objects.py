@@ -35,12 +35,27 @@ from .forms import (
 from .utils import parse_expected, parse_form
 
 
+@pytest.mark.parametrize(
+    "input,expected",
+    [
+        ("text_input", "text_input.html"),
+        ("text_area", "text_area.html"),
+        ("checkboxes", "checkboxes.html"),
+        ("radio", "radio.html"),
 def test_field_with_custom_template():
     test_form = SampleForm()
     test_form.helper = FormHelper()
     test_form.helper.layout = Layout(
         Field("email", template="custom_field_template.html")
     )
+        ("select_input", "test_select.html"),
+    ],
+)
+def test_inputs(input, expected):
+    form = InputsForm()
+    form.helper = FormHelper()
+    form.helper.layout = Layout(input)
+    assert parse_form(form) == parse_expected(expected)
 
     html = render_crispy_form(test_form)
     assert "<h1>Special custom field</h1>" in html
@@ -108,10 +123,7 @@ def test_field_wrapper_class(settings):
     form.helper.layout = Layout(Field("email", wrapper_class="testing"))
 
     html = render_crispy_form(form)
-    if settings.CRISPY_TEMPLATE_PACK == "bootstrap":
-        assert html.count('class="control-group testing"') == 1
-    elif settings.CRISPY_TEMPLATE_PACK in ("bootstrap3", "bootstrap4"):
-        assert html.count('class="form-group testing"') == 1
+    assert html.count('class="field testing"') == 1
 
 
 def test_html_with_carriage_returns(settings):
@@ -151,7 +163,7 @@ def test_i18n():
 
 def test_remove_labels():
     form = SampleForm()
-    # remove boolean field as label is still printed in boostrap
+    # remove boolean field as label is still printed in bulma
     del form.fields["is_company"]
 
     for fields in form:
@@ -160,23 +172,6 @@ def test_remove_labels():
     html = render_crispy_form(form)
 
     assert "<label" not in html
-
-
-@pytest.mark.parametrize(
-    "input,expected",
-    [
-        ("text_input", "text_input.html"),
-        ("text_area", "text_area.html"),
-        ("checkboxes", "checkboxes.html"),
-        ("radio", "radio.html"),
-        ("single_checkbox", "single_checkbox.html"),
-    ],
-)
-def test_inputs(input, expected):
-    form = InputsForm()
-    form.helper = FormHelper()
-    form.helper.layout = Layout(input)
-    assert parse_form(form) == parse_expected(expected)
 
 
 class TestBootstrapLayoutObjects:

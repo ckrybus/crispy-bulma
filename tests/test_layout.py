@@ -535,24 +535,6 @@ def test_bootstrap5_form_inline():
     assert parse_form(form) == parse_expected("test_bootstrap5_form_inline.html")
 
 
-def test_select():
-    form = InputsForm()
-    form.helper = FormHelper()
-    form.helper.layout = Layout("select_input")
-    assert parse_form(form) == parse_expected("test_select.html")
-
-
-def test_select_prepended():
-    form = InputsForm()
-    form.helper = FormHelper()
-    form.helper.layout = Layout(
-        PrependedText("select_input", "bar"),
-        AppendedText("select_input", "bar"),
-        PrependedAppendedText("select_input", "£", ".00"),
-    )
-    assert parse_form(form) == parse_expected("test_prepended_appended_select.html")
-
-
 def test_update_attributes_class():
     form = SampleForm()
     form.helper = FormHelper()
