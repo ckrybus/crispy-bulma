@@ -1,5 +1,4 @@
 import pytest
-from crispy_bootstrap5.bootstrap5 import FloatingField
 
 from django import forms
 from django.template import Context, Template
@@ -392,22 +391,6 @@ class TestBootstrapLayoutObjects:
         )
         form.helper.form_class = "row row-cols-lg-auto align-items-center"
         assert parse_form(form) == parse_expected("test_inline_field.html")
-
-    def test_float_field(self):
-        form = SampleForm()
-        form.helper = FormHelper()
-        form.helper.layout = Layout(
-            FloatingField("first_name"),
-        )
-        assert parse_form(form) == parse_expected("test_floating_field.html")
-
-        form = InputsForm({})
-        form.helper = FormHelper()
-        form.helper.layout = Layout(
-            FloatingField("text_area"),
-            FloatingField("select_input"),
-        )
-        assert parse_form(form) == parse_expected("test_floating_field_failing.html")
 
     def test_grouped_checkboxes_radios(self):
         form = GroupedChoiceForm()
