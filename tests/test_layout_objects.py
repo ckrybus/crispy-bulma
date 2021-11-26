@@ -56,6 +56,13 @@ def test_inputs(input, expected):
     form.helper.layout = Layout(input)
     assert parse_form(form) == parse_expected(expected)
 
+
+def test_email_field():
+    form = SampleForm()
+    form.helper = FormHelper()
+    form.helper.layout = Layout("email")
+    assert parse_form(form) == parse_expected("test_email_field.html")
+
     html = render_crispy_form(test_form)
     assert "<h1>Special custom field</h1>" in html
 
