@@ -7,7 +7,7 @@ setup(
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
     author="Christoph Krybus",
-    author_email="ckrybus@googlemail.com",
+    author_email="chris@ckrybus.com",
     url="https://github.com/ckrybus/django-crispy-bulma",
     license="MIT",
     packages=find_packages(exclude=["tests", "tests.*"]),
