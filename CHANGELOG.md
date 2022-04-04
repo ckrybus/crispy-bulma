@@ -4,6 +4,12 @@
 ## UNRELEASED
 
 
+
+
+
+From https://github.com/python-discord/django-crispy-bulma
+----------------------------------------------------------
+
 ## 0.3.0 2020-03-22
 * Add support for django 3.0
 
@@ -24,8 +30,8 @@
 * Initial version by discord.
 
 
----
-
+From https://github.com/jhotujec/crispy-forms-bulma
+---------------------------------------------------
 
 ## 1.1.3 (2017-11-06)
 * Added input with icons
