@@ -1,14 +1,14 @@
 from setuptools import find_packages, setup
 
 setup(
-    name="django-crispy-bulma-redux",
+    name="crispy-bulma",
     version="0.3",
-    description="Bulma.io template pack for django-crispy-forms",
+    description="Bulma template pack for django-crispy-forms",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
     author="Christoph Krybus",
     author_email="chris@ckrybus.com",
-    url="https://github.com/ckrybus/django-crispy-bulma",
+    url="https://github.com/ckrybus/crispy-bulma",
     license="MIT",
     packages=find_packages(exclude=["tests", "tests.*"]),
     classifiers=[

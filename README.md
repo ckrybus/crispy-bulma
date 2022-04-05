@@ -1,4 +1,4 @@
-# django-crispy-bulma
+# crispy-bulma
 
 **This project is an early work in progress. You should not use this package yet, as it is poorly documented and is missing many important features. We'll remove this header when it's ready to use.**
 
@@ -10,14 +10,14 @@ of adding support for Django 2.0+, as well as for components found in the bulma-
 
 ## Installation
 
-You can install `django-crispy-bulma` from [PyPI](https://pypi.org/project/django-crispy-bulma/) by running `pip install django-crispy-bulma`. Make sure you also have `django-crispy-forms` installed, as it will not work without it. In order to activate it, you'll need to modify your projects `settings.py` file. 
+You can install `crispy-bulma` from [PyPI](https://pypi.org/project/crispy-bulma/) by running `pip install crispy-bulma`. Make sure you also have `django-crispy-forms` installed, as it will not work without it. In order to activate it, you'll need to modify your projects `settings.py` file.
 
-First, add `django-crispy-bulma` to your `INSTALLED_APPS`:
+First, add `crispy-bulma` to your `INSTALLED_APPS`:
 
 ```python
 INSTALLED_APPS = [
     'crispy_forms',
-    'django_crispy_bulma',
+    'crispy_bulma',
     # ...
 ]
 ```
@@ -35,7 +35,7 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = (
 CRISPY_TEMPLATE_PACK = "bulma"
 ```
 
-You may also need to use Layout objects or form objects from `django_crispy_bulma` in order to build certain objects, like the UploadField. See the documentation below for specifics on objects like these.
+You may also need to use Layout objects or form objects from `crispy_bulma` in order to build certain objects, like the UploadField. See the documentation below for specifics on objects like these.
 
 EmailField
 ----------
@@ -48,7 +48,7 @@ An EmailField can be created simply, like any other field in your form. For exam
 
 ```python
 from django.forms import Form
-from django_crispy_bulma.forms import EmailField
+from crispy_bulma.forms import EmailField
 
 class MyForm(Form):
     my_email = EmailField(
@@ -71,7 +71,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout
 from django.forms import Form, CharField
 
-from django_crispy_bulma.layout import IconField
+from crispy_bulma.layout import IconField
 
 class SetupForm(Form):
     def __init__(self, *args, **kwargs):
@@ -103,8 +103,8 @@ To create these with CrispyForms, you'll need both a form object and a layout ob
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout
 from django import forms
-from django_crispy_bulma.layout import UploadField
-from django_crispy_bulma.forms import ImageField, FileField
+from crispy_bulma.layout import UploadField
+from crispy_bulma.forms import ImageField, FileField
 
 class MyForm(forms.Form):
     my_image = ImageField(
