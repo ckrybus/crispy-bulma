@@ -7,6 +7,7 @@ class EmailInput(DjangoEmailInput):
         super().__init__(*args, **kwargs)
 
     def get_context(self, *args, **kwargs):
+
         context = super().get_context(*args, **kwargs)
         classes = context["widget"]["attrs"]["class"].split()
 

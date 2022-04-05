@@ -1,9 +1,9 @@
 import os
 from pathlib import Path
 
-from django.test.html import Element, parse_html
-
 from crispy_forms.utils import render_crispy_form
+
+from django.test.html import Element, parse_html
 
 TEST_DIR = os.path.dirname(os.path.abspath(__file__))
 

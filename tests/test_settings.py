@@ -8,7 +8,7 @@ INSTALLED_APPS = (
     "django.contrib.contenttypes",
     "django.contrib.admin",
     "crispy_forms",
-    "crispy_bootstrap5",
+    "crispy_bulma",
     "tests",
 )
 
@@ -50,8 +50,8 @@ TEMPLATES = [
     },
 ]
 
-CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bulma"
 
-CRISPY_TEMPLATE_PACK = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bulma"
 
 USE_TZ = True
