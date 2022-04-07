@@ -9,7 +9,13 @@ from django.template import Context, Template
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
-from crispy_forms.bootstrap import AppendedText, FieldWithButtons, PrependedAppendedText, PrependedText, StrictButton
+from crispy_forms.bootstrap import (
+    AppendedText,
+    FieldWithButtons,
+    PrependedAppendedText,
+    PrependedText,
+    StrictButton,
+)
 from crispy_forms.helper import FormHelper, FormHelpersException
 from crispy_forms.layout import Button, Hidden, Layout, Reset, Submit
 from crispy_forms.templatetags.crispy_forms_tags import CrispyFormNode
@@ -144,19 +150,19 @@ def test_html5_required():
     html = render_crispy_form(form)
 
 
-def test_media_is_included_by_default_with_bootstrap5():
+def test_media_is_included_by_default_with_bulma():
     form = SampleFormWithMedia()
     form.helper = FormHelper()
-    form.helper.template_pack = "bootstrap5"
+    form.helper.template_pack = "bulma"
     html = render_crispy_form(form)
     assert "test.css" in html
     assert "test.js" in html
 
 
-def test_media_removed_when_include_media_is_false_with_bootstrap5():
+def test_media_removed_when_include_media_is_false_with_bulma():
     form = SampleFormWithMedia()
     form.helper = FormHelper()
-    form.helper.template_pack = "bootstrap5"
+    form.helper.template_pack = "bulma"
     form.helper.include_media = False
     html = render_crispy_form(form)
     assert "test.css" not in html
@@ -246,6 +252,7 @@ def test_invalid_helper(settings):
         template.render(c)
 
 
+@pytest.mark.skip(reason="formset")
 def test_formset_with_helper_without_layout(settings):
     template = Template(
         """
@@ -461,6 +468,7 @@ def test_helper_std_field_template_no_layout():
         assert html.count('id="div_id_%s"' % field) == 1
 
 
+@pytest.mark.skip(reason="prepended_appended_text")
 def test_bootstrap_form_show_errors_bs5():
     form = SampleForm(
         {
@@ -490,6 +498,7 @@ def test_bootstrap_form_show_errors_bs5():
     assert html.count("error") == 0
 
 
+@pytest.mark.skip(reason="prepended_appended_text")
 def test_error_text_inline():
     form = SampleForm({"email": "invalidemail"})
     form.helper = FormHelper()
@@ -527,6 +536,7 @@ def test_error_text_inline():
     assert len(matches) == 3
 
 
+@pytest.mark.skip(reason="bootstrap specific")
 def test_error_and_help_inline():
     form = SampleForm({"email": "invalidemail"})
     form.helper = FormHelper()
@@ -556,6 +566,7 @@ def test_error_and_help_inline():
     assert error_position < help_position
 
 
+@pytest.mark.skip(reason="button")
 def test_form_show_labels():
     form = SampleForm()
     form.helper = FormHelper()
@@ -572,6 +583,7 @@ def test_form_show_labels():
     assert html.count("<label") == 0
 
 
+@pytest.mark.skip(reason="bootsrap")
 def test_label_class_and_field_class_bs5():
     form = SampleForm()
     form.helper = FormHelper()
@@ -596,6 +608,7 @@ def test_label_class_and_field_class_bs5():
     # assert "offset" not in html
 
 
+@pytest.mark.skip(reason="bootstrap")
 def test_label_class_and_field_class_bs5_offset_when_horizontal():
     # Test col-XX-YY pattern
     form = SampleForm()
@@ -626,6 +639,7 @@ def test_label_class_and_field_class_bs5_offset_when_horizontal():
     assert html.count("col-lg-8") == 7
 
 
+@pytest.mark.skip(reason="bootstrap")
 def test_form_group_with_form_inline_bs5():
     form = SampleForm()
     form.helper = FormHelper()

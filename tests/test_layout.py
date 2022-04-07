@@ -9,12 +9,9 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
 from crispy_forms.bootstrap import (
-    AppendedText,
     Field,
     FieldWithButtons,
     InlineCheckboxes,
-    PrependedAppendedText,
-    PrependedText,
     StrictButton,
 )
 from crispy_forms.helper import FormHelper
@@ -28,7 +25,6 @@ from .forms import (
     FileForm,
     FileFormRequired,
     HelpTextForm,
-    InputsForm,
     LabelForm,
     SampleForm,
     SampleForm2,
@@ -146,6 +142,7 @@ def test_context_pollution():
     assert html.count('name="is_company"') == 1
 
 
+@pytest.mark.skip(reason="fieldset")
 def test_layout_fieldset_row_html_with_unicode_fieldnames():
     form_helper = FormHelper()
     form_helper.add_layout(
@@ -209,6 +206,7 @@ def test_layout_fieldset_row_html_with_unicode_fieldnames():
     assert "testLink" in html
 
 
+@pytest.mark.skip(reason="fieldset")
 def test_change_layout_dynamically_delete_field():
     template = Template(
         """
@@ -247,6 +245,7 @@ def test_change_layout_dynamically_delete_field():
     assert "email" not in html
 
 
+@pytest.mark.skip(reason="fieldset")
 def test_column_has_css_classes():
     template = Template(
         """
@@ -278,6 +277,7 @@ def test_column_has_css_classes():
     assert html.count("col-md") == 1
 
 
+@pytest.mark.skip(reason="bootstrap")
 def test_bs5_column_css_classes():
     template = Template(
         """
@@ -303,6 +303,7 @@ def test_bs5_column_css_classes():
     assert html.count("col-sm") == 1
 
 
+@pytest.mark.skip(reason="bootstrap")
 def test_bs5_field_with_buttons_css_classes():
     form = SampleForm()
     form.helper = FormHelper()
@@ -333,6 +334,7 @@ def test_bs5_field_with_buttons_css_classes():
     assert parse_form(form) == parse_expected("field_with_buttons_failing.html")
 
 
+@pytest.mark.skip(reason="formset")
 def test_formset_layout():
     SampleFormSet = formset_factory(SampleForm, extra=3)
     formset = SampleFormSet()
@@ -397,6 +399,7 @@ def test_formset_layout():
     assert html.count("mb-3") == 21
 
 
+@pytest.mark.skip(reason="formset")
 def test_modelformset_layout():
     CrispyModelFormSet = modelformset_factory(
         CrispyTestModel, form=SampleForm4, extra=3
@@ -434,6 +437,7 @@ def test_modelformset_layout():
     assert html.count("password") == 0
 
 
+@pytest.mark.skip(reason="fieldset")
 def test_i18n():
     template = Template(
         """
@@ -506,6 +510,7 @@ def test_choice_with_none_is_selected():
     assert "checked" in html
 
 
+@pytest.mark.skip(reason="InlineCheckboxes")
 def test_keepcontext_context_manager():
     # Test case for issue #180
     # Apparently it only manifest when using render_to_response this exact way
@@ -525,6 +530,7 @@ def test_keepcontext_context_manager():
     assert response.content.count(b"form-check-input") > 0
 
 
+@pytest.mark.skip(reason="bootstrap")
 def test_bootstrap5_form_inline():
     form = SampleForm()
     form.helper = FormHelper()
@@ -541,7 +547,7 @@ def test_update_attributes_class():
     form.helper.layout = Layout("email", Field("password1"), "password2")
     form.helper["password1"].update_attributes(css_class="hello")
     html = render_crispy_form(form)
-    assert html.count(' class="hello textinput') == 1
+    assert html.count(' class="hello input') == 1
     form.helper = FormHelper()
     form.helper.layout = Layout(
         "email",
@@ -550,7 +556,7 @@ def test_update_attributes_class():
     )
     form.helper["password1"].update_attributes(css_class="hello2")
     html = render_crispy_form(form)
-    assert html.count(' class="hello hello2 textinput') == 1
+    assert html.count(' class="hello hello2 input') == 1
 
 
 def test_file_field():
@@ -575,6 +581,7 @@ def test_file_field():
     assert parse_form(form) == parse_expected("test_file_field_failing.html")
 
 
+@pytest.mark.skip(reason="bootstrap")
 def test_row():
     form = SampleForm()
     form.helper = FormHelper()
@@ -595,6 +602,7 @@ def test_html_label_escape():
     assert "&lt;&gt;&amp;" in html
 
 
+@pytest.mark.skip(reason="formset")
 def test_tabular_formset_layout():
     SampleFormSet = formset_factory(SampleForm, extra=3)
     formset = SampleFormSet()
@@ -615,6 +623,7 @@ def test_tabular_formset_layout():
     )
 
 
+@pytest.mark.skip(reason="bootstrap")
 def test_flat_attrs_safe():
     form = SampleForm()
     form.helper = FormHelper()

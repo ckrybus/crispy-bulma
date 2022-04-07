@@ -20,7 +20,6 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = "tests.urls"
-CRISPY_CLASS_CONVERTERS = {"textinput": "textinput textInput inputtext"}
 SECRET_KEY = "secretkey"
 SITE_ROOT = os.path.dirname(os.path.abspath(__file__))
 
