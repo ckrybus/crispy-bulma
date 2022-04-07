@@ -1,14 +1,11 @@
 <form method="post">
-  <div class="mb-3">
-    <div id="div_id_single_checkbox" class="mb-3">
-      <input
-        type="checkbox"
-        name="single_checkbox"
-        class="checkboxinput form-check-input"
-        id="id_single_checkbox"
-      />
-      <label for="id_single_checkbox" class="form-check-label"
-        >company      </label>
+  <div class="field" id="div_id_single_checkbox">
+    <div class="control">
+      <label class="checkbox" for="id_single_checkbox">
+        <!-- TODO remove class="checkboxinput" -->
+        <input class="checkboxinput" id="id_single_checkbox" name="single_checkbox" type="checkbox">
+        company
+      </label>
     </div>
   </div>
 </form>
