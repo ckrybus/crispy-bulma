@@ -34,27 +34,12 @@ from .forms import (
 from .utils import parse_expected, parse_form
 
 
-@pytest.mark.parametrize(
-    "input,expected",
-    [
-        ("text_input", "text_input.html"),
-        ("text_area", "text_area.html"),
-        ("checkboxes", "checkboxes.html"),
-        ("radio", "radio.html"),
 def test_field_with_custom_template():
     test_form = SampleForm()
     test_form.helper = FormHelper()
     test_form.helper.layout = Layout(
         Field("email", template="custom_field_template.html")
     )
-        ("select_input", "test_select.html"),
-    ],
-)
-def test_inputs(input, expected):
-    form = InputsForm()
-    form.helper = FormHelper()
-    form.helper.layout = Layout(input)
-    assert parse_form(form) == parse_expected(expected)
 
 
 def test_email_field():
@@ -178,6 +163,23 @@ def test_remove_labels():
     html = render_crispy_form(form)
 
     assert "<label" not in html
+
+
+@pytest.mark.parametrize(
+    "input,expected",
+    [
+        ("text_input", "text_input.html"),
+        ("text_area", "text_area.html"),
+        ("checkboxes", "checkboxes.html"),
+        ("radio", "radio.html"),
+        ("single_checkbox", "single_checkbox.html"),
+    ],
+)
+def test_inputs(input, expected):
+    form = InputsForm()
+    form.helper = FormHelper()
+    form.helper.layout = Layout(input)
+    assert parse_form(form) == parse_expected(expected)
 
 
 class TestBootstrapLayoutObjects:
