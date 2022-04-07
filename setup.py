@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from setuptools import find_packages, setup
+from setuptools import setup
 
 with open("README.rst") as readme_file:
     readme = readme_file.read()
@@ -8,10 +8,6 @@ with open("README.rst") as readme_file:
 with open("HISTORY.rst") as history_file:
     history = history_file.read()
 
-requirements = ["Django>=2.2", "django-crispy-forms>=1.9.0"]
-test_requirements = [
-    "pytest>=3",
-]
 
 setup(
     name="crispy-bulma",
@@ -23,7 +19,13 @@ setup(
     author_email="chris@ckrybus.com",
     url="https://github.com/ckrybus/crispy-bulma",
     license="MIT license",
-    packages=find_packages(include=["crispy_bulma", "crispy_bulma.*"]),
+    packages=["crispy_bulma"],
+    install_requires=["Django>=2.2", "django-crispy-forms>=1.9.0"],
+    extras_require={"test": ["pytest", "pytest-django"]},
+    tests_require=["crispy-bulma[test]"],
+    python_requires=">=3.6",
+    include_package_data=True,
+    zip_safe=False,
     classifiers=[
         "Development Status :: 3 - Alpha",
         # "Development Status :: 4 - Beta",
@@ -46,10 +48,4 @@ setup(
         "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
-    install_requires=requirements,
-    python_requires=">=3.6",
-    include_package_data=True,
-    zip_safe=False,
-    test_suite="tests",
-    tests_require=test_requirements,
 )
