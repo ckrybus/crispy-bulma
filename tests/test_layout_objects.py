@@ -182,238 +182,242 @@ def test_inputs(input, expected):
     assert parse_form(form) == parse_expected(expected)
 
 
-class TestBootstrapLayoutObjects:
-    def test_custom_django_widget(self):
-        # Make sure an inherited RadioSelect gets rendered as it
-        form = SampleFormCustomWidgets()
-        assert isinstance(form.fields["inline_radios"].widget, CustomRadioSelect)
-        form.helper = FormHelper()
-        form.helper.layout = Layout("inline_radios")
+def test_custom_django_widget():
+    # Make sure an inherited RadioSelect gets rendered as it
+    form = SampleFormCustomWidgets()
+    assert isinstance(form.fields["inline_radios"].widget, CustomRadioSelect)
+    form.helper = FormHelper()
+    form.helper.layout = Layout("inline_radios")
 
-        html = render_crispy_form(form)
-        print(html)
-        assert 'class="form-check-input"' in html
+    html = render_crispy_form(form)
+    assert 'class="form-check-input"' in html
 
-        # Make sure an inherited CheckboxSelectMultiple gets rendered as it
-        assert isinstance(
-            form.fields["checkboxes"].widget, CustomCheckboxSelectMultiple
-        )
-        form.helper.layout = Layout("checkboxes")
-        html = render_crispy_form(form)
-        assert 'class="form-check-input"' in html
+    # Make sure an inherited CheckboxSelectMultiple gets rendered as it
+    assert isinstance(form.fields["checkboxes"].widget, CustomCheckboxSelectMultiple)
+    form.helper.layout = Layout("checkboxes")
+    html = render_crispy_form(form)
+    assert 'class="form-check-input"' in html
 
-    def test_prepended_appended_text(self):
-        test_form = SampleForm()
-        test_form.helper = FormHelper()
-        test_form.helper.layout = Layout(
-            PrependedAppendedText(
-                "email", "@<>&", "gmail.com", css_class="form-control-lg"
+
+def test_prepended_appended_text():
+    test_form = SampleForm()
+    test_form.helper = FormHelper()
+    test_form.helper.layout = Layout(
+        PrependedAppendedText(
+            "email", "@<>&", "gmail.com", css_class="form-control-lg"
+        ),
+        AppendedText("password1", "#"),
+        PrependedText("password2", "$"),
+    )
+    assert parse_form(test_form) == parse_expected("test_prepended_appended_text.html")
+
+
+def test_inline_radios():
+    test_form = CheckboxesSampleForm()
+    test_form.helper = FormHelper()
+    test_form.helper.layout = Layout(InlineRadios("inline_radios"))
+    html = render_crispy_form(test_form)
+    assert html.count('form-check-inline"') == 2
+
+
+def test_alert():
+    test_form = SampleForm()
+    test_form.helper = FormHelper()
+    test_form.helper.form_tag = False
+    test_form.helper.layout = Layout(
+        Alert(content="Testing...", css_class="alert-primary"),
+        Alert(content="Testing...", css_class="alert-primary", dismiss=False),
+    )
+    assert parse_form(test_form) == parse_expected("alert.html")
+
+
+def test_tab_and_tab_holder():
+    test_form = SampleForm()
+    test_form.helper = FormHelper()
+    test_form.helper.layout = Layout(
+        TabHolder(
+            Tab(
+                "one",
+                "first_name",
+                css_id="custom-name",
+                css_class="first-tab-class active",
             ),
-            AppendedText("password1", "#"),
-            PrependedText("password2", "$"),
+            Tab("two", "password1", "password2"),
         )
-        assert parse_form(test_form) == parse_expected(
-            "test_prepended_appended_text.html"
+    )
+    html = render_crispy_form(test_form)
+
+    assert (
+        html.count(
+            '<ul class="nav nav-tabs"> <li class="nav-item">'
+            '<a class="nav-link active" href="#custom-name" data-bs-toggle="tab">'
+            "One</a></li>"
         )
+        == 1
+    )
+    assert html.count("tab-pane") == 2
 
-    def test_inline_radios(self):
-        test_form = CheckboxesSampleForm()
-        test_form.helper = FormHelper()
-        test_form.helper.layout = Layout(InlineRadios("inline_radios"))
-        html = render_crispy_form(test_form)
-        assert html.count('form-check-inline"') == 2
+    assert html.count('class="tab-pane first-tab-class active"') == 1
 
-    def test_alert(self):
-        test_form = SampleForm()
-        test_form.helper = FormHelper()
-        test_form.helper.form_tag = False
-        test_form.helper.layout = Layout(
-            Alert(content="Testing...", css_class="alert-primary"),
-            Alert(content="Testing...", css_class="alert-primary", dismiss=False),
-        )
-        assert parse_form(test_form) == parse_expected("alert.html")
+    assert html.count('<div id="custom-name"') == 1
+    assert html.count('<div id="two"') == 1
+    assert html.count('name="first_name"') == 1
+    assert html.count('name="password1"') == 1
+    assert html.count('name="password2"') == 1
 
-    def test_tab_and_tab_holder(self):
-        test_form = SampleForm()
-        test_form.helper = FormHelper()
-        test_form.helper.layout = Layout(
+
+def test_tab_helper_reuse():
+    # this is a proper form, according to the docs.
+    # note that the helper is a class property here,
+    # shared between all instances
+    class SampleForm(forms.Form):
+        val1 = forms.CharField(required=False)
+        val2 = forms.CharField(required=True)
+        helper = FormHelper()
+        helper.layout = Layout(
             TabHolder(
-                Tab(
-                    "one",
-                    "first_name",
-                    css_id="custom-name",
-                    css_class="first-tab-class active",
-                ),
-                Tab("two", "password1", "password2"),
+                Tab("one", "val1"),
+                Tab("two", "val2"),
             )
         )
-        html = render_crispy_form(test_form)
 
-        assert (
-            html.count(
-                '<ul class="nav nav-tabs"> <li class="nav-item">'
-                '<a class="nav-link active" href="#custom-name" data-bs-toggle="tab">'
-                "One</a></li>"
-            )
-            == 1
+    # first render of form => everything is fine
+    test_form = SampleForm()
+    html = render_crispy_form(test_form)
+
+    # second render of form => first tab should be active,
+    # but not duplicate class
+    test_form = SampleForm()
+    html = render_crispy_form(test_form)
+    assert html.count('class="nav-item active active"') == 0
+
+    # render a new form, now with errors
+    test_form = SampleForm(data={"val1": "foo"})
+    html = render_crispy_form(test_form)
+    tab_class = "tab-pane"
+    # if settings.CRISPY_TEMPLATE_PACK == 'bootstrap4':
+    # tab_class = 'nav-link'
+    # else:
+    # tab_class = 'tab-pane'
+    # tab 1 should not be active
+    assert html.count('<div id="one" \n    class="{} active'.format(tab_class)) == 0
+    # tab 2 should be active
+    assert html.count('<div id="two" \n    class="{} active'.format(tab_class)) == 1
+
+
+def test_radio_attrs():
+    form = CheckboxesSampleForm()
+    form.fields["inline_radios"].widget.attrs = {"class": "first"}
+    form.fields["checkboxes"].widget.attrs = {"class": "second"}
+    html = render_crispy_form(form)
+    assert 'class="first"' in html
+    assert 'class="second"' in html
+
+
+def test_field_with_buttons():
+    form = SampleForm()
+    form.helper = FormHelper()
+    form.helper.layout = Layout(
+        FieldWithButtons(
+            Field("password1", css_class="span4"),
+            StrictButton("Go!", css_id="go-button"),
+            StrictButton("No!", css_class="extra"),
+            StrictButton("Test", type="submit", name="whatever", value="something"),
+            css_class="extra",
+            autocomplete="off",
         )
-        assert html.count("tab-pane") == 2
+    )
+    html = render_crispy_form(form)
 
-        assert html.count('class="tab-pane first-tab-class active"') == 1
+    form_group_class = "mb-3"
 
-        assert html.count('<div id="custom-name"') == 1
-        assert html.count('<div id="two"') == 1
-        assert html.count('name="first_name"') == 1
-        assert html.count('name="password1"') == 1
-        assert html.count('name="password2"') == 1
+    assert html.count('class="%s extra"' % form_group_class) == 1
+    assert html.count('autocomplete="off"') == 1
+    assert html.count('class="span4') == 1
+    assert html.count('id="go-button"') == 1
+    assert html.count("Go!") == 1
+    assert html.count("No!") == 1
+    assert html.count('class="btn"') == 2
+    assert html.count('class="btn extra"') == 1
+    assert html.count('type="submit"') == 1
+    assert html.count('name="whatever"') == 1
+    assert html.count('value="something"') == 1
 
-    def test_tab_helper_reuse(self):
-        # this is a proper form, according to the docs.
-        # note that the helper is a class property here,
-        # shared between all instances
-        class SampleForm(forms.Form):
-            val1 = forms.CharField(required=False)
-            val2 = forms.CharField(required=True)
-            helper = FormHelper()
-            helper.layout = Layout(
-                TabHolder(
-                    Tab("one", "val1"),
-                    Tab("two", "val2"),
-                )
-            )
 
-        # first render of form => everything is fine
-        test_form = SampleForm()
-        html = render_crispy_form(test_form)
+def test_hidden_fields():
+    form = SampleForm()
+    # All fields hidden
+    for field in form.fields:
+        form.fields[field].widget = forms.HiddenInput()
 
-        # second render of form => first tab should be active,
-        # but not duplicate class
-        test_form = SampleForm()
-        html = render_crispy_form(test_form)
-        assert html.count('class="nav-item active active"') == 0
+    form.helper = FormHelper()
+    form.helper.layout = Layout(
+        AppendedText("password1", "foo"),
+        PrependedText("password2", "bar"),
+        PrependedAppendedText("email", "bar"),
+        InlineCheckboxes("first_name"),
+        InlineRadios("last_name"),
+    )
+    html = render_crispy_form(form)
+    assert html.count("<input") == 5
+    assert html.count('type="hidden"') == 5
+    assert html.count("<label") == 0
 
-        # render a new form, now with errors
-        test_form = SampleForm(data={"val1": "foo"})
-        html = render_crispy_form(test_form)
-        tab_class = "tab-pane"
-        # if settings.CRISPY_TEMPLATE_PACK == 'bootstrap4':
-        # tab_class = 'nav-link'
-        # else:
-        # tab_class = 'tab-pane'
-        # tab 1 should not be active
-        assert html.count('<div id="one" \n    class="{} active'.format(tab_class)) == 0
-        # tab 2 should be active
-        assert html.count('<div id="two" \n    class="{} active'.format(tab_class)) == 1
 
-    def test_radio_attrs(self):
-        form = CheckboxesSampleForm()
-        form.fields["inline_radios"].widget.attrs = {"class": "first"}
-        form.fields["checkboxes"].widget.attrs = {"class": "second"}
-        html = render_crispy_form(form)
-        assert 'class="first"' in html
-        assert 'class="second"' in html
+def test_multiplecheckboxes():
+    test_form = CheckboxesSampleForm()
+    html = render_crispy_form(test_form)
+    assert html.count("checked") == 6
 
-    def test_field_with_buttons(self):
-        form = SampleForm()
-        form.helper = FormHelper()
-        form.helper.layout = Layout(
-            FieldWithButtons(
-                Field("password1", css_class="span4"),
-                StrictButton("Go!", css_id="go-button"),
-                StrictButton("No!", css_class="extra"),
-                StrictButton("Test", type="submit", name="whatever", value="something"),
-                css_class="extra",
-                autocomplete="off",
-            )
-        )
-        html = render_crispy_form(form)
+    test_form.helper = FormHelper(test_form)
+    test_form.helper[1].wrap(InlineCheckboxes, inline=True)
+    html = render_crispy_form(test_form)
+    # TODO Fix this test
+    # assert html.count('form-check-input"') == 3
 
-        form_group_class = "mb-3"
 
-        assert html.count('class="%s extra"' % form_group_class) == 1
-        assert html.count('autocomplete="off"') == 1
-        assert html.count('class="span4') == 1
-        assert html.count('id="go-button"') == 1
-        assert html.count("Go!") == 1
-        assert html.count("No!") == 1
-        assert html.count('class="btn"') == 2
-        assert html.count('class="btn extra"') == 1
-        assert html.count('type="submit"') == 1
-        assert html.count('name="whatever"') == 1
-        assert html.count('value="something"') == 1
+def test_multiple_checkboxes_unique_ids():
+    test_form = CheckboxesSampleForm()
+    html = render_crispy_form(test_form)
 
-    def test_hidden_fields(self):
-        form = SampleForm()
-        # All fields hidden
-        for field in form.fields:
-            form.fields[field].widget = forms.HiddenInput()
+    expected_ids = [
+        "checkboxes_0",
+        "checkboxes_1",
+        "checkboxes_2",
+        "alphacheckboxes_0",
+        "alphacheckboxes_1",
+        "alphacheckboxes_2",
+        "numeric_multiple_checkboxes_0",
+        "numeric_multiple_checkboxes_1",
+        "numeric_multiple_checkboxes_2",
+    ]
+    for id_suffix in expected_ids:
+        expected_str = f'id="id_{id_suffix}"'
+        assert html.count(expected_str) == 1
 
-        form.helper = FormHelper()
-        form.helper.layout = Layout(
-            AppendedText("password1", "foo"),
-            PrependedText("password2", "bar"),
-            PrependedAppendedText("email", "bar"),
-            InlineCheckboxes("first_name"),
-            InlineRadios("last_name"),
-        )
-        html = render_crispy_form(form)
-        assert html.count("<input") == 5
-        assert html.count('type="hidden"') == 5
-        assert html.count("<label") == 0
 
-    def test_multiplecheckboxes(self):
-        test_form = CheckboxesSampleForm()
-        html = render_crispy_form(test_form)
-        assert html.count("checked") == 6
+def test_inline_field():
+    form = SampleForm()
+    form.helper = FormHelper()
+    form.helper.layout = Layout(
+        InlineField("first_name", wrapper_class="col-4"),
+        InlineField("is_company", wrapper_class="col-4"),
+    )
+    form.helper.form_class = "row row-cols-lg-auto align-items-center"
+    assert parse_form(form) == parse_expected("test_inline_field.html")
 
-        test_form.helper = FormHelper(test_form)
-        test_form.helper[1].wrap(InlineCheckboxes, inline=True)
-        html = render_crispy_form(test_form)
-        # TODO Fix this test
-        # assert html.count('form-check-input"') == 3
 
-    def test_multiple_checkboxes_unique_ids(self):
-        test_form = CheckboxesSampleForm()
-        html = render_crispy_form(test_form)
+def test_grouped_checkboxes_radios():
+    form = GroupedChoiceForm()
+    form.helper = FormHelper()
+    form.helper.layout = Layout("checkbox_select_multiple")
+    assert parse_form(form) == parse_expected("test_grouped_checkboxes.html")
+    form.helper.layout = Layout("radio")
+    assert parse_form(form) == parse_expected("test_grouped_radios.html")
 
-        expected_ids = [
-            "checkboxes_0",
-            "checkboxes_1",
-            "checkboxes_2",
-            "alphacheckboxes_0",
-            "alphacheckboxes_1",
-            "alphacheckboxes_2",
-            "numeric_multiple_checkboxes_0",
-            "numeric_multiple_checkboxes_1",
-            "numeric_multiple_checkboxes_2",
-        ]
-        for id_suffix in expected_ids:
-            expected_str = f'id="id_{id_suffix}"'
-            assert html.count(expected_str) == 1
-
-    def test_inline_field(self):
-        form = SampleForm()
-        form.helper = FormHelper()
-        form.helper.layout = Layout(
-            InlineField("first_name", wrapper_class="col-4"),
-            InlineField("is_company", wrapper_class="col-4"),
-        )
-        form.helper.form_class = "row row-cols-lg-auto align-items-center"
-        assert parse_form(form) == parse_expected("test_inline_field.html")
-
-    def test_grouped_checkboxes_radios(self):
-        form = GroupedChoiceForm()
-        form.helper = FormHelper()
-        form.helper.layout = Layout("checkbox_select_multiple")
-        assert parse_form(form) == parse_expected("test_grouped_checkboxes.html")
-        form.helper.layout = Layout("radio")
-        assert parse_form(form) == parse_expected("test_grouped_radios.html")
-
-        form = GroupedChoiceForm({})
-        form.helper = FormHelper()
-        form.helper.layout = Layout("checkbox_select_multiple")
-        assert parse_form(form) == parse_expected(
-            "test_grouped_checkboxes_failing.html"
-        )
-        form.helper.layout = Layout("radio")
-        assert parse_form(form) == parse_expected("test_grouped_radios_failing.html")
+    form = GroupedChoiceForm({})
+    form.helper = FormHelper()
+    form.helper.layout = Layout("checkbox_select_multiple")
+    assert parse_form(form) == parse_expected("test_grouped_checkboxes_failing.html")
+    form.helper.layout = Layout("radio")
+    assert parse_form(form) == parse_expected("test_grouped_radios_failing.html")
