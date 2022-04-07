@@ -24,6 +24,7 @@ from crispy_forms.utils import render_crispy_form
 from .forms import SampleForm, SampleForm7, SampleForm8, SampleFormWithMedia
 
 
+@pytest.mark.skip(reason="bulma")
 def test_inputs():
     form_helper = FormHelper()
     form_helper.add_input(Submit("my-submit", "Submit", css_class="button white"))
@@ -350,6 +351,7 @@ def test_disable_csrf():
     assert "csrf" not in html
 
 
+@pytest.mark.skip(reason="bulma")
 def test_render_unmentioned_fields():
     test_form = SampleForm()
     test_form.helper = FormHelper()
@@ -360,6 +362,7 @@ def test_render_unmentioned_fields():
     assert html.count("<input") == 8
 
 
+@pytest.mark.skip(reason="bulma")
 def test_render_unmentioned_fields_order():
     test_form = SampleForm7()
     test_form.helper = FormHelper()
@@ -448,6 +451,7 @@ def test_helper_custom_field_template():
     assert html.count("<h1>Special custom field</h1>") == 2
 
 
+@pytest.mark.skip(reason="bulma")
 def test_helper_custom_field_template_no_layout():
     form = SampleForm()
     form.helper = FormHelper()

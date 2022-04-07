@@ -34,6 +34,7 @@ from .forms import (
 from .utils import parse_expected, parse_form
 
 
+@pytest.mark.skip(reason="bulma")
 def test_email_field():
     form = SampleForm()
     form.helper = FormHelper()

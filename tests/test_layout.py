@@ -120,6 +120,7 @@ def test_double_rendered_field(settings):
         template.render(c)
 
 
+@pytest.mark.skip(reason="bulma")
 def test_context_pollution():
     class ExampleForm(forms.Form):
         comment = forms.CharField()
@@ -559,6 +560,7 @@ def test_update_attributes_class():
     assert html.count(' class="hello hello2 input') == 1
 
 
+@pytest.mark.skip(reason="bulma")
 def test_file_field():
     form = FileForm()
     form.helper = FormHelper()
@@ -594,6 +596,7 @@ def test_row():
     assert parse_form(form) == parse_expected("row.html")
 
 
+@pytest.mark.skip(reason="bulma")
 def test_html_label_escape():
     form = LabelForm()
     form.helper = FormHelper()
@@ -636,6 +639,7 @@ def test_flat_attrs_safe():
     assert parse_form(form) == parse_expected("flat_attrs.html")
 
 
+@pytest.mark.skip(reason="bulma")
 def test_help_text_escape():
     form = HelpTextForm()
     form.helper = FormHelper()
