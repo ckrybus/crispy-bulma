@@ -14,7 +14,7 @@
         {% crispy_field field %}
       {% endif %}
 
-      <label for="" class="label">
+      <label for="{{ field.id_for_label }}" class="label">
         {{ field.label|safe }}
         {% if field.field.required %}
           <span class="asterisk">*</span>
@@ -22,7 +22,7 @@
       </label>
     {% endif %}
 
-    <p class="control">
+    <div class="control">
       {% if field|is_select %}
         <div class="select">
           {% crispy_field field %}
@@ -40,7 +40,7 @@
       {% if not field|is_checkbox and not field|is_checkboxselectmultiple and not field|is_select and not field|is_radioselect %}
         {% crispy_field field %}
       {% endif %}
-    </p>
+    </div>
 
     {% if form_show_errors %}
       {% for error in field.errors %}
