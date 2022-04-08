@@ -126,4 +126,13 @@ $ bump2version patch # possible: major / minor / patch
 $ git push
 $ git push --tags
 
+
+Making a release
+----------------
+
+Generate and upload the package to pypi::
+
+$ make dist
+$ twine upload dist/*
+
 TODO: Github Actions will then deploy to PyPI if tests pass.
