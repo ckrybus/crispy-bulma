@@ -62,7 +62,7 @@ Ready to contribute? Here's how to set up `crispy-bulma` for local development.
 1. Fork the `crispy-bulma` repo on GitHub.
 2. Clone your fork locally::
 
-    $ git clone git@github.com:your_name_here/crispy-bulma.git
+    $ git clone git@github.com:ckrybus/crispy-bulma.git
 
 3. Install your local copy into a virtualenv. Assuming you have virtualenvwrapper installed, this is how you set up your fork for local development::
 
@@ -102,8 +102,8 @@ Before you submit a pull request, check that it meets these guidelines:
 2. If the pull request adds functionality, the docs should be updated. Put
    your new functionality into a function with a docstring, and add the
    feature to the list in README.rst.
-3. The pull request should work for Python 3.5, 3.6, 3.7 and 3.8, and for PyPy. Check
-   https://travis-ci.com/ckrybus/crispy-bulma/pull_requests
+3. The pull request should work for Python 3.6, 3.7, 3.8, 3.9 and 3.10. Check
+   https://github.com/ckrybus/crispy-bulma/actions
    and make sure that the tests pass for all supported Python versions.
 
 Tips
@@ -119,10 +119,11 @@ Deploying
 
 A reminder for the maintainers on how to deploy.
 Make sure all your changes are committed (including an entry in HISTORY.rst).
+Git push current state, verify in Github Actions that all tests are green.
 Then run::
 
 $ bump2version patch # possible: major / minor / patch
 $ git push
 $ git push --tags
 
-Travis will then deploy to PyPI if tests pass.
+TODO: Github Actions will then deploy to PyPI if tests pass.
