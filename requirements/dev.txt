@@ -1,2 +1,3 @@
 pre-commit
 Sphinx
+bump2version
