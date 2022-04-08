@@ -34,6 +34,7 @@ from .forms import (
 from .utils import parse_expected, parse_form
 
 
+@pytest.mark.skip(reason="bulma")
 def test_email_field():
     form = SampleForm()
     form.helper = FormHelper()
@@ -132,7 +133,7 @@ def test_html_with_carriage_returns(settings):
         )
     )
     html = render_crispy_form(test_form)
-    assert html.count("\n") == 26
+    assert html.count("\n") == 24
 
 
 def test_i18n():
