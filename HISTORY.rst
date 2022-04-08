@@ -3,10 +3,12 @@ History
 =======
 
 
-0.4.0 (2022-04-XX)
+0.3.1 (2022-04-08)
 ------------------
 
-* Initial version by ckrybus.
+* Fix input wrapper, replace p tag with a div
+* Fix checkbox rendering, the input was rendered twice
+* Initial version by ckrybus (tests, docs, packaging, no logic changes)
 
 
 0.3.0 (2020-03-22) [#discord]_
@@ -49,7 +51,7 @@ History
 -------------------------------
 
 * Added template for non-field errors
-* Fix radio selec, which now appears inline
+* Fix radio select, which now appears inline
 * Fix form actions template (submit, reset)
 
 
