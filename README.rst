@@ -7,8 +7,9 @@ crispy-bulma
 .. image:: https://img.shields.io/github/workflow/status/ckrybus/crispy-bulma/Test
         :target: https://github.com/ckrybus/crispy-bulma/actions
         :alt: GitHub Workflow Status
-.. image:: https://img.shields.io/pypi/v/crispy_bulma.svg
+.. image:: https://img.shields.io/pypi/v/crispy-bulma
         :target: https://pypi.python.org/pypi/crispy-bulma
+        :alt: PyPI
 
 **This project is under active development. You should not use this package yet, as it is poorly documented and is missing many important features. I'll remove this header when it's ready to use.**
 
