@@ -27,17 +27,14 @@
         <div class="select">
           {% crispy_field field %}
         </div>
-      {% endif %}
 
-      {% if field|is_radioselect %}
+      {% elif field|is_radioselect %}
         {% include 'bulma/layout/radioselect.html' %}
-      {% endif %}
 
-      {% if field|is_checkbox %}
+      {% elif field|is_checkbox %}
         {% include 'bulma/layout/checkbox.html' %}
-      {% endif %}
 
-      {% if not field|is_checkbox and not field|is_checkboxselectmultiple and not field|is_select and not field|is_radioselect %}
+      {% elif not field|is_checkboxselectmultiple %}
         {% crispy_field field %}
       {% endif %}
     </div>
