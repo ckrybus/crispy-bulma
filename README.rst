@@ -47,8 +47,8 @@ for your project::
 Credits
 -------
 
-* This project is based on an archived `crispy-forms-bulma <https://github.com/python-discord/django-crispy-bulma>`_ fork by Discord
-* The original `crispy-forms-bulma <https://github.com/jhotujec/crispy-forms-bulma>`_ project is by Jure Hotujec
+* This project is based on an archived `crispy-forms-bulma <https://github.com/python-discord/django-crispy-bulma>`__ fork by Discord
+* The original `crispy-forms-bulma <https://github.com/jhotujec/crispy-forms-bulma>`__ project is by Jure Hotujec
 
 * This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
 
