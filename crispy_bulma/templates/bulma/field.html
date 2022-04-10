@@ -9,12 +9,12 @@
   >
   
   {% spaceless %}
-    {% if field.label and not field|is_radioselect and not field|is_checkbox %}
+    {% if field.label and not field|is_checkbox %}
       {% if field|is_checkbox %}
         {% crispy_field field %}
       {% endif %}
 
-      <label for="{{ field.id_for_label }}" class="label">
+      <label {% if not field|is_radioselect and not field|is_checkboxselectmultiple %}for="{{ field.id_for_label }}"{% endif %} class="label">
         {{ field.label|safe }}
         {% if field.field.required %}
           <span class="asterisk">*</span>
@@ -22,10 +22,11 @@
       </label>
     {% endif %}
 
-    <div class="control">
       {% if field|is_select %}
+        <div class="control">
         <div class="select">
           {% crispy_field field %}
+        </div>
         </div>
 
       {% elif field|is_radioselect %}
@@ -34,10 +35,14 @@
       {% elif field|is_checkbox %}
         {% include 'bulma/layout/checkbox.html' %}
 
-      {% elif not field|is_checkboxselectmultiple %}
+      {% elif field|is_checkboxselectmultiple %}
+        {% include 'bulma/layout/checkboxselectmultiple.html' %}
+
+      {% else %}
+        <div class="control">
         {% crispy_field field %}
+        </div>
       {% endif %}
-    </div>
 
     {% if form_show_errors %}
       {% for error in field.errors %}

@@ -3,6 +3,13 @@ History
 =======
 
 
+
+Unreleased
+-----------
+
+* Feature: add support for forms.MultipleChoiceField with CheckboxSelectMultiple as widget
+
+
 0.3.1 (2022-04-08)
 ------------------
 
