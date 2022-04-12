@@ -111,6 +111,7 @@ class CrispyBulmaFieldNode(template.Node):
             "passwordinput": "input",
             "emailinput": "input",
             "checkboxinput": "",
+            "select": "",
         }
         converters.update(getattr(settings, "CRISPY_CLASS_CONVERTERS", {}))
 
