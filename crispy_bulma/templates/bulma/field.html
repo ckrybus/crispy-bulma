@@ -8,49 +8,49 @@
     class="field{% if wrapper_class %} {{ wrapper_class }}{% endif %}{% if form_horizontal %} is-horizontal{% endif %}"
   >
     {% if form_horizontal %}<div class="field-label">{% endif %}
-    {% if field.label and not field|is_checkbox %}
-      <label {% if not field|is_radioselect and not field|is_checkboxselectmultiple %}for="{{ field.id_for_label }}"{% endif %} class="label">
-        {{ field.label }}
-        {% if field.field.required %}
-          <span class="asterisk">*</span>
-        {% endif %}
-      </label>
-    {% endif %}
+      {% if field.label and not field|is_checkbox %}
+        <label {% if not field|is_radioselect and not field|is_checkboxselectmultiple %}for="{{ field.id_for_label }}"{% endif %} class="label">
+          {{ field.label }}
+          {% if field.field.required %}
+            <span class="asterisk">*</span>
+          {% endif %}
+        </label>
+      {% endif %}
     {% if form_horizontal %}</div>{% endif %}
 
     {% if form_horizontal %}<div class="field-body"><div class="field">{% endif %}
-    {% if field|is_select %}
-      <div class="control">
-        <div class="select">
+      {% if field|is_select %}
+        <div class="control">
+          <div class="select">
+            {% crispy_field field %}
+          </div>
+        </div>
+
+      {% elif field|is_radioselect %}
+        {% include 'bulma/layout/radioselect.html' %}
+
+      {% elif field|is_checkbox %}
+        {% include 'bulma/layout/checkbox.html' %}
+
+      {% elif field|is_checkboxselectmultiple %}
+        {% include 'bulma/layout/checkboxselectmultiple.html' %}
+
+      {% else %}
+        <div class="control">
           {% crispy_field field %}
         </div>
-      </div>
+      {% endif %}
 
-    {% elif field|is_radioselect %}
-      {% include 'bulma/layout/radioselect.html' %}
+      {% if form_show_errors %}
+        {% for error in field.errors %}
+          <p id="error_{{ forloop.counter }}_{{ field.auto_id }}"
+             class="help is-danger">
+            {{ error }}
+          </p>
+        {% endfor %}
+      {% endif %}
 
-    {% elif field|is_checkbox %}
-      {% include 'bulma/layout/checkbox.html' %}
-
-    {% elif field|is_checkboxselectmultiple %}
-      {% include 'bulma/layout/checkboxselectmultiple.html' %}
-
-    {% else %}
-      <div class="control">
-        {% crispy_field field %}
-      </div>
-    {% endif %}
-
-    {% if form_show_errors %}
-      {% for error in field.errors %}
-        <p id="error_{{ forloop.counter }}_{{ field.auto_id }}"
-           class="help is-danger">
-          {{ error }}
-        </p>
-      {% endfor %}
-    {% endif %}
-
-    {% include 'bulma/layout/help_text.html' %}
+      {% include 'bulma/layout/help_text.html' %}
     {% if form_horizontal %}</div></div>{% endif %}
   </div>
 {% endif %}
