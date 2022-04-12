@@ -638,7 +638,8 @@ def test_flat_attrs_safe():
     assert parse_form(form) == parse_expected("flat_attrs.html")
 
 
-def test_help_text_escape():
+def test_help_text_is_not_escaped():
+    # in django this value is also not HTML-escaped in automatically-generated forms
     form = HelpTextForm()
     form.helper = FormHelper()
     assert parse_form(form) == parse_expected("help_text_escape.html")
