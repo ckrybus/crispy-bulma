@@ -270,6 +270,5 @@ class GroupedChoiceForm(forms.Form):
 class HelpTextForm(forms.Form):
     email = forms.EmailField(
         label="email",
-        widget=forms.TextInput(),
-        help_text="Insert your email<>&",
+        help_text="Insert your <b>email</b>",
     )

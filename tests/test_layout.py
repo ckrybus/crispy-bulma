@@ -638,9 +638,7 @@ def test_flat_attrs_safe():
     assert parse_form(form) == parse_expected("flat_attrs.html")
 
 
-@pytest.mark.skip(reason="bulma")
 def test_help_text_escape():
     form = HelpTextForm()
     form.helper = FormHelper()
-    form.helper.form_tag = False
     assert parse_form(form) == parse_expected("help_text_escape.html")

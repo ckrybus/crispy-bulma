@@ -49,9 +49,7 @@
       {% endfor %}
     {% endif %}
 
-    {% if field.help_text %}
-      <p id="hint_{{ field.auto_id }}" class="help">{{ field.help_text|safe }}</p>
-    {% endif %}
+    {% include 'bulma/layout/help_text.html' %}
   {% endspaceless %}
   </div>
 {% endif %}
