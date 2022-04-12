@@ -11,7 +11,7 @@
   {% spaceless %}
     {% if field.label and not field|is_checkbox %}
       <label {% if not field|is_radioselect and not field|is_checkboxselectmultiple %}for="{{ field.id_for_label }}"{% endif %} class="label">
-        {{ field.label|safe }}
+        {{ field.label }}
         {% if field.field.required %}
           <span class="asterisk">*</span>
         {% endif %}

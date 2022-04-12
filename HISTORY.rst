@@ -7,8 +7,9 @@ History
 Unreleased
 -----------
 
+* BREAKING CHANGE: HTML in labels is now being escaped, this is consistent with django.
 * BREAKING CHANGE: EmailField and EmailInput have been removed. Use django.forms.EmailField instead.
-* Feature: add support for forms.MultipleChoiceField with CheckboxSelectMultiple as widget
+* Feature: add support for forms.MultipleChoiceField with CheckboxSelectMultiple as widget.
 
 
 0.3.1 (2022-04-08)

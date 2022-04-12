@@ -215,7 +215,7 @@ class InputsForm(forms.Form):
 
 
 class LabelForm(forms.Form):
-    text_input = forms.CharField(label="Test html escape <>&")
+    text_input = forms.CharField(label="Test html <b>escape</b>")
 
 
 class CustomRadioSelect(forms.RadioSelect):

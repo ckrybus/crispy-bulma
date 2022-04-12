@@ -595,13 +595,12 @@ def test_row():
     assert parse_form(form) == parse_expected("row.html")
 
 
-@pytest.mark.skip(reason="bulma")
 def test_html_label_escape():
     form = LabelForm()
     form.helper = FormHelper()
     form.helper.layout = Layout("text_input")
     html = render_crispy_form(form)
-    assert "&lt;&gt;&amp;" in html
+    assert "&lt;b&gt;escape&lt;/b&gt;" in html
 
 
 @pytest.mark.skip(reason="formset")
