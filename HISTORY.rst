@@ -7,6 +7,7 @@ History
 Unreleased
 -----------
 
+* BREAKING CHANGE: EmailField and EmailInput have been removed. Use django.forms.EmailField instead.
 * Feature: add support for forms.MultipleChoiceField with CheckboxSelectMultiple as widget
 
 

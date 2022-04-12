@@ -351,7 +351,6 @@ def test_disable_csrf():
     assert "csrf" not in html
 
 
-@pytest.mark.skip(reason="bulma")
 def test_render_unmentioned_fields():
     test_form = SampleForm()
     test_form.helper = FormHelper()
@@ -362,7 +361,6 @@ def test_render_unmentioned_fields():
     assert html.count("<input") == 8
 
 
-@pytest.mark.skip(reason="bulma")
 def test_render_unmentioned_fields_order():
     test_form = SampleForm7()
     test_form.helper = FormHelper()

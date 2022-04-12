@@ -109,6 +109,7 @@ class CrispyBulmaFieldNode(template.Node):
             "textinput": "input",
             "fileinput": "fileinput fileUpload",
             "passwordinput": "input",
+            "emailinput": "input",
         }
         converters.update(getattr(settings, "CRISPY_CLASS_CONVERTERS", {}))
 

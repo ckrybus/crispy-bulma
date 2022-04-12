@@ -12,7 +12,6 @@ class SampleForm(forms.Form):
         label="email",
         max_length=30,
         required=True,
-        widget=forms.TextInput(),
         help_text="Insert your email",
     )
     password1 = forms.CharField(

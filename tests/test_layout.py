@@ -120,7 +120,6 @@ def test_double_rendered_field(settings):
         template.render(c)
 
 
-@pytest.mark.skip(reason="bulma")
 def test_context_pollution():
     class ExampleForm(forms.Form):
         comment = forms.CharField()

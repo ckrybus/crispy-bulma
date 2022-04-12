@@ -1,12 +1,7 @@
-from django.forms import EmailField as DjangoEmailField
 from django.forms import FileField as DjangoFileField
 from django.forms import ImageField as DjangoImageField
 
-from crispy_bulma.widgets import EmailInput, FileUploadInput
-
-
-class EmailField(DjangoEmailField):
-    widget = EmailInput()
+from crispy_bulma.widgets import FileUploadInput
 
 
 class ImageField(DjangoImageField):
