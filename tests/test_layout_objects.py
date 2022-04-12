@@ -162,11 +162,11 @@ def test_remove_labels():
 @pytest.mark.parametrize(
     "input,expected",
     [
-        ("text_input", "text_input.html"),
-        ("text_area", "text_area.html"),
-        ("checkboxes", "checkboxes.html"),
-        ("radio", "radio.html"),
-        ("single_checkbox", "single_checkbox.html"),
+        ("text_input", "test_text_input.html"),
+        ("text_area", "test_text_area.html"),
+        ("radio", "test_radio.html"),
+        ("checkbox", "test_checkbox.html"),
+        ("checkboxes", "test_checkboxes.html"),
         ("select_input", "test_select.html"),
     ],
 )
