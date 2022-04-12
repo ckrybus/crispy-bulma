@@ -5,30 +5,22 @@ from crispy_forms.helper import FormHelper
 
 
 class SampleForm(forms.Form):
-    is_company = forms.CharField(
-        label="company", required=False, widget=forms.CheckboxInput()
-    )
+    is_company = forms.BooleanField(label="company", required=False)
     email = forms.EmailField(
         label="email",
         max_length=30,
-        required=True,
         help_text="Insert your email",
     )
     password1 = forms.CharField(
-        label="password", max_length=30, required=True, widget=forms.PasswordInput()
+        label="password", max_length=30, widget=forms.PasswordInput()
     )
     password2 = forms.CharField(
         label="re-enter password",
         max_length=30,
-        required=True,
         widget=forms.PasswordInput(),
     )
-    first_name = forms.CharField(
-        label="first name", max_length=5, required=True, widget=forms.TextInput()
-    )
-    last_name = forms.CharField(
-        label="last name", max_length=5, required=True, widget=forms.TextInput()
-    )
+    first_name = forms.CharField(label="first name", max_length=5)
+    last_name = forms.CharField(label="last name", max_length=5)
     datetime_field = forms.SplitDateTimeField(
         label="date time", widget=forms.SplitDateTimeWidget()
     )
@@ -39,7 +31,6 @@ class SampleForm(forms.Form):
         password2 = self.cleaned_data.get("password2", None)
         if not password1 and not password2 or password1 != password2:
             raise forms.ValidationError("Passwords dont match")
-
         return self.cleaned_data
 
 
@@ -100,16 +91,8 @@ class SampleForm3(forms.ModelForm):
 
 class SampleForm4(forms.ModelForm):
     class Meta:
-        """
-        before Django1.6, one cannot use __all__ shortcut for fields
-        without getting the following error:
-        django.core.exceptions.FieldError: Unknown field(s) (a, l, _)
-        specified for CrispyTestModel because obviously it casts the
-        string to a set
-        """
-
         model = CrispyTestModel
-        fields = "__all__"  # eliminate RemovedInDjango18Warning
+        fields = "__all__"
 
 
 class SampleForm5(forms.Form):
@@ -168,7 +151,6 @@ class SampleForm7(forms.ModelForm):
     password2 = forms.CharField(
         label="re-enter password",
         max_length=30,
-        required=True,
         widget=forms.PasswordInput(),
     )
 
@@ -184,7 +166,6 @@ class SampleForm8(forms.ModelForm):
     password2 = forms.CharField(
         label="re-enter password",
         max_length=30,
-        required=True,
         widget=forms.PasswordInput(),
     )
 
@@ -213,8 +194,8 @@ class FileForm(forms.Form):
 
 
 class FileFormRequired(forms.Form):
-    file_field = forms.FileField(required=True, widget=forms.FileInput)
-    clearable_file = forms.FileField(required=True, widget=forms.ClearableFileInput)
+    file_field = forms.FileField(widget=forms.FileInput)
+    clearable_file = forms.FileField(widget=forms.ClearableFileInput)
 
 
 class InputsForm(forms.Form):
@@ -289,7 +270,6 @@ class GroupedChoiceForm(forms.Form):
 class HelpTextForm(forms.Form):
     email = forms.EmailField(
         label="email",
-        required=True,
         widget=forms.TextInput(),
         help_text="Insert your email<>&",
     )
