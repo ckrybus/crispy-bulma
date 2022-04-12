@@ -22,27 +22,27 @@
       </label>
     {% endif %}
 
-      {% if field|is_select %}
-        <div class="control">
+    {% if field|is_select %}
+      <div class="control">
         <div class="select">
           {% crispy_field field %}
         </div>
-        </div>
+      </div>
 
-      {% elif field|is_radioselect %}
-        {% include 'bulma/layout/radioselect.html' %}
+    {% elif field|is_radioselect %}
+      {% include 'bulma/layout/radioselect.html' %}
 
-      {% elif field|is_checkbox %}
-        {% include 'bulma/layout/checkbox.html' %}
+    {% elif field|is_checkbox %}
+      {% include 'bulma/layout/checkbox.html' %}
 
-      {% elif field|is_checkboxselectmultiple %}
-        {% include 'bulma/layout/checkboxselectmultiple.html' %}
+    {% elif field|is_checkboxselectmultiple %}
+      {% include 'bulma/layout/checkboxselectmultiple.html' %}
 
-      {% else %}
-        <div class="control">
+    {% else %}
+      <div class="control">
         {% crispy_field field %}
-        </div>
-      {% endif %}
+      </div>
+    {% endif %}
 
     {% if form_show_errors %}
       {% for error in field.errors %}

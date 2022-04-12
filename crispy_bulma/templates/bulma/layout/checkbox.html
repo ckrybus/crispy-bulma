@@ -1,11 +1,11 @@
 {% load crispy_forms_bulma_field %}
 
 <div class="control">
-<label for="{{ field.id_for_label }}" class="checkbox">
-  {% crispy_field field %}
-  {{ field.label|safe }}
-  {% if field.field.required %}
-    <span class="asterisk">*</span>
-  {% endif %}
-</label>
+  <label for="{{ field.id_for_label }}" class="checkbox">
+    {% crispy_field field %}
+    {{ field.label|safe }}
+    {% if field.field.required %}
+      <span class="asterisk">*</span>
+    {% endif %}
+  </label>
 </div>
