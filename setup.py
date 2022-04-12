@@ -24,6 +24,11 @@ setup(
     extras_require={"test": ["pytest", "pytest-django"]},
     tests_require=["crispy-bulma[test]"],
     python_requires=">=3.6",
+    project_urls={
+        "Documentation": "https://crispy-bulma.readthedocs.io/en/latest/",
+        "Source": "https://github.com/ckrybus/crispy-bulma",
+        "Changelog": "https://github.com/ckrybus/crispy-bulma/blob/main/HISTORY.rst",
+    },
     include_package_data=True,
     zip_safe=False,
     classifiers=[
