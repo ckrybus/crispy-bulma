@@ -22,6 +22,7 @@ from crispy_forms.templatetags.crispy_forms_tags import CrispyFormNode
 from crispy_forms.utils import render_crispy_form
 
 from .forms import SampleForm, SampleForm7, SampleForm8, SampleFormWithMedia
+from .utils import parse_expected, parse_form
 
 
 @pytest.mark.skip(reason="bulma")
@@ -611,37 +612,6 @@ def test_label_class_and_field_class_bs5():
 
 
 @pytest.mark.skip(reason="bootstrap")
-def test_label_class_and_field_class_bs5_offset_when_horizontal():
-    # Test col-XX-YY pattern
-    form = SampleForm()
-    form.helper = FormHelper()
-    form.helper.label_class = "col-lg-2"
-    form.helper.field_class = "col-lg-8"
-    form.helper.form_class = "form-horizontal"
-    html = render_crispy_form(form)
-
-    assert '<div class="mb-3 row">' in html
-    assert '<div class="offset-lg-2 col-lg-8">' in html
-    assert html.count("col-lg-8") == 7
-
-    # Test multi col-XX-YY pattern and col-X pattern
-
-    form.helper.label_class = "col-sm-3 col-md-4 col-5 col-lg-4"
-    form.helper.field_class = "col-sm-8 col-md-6 col-7 col-lg-8"
-    html = render_crispy_form(form)
-
-    assert '<div class="mb-3 row">' in html
-    assert (
-        '<div class="offset-sm-3 offset-md-4 offset-lg-4 col-sm-8'
-        ' col-md-6 col-7 col-lg-8">' in html
-    )
-    assert html.count("col-sm-8") == 7
-    assert html.count("col-md-6") == 7
-    assert html.count("col-7") == 7
-    assert html.count("col-lg-8") == 7
-
-
-@pytest.mark.skip(reason="bootstrap")
 def test_form_group_with_form_inline_bs5():
     form = SampleForm()
     form.helper = FormHelper()
@@ -671,3 +641,13 @@ def test_passthrough_context():
     html = render_crispy_form(form, helper=form.helper, context=c)
     assert "Got prefix: foo" in html
     assert "Got suffix: bar" in html
+
+
+def test_form_horizontal():
+    form = SampleForm()
+    form.helper = FormHelper()
+    form.helper.layout = Layout(
+        "first_name",
+    )
+    form.helper.form_horizontal = True
+    assert parse_form(form) == parse_expected("test_form_horizontal.html")

@@ -8,6 +8,7 @@ Welcome to crispy-bulma's documentation!
    readme
    installation
    usage
+   form_helper
    contributing
    history
 

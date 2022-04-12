@@ -5,8 +5,9 @@
 {% else %}
   <div
     id="div_{{ field.auto_id }}"
-    class="field{% if wrapper_class %} {{ wrapper_class }}{% endif %}"
+    class="field{% if wrapper_class %} {{ wrapper_class }}{% endif %}{% if form_horizontal %} is-horizontal{% endif %}"
   >
+    {% if form_horizontal %}<div class="field-label">{% endif %}
     {% if field.label and not field|is_checkbox %}
       <label {% if not field|is_radioselect and not field|is_checkboxselectmultiple %}for="{{ field.id_for_label }}"{% endif %} class="label">
         {{ field.label }}
@@ -15,7 +16,9 @@
         {% endif %}
       </label>
     {% endif %}
+    {% if form_horizontal %}</div>{% endif %}
 
+    {% if form_horizontal %}<div class="field-body"><div class="field">{% endif %}
     {% if field|is_select %}
       <div class="control">
         <div class="select">
@@ -48,5 +51,6 @@
     {% endif %}
 
     {% include 'bulma/layout/help_text.html' %}
+    {% if form_horizontal %}</div></div>{% endif %}
   </div>
 {% endif %}
