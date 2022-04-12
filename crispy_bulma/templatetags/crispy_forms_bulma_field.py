@@ -110,6 +110,7 @@ class CrispyBulmaFieldNode(template.Node):
             "fileinput": "fileinput fileUpload",
             "passwordinput": "input",
             "emailinput": "input",
+            "checkboxinput": "",
         }
         converters.update(getattr(settings, "CRISPY_CLASS_CONVERTERS", {}))
 
@@ -128,6 +129,10 @@ class CrispyBulmaFieldNode(template.Node):
                     css_class += " is-danger"
 
             widget.attrs["class"] = css_class
+
+            if "class" in widget.attrs and not widget.attrs["class"]:
+                # remove the class="" attribute completely if empty
+                del widget.attrs["class"]
 
             # HTML5 required attribute
             if (
