@@ -7,8 +7,6 @@
     id="div_{{ field.auto_id }}"
     class="field{% if wrapper_class %} {{ wrapper_class }}{% endif %}"
   >
-  
-  {% spaceless %}
     {% if field.label and not field|is_checkbox %}
       <label {% if not field|is_radioselect and not field|is_checkboxselectmultiple %}for="{{ field.id_for_label }}"{% endif %} class="label">
         {{ field.label }}
@@ -50,6 +48,5 @@
     {% endif %}
 
     {% include 'bulma/layout/help_text.html' %}
-  {% endspaceless %}
   </div>
 {% endif %}
