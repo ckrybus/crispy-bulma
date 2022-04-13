@@ -19,6 +19,17 @@ Bulma_ template pack for django-crispy-forms_
 Documentation: https://crispy-bulma.readthedocs.io.
 
 
+Requirements
+------------
+
+* Django: 2.2, 3.1, 3.2
+* Python 3.6, 3.7, 3.8, 3.9
+* django-crispy-forms >= 1.12.0
+* Bulma.css 0.7.5 - 0.9.3
+
+If you depend on django 3.0 or django-crispy-forms < 1.12.0 use the 0.4.0 version.
+
+
 Quickstart
 ----------
 

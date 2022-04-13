@@ -3,10 +3,11 @@ History
 =======
 
 
-Unreleased
------------
+0.5.0 (2022-04-13)
+------------------
 
-* Nothing yet
+* Drop support for Django 3.0
+* Upgrade crispy_forms dependency, now version >= 1.12.0 is required
 
 
 0.4.0 (2022-04-13)
