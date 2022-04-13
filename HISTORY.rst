@@ -3,9 +3,14 @@ History
 =======
 
 
-
 Unreleased
 -----------
+
+* Nothing yet
+
+
+0.4.0 (2022-04-13)
+------------------
 
 * Feature: add ``label_class`` helper attribute
 * Feature: add support for horizontal forms
