@@ -48,7 +48,7 @@ master_doc = "index"
 
 # General information about the project.
 project = "crispy-bulma"
-copyright = "2021, Christoph Krybus"
+copyright = "2021-2022, Christoph Krybus"
 author = "Christoph Krybus"
 
 # The version info for the project you're documenting, acts as replacement

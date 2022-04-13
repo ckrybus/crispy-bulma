@@ -586,29 +586,14 @@ def test_form_show_labels():
     assert html.count("<label") == 0
 
 
-@pytest.mark.skip(reason="bootsrap")
-def test_label_class_and_field_class_bs5():
+def test_label_class_bulma():
     form = SampleForm()
     form.helper = FormHelper()
-    form.helper.label_class = "col-lg-2"
-    form.helper.field_class = "col-lg-8"
+    form.helper.label_class = "is-pulled-left"
     html = render_crispy_form(form)
-
-    assert '<div class="mb-3">' in html
-    assert '<div class="col-lg-8">' in html
-    assert html.count("col-lg-8") == 7
-    # TODO FIX THIS TEST
-    # assert "offset" not in html
-
-    form.helper.label_class = "col-sm-3 col-md-4"
-    form.helper.field_class = "col-sm-8 col-md-6"
-    html = render_crispy_form(form)
-
-    assert '<div class="mb-3">' in html
-    assert '<div class="col-sm-8 col-md-6">' in html
-    assert html.count("col-sm-8") == 7
-    # TODO FIX THIS TEST
-    # assert "offset" not in html
+    assert 'class="label is-pulled-left"' in html
+    # there are 7 form fields, but one of them is a checkbox without a label
+    assert html.count("is-pulled-left") == 6
 
 
 @pytest.mark.skip(reason="bootstrap")
