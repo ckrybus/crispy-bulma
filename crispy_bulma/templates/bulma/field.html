@@ -20,11 +20,7 @@
 
     {% if form_horizontal %}<div class="field-body"><div class="field">{% endif %}
       {% if field|is_select %}
-        <div class="control">
-          <div class="select">
-            {% crispy_field field %}
-          </div>
-        </div>
+        {% include 'bulma/layout/select.html' %}
 
       {% elif field|is_radioselect %}
         {% include 'bulma/layout/radioselect.html' %}
