@@ -3,6 +3,11 @@ History
 =======
 
 
+Unreleased
+----------
+
+* Fix SelectMultiple widget rendering
+
 
 0.5.1 (2022-04-14)
 ------------------

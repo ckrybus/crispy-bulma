@@ -160,7 +160,7 @@ def test_remove_labels():
 
 
 @pytest.mark.parametrize(
-    "input,expected",
+    "form_field,expected",
     [
         ("text_input", "test_text_input.html"),
         ("text_area", "test_text_area.html"),
@@ -168,12 +168,16 @@ def test_remove_labels():
         ("checkbox", "test_checkbox.html"),
         ("checkboxes", "test_checkboxes.html"),
         ("select_input", "test_select.html"),
+        ("select_multiple", "test_selectmultiple.html"),
     ],
 )
-def test_inputs(input, expected):
+def test_inputs(form_field, expected):
     form = InputsForm()
     form.helper = FormHelper()
-    form.helper.layout = Layout(input)
+    if form_field == "select_multiple":
+        form_field = Field(form_field, size="5")
+    form.helper.layout = Layout(form_field)
+
     assert parse_form(form) == parse_expected(expected)
 
 

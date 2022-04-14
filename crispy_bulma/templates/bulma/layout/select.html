@@ -1,7 +1,7 @@
 {% load crispy_forms_bulma_field %}
 
 <div class="control">
-  <div class="select">
+  <div class="select{% if field|is_selectmultiple %} is-multiple{%endif%}">
     {% crispy_field field %}
   </div>
 </div>

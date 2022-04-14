@@ -199,19 +199,27 @@ class FileFormRequired(forms.Form):
 
 
 class InputsForm(forms.Form):
-    choices = ((1, "Option one"), (2, "Option two"), (3, "Option three"))
+    choices = [
+        (1, "Option one"),
+        (2, "Option two"),
+        (3, "Option three"),
+        (4, "Option four"),
+        (5, "Option five"),
+        (6, "Option six"),
+    ]
     text_input = forms.CharField()
     text_area = forms.CharField(widget=forms.Textarea())
     checkboxes = forms.MultipleChoiceField(
-        choices=choices,
+        choices=choices[:3],
         initial=(1,),
         widget=forms.CheckboxSelectMultiple,
     )
-    radio = forms.ChoiceField(widget=forms.RadioSelect, choices=choices)
+    radio = forms.ChoiceField(widget=forms.RadioSelect, choices=choices[:3])
     checkbox = forms.CharField(
         label="company", required=False, widget=forms.CheckboxInput()
     )
-    select_input = forms.ChoiceField(choices=choices)
+    select_input = forms.ChoiceField(choices=choices[:3])
+    select_multiple = forms.MultipleChoiceField(choices=choices)
 
 
 class LabelForm(forms.Form):

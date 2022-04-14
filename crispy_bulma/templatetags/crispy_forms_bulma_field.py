@@ -27,7 +27,13 @@ def is_radioselect(field):
 
 @register.filter
 def is_select(field):
+    # warning: this function is True for forms.SelectMultiple too
     return isinstance(field.field.widget, forms.Select)
+
+
+@register.filter
+def is_selectmultiple(field):
+    return isinstance(field.field.widget, forms.SelectMultiple)
 
 
 @register.filter
@@ -116,6 +122,7 @@ class CrispyBulmaFieldNode(template.Node):
             "emailinput": "input",
             "checkboxinput": "",
             "select": "",
+            "selectmultiple": "",
         }
         converters.update(getattr(settings, "CRISPY_CLASS_CONVERTERS", {}))
 
