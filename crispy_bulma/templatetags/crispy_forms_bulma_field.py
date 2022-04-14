@@ -1,7 +1,6 @@
-try:
-    from itertools import izip
-except ImportError:
-    izip = zip
+# This file is currently copied directly from django-crispy-forms==0.12.0
+# There are only a few small changes specific to bulma.
+# https://github.com/django-crispy-forms/django-crispy-forms/blob/1.12.0/crispy_forms/templatetags/crispy_forms_field.py
 
 from django import forms, template
 from django.conf import settings
@@ -42,6 +41,11 @@ def is_file(field):
 
 
 @register.filter
+def is_clearable_file(field):
+    return isinstance(field.field.widget, forms.ClearableFileInput)
+
+
+@register.filter
 def is_multivalue(field):
     return isinstance(field.field.widget, forms.MultiWidget)
 
@@ -65,7 +69,7 @@ def css_class(field):
 def pairwise(iterable):
     """s -> (s0,s1), (s2,s3), (s4, s5), ..."""
     a = iter(iterable)
-    return izip(a, a)
+    return zip(a, a)
 
 
 class CrispyBulmaFieldNode(template.Node):
@@ -75,7 +79,7 @@ class CrispyBulmaFieldNode(template.Node):
         self.html5_required = "html5_required"
 
     def render(self, context):
-        # Nodes are not thread-safe so we must store and look up our instance
+        # Nodes are not threadsafe so we must store and look up our instance
         # variables in the current rendering context first
         if self not in context.render_context:
             context.render_context[self] = (
@@ -125,7 +129,7 @@ class CrispyBulmaFieldNode(template.Node):
             else:
                 css_class = class_name
 
-            if template_pack in ["bulma"]:
+            if template_pack == "bulma":
                 if field.errors:
                     css_class += " is-danger"
 
@@ -156,7 +160,7 @@ class CrispyBulmaFieldNode(template.Node):
                         context
                     )
 
-        return field
+        return str(field)
 
 
 @register.tag(name="crispy_field")
