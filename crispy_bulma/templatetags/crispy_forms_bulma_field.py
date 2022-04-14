@@ -17,6 +17,11 @@ def is_checkbox(field):
 
 
 @register.filter
+def is_password(field):
+    return isinstance(field.field.widget, forms.PasswordInput)
+
+
+@register.filter
 def is_radioselect(field):
     return isinstance(field.field.widget, forms.RadioSelect)
 
@@ -32,11 +37,29 @@ def is_checkboxselectmultiple(field):
 
 
 @register.filter
+def is_file(field):
+    return isinstance(field.field.widget, forms.FileInput)
+
+
+@register.filter
+def is_multivalue(field):
+    return isinstance(field.field.widget, forms.MultiWidget)
+
+
+@register.filter
 def classes(field):
     """
     Returns CSS classes of a field
     """
     return field.widget.attrs.get("class", None)
+
+
+@register.filter
+def css_class(field):
+    """
+    Returns widgets class name in lowercase
+    """
+    return field.field.widget.__class__.__name__.lower()
 
 
 def pairwise(iterable):
