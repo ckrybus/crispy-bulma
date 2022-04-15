@@ -3,6 +3,12 @@ History
 =======
 
 
+Unreleased
+----------
+
+* Add support for Python 3.10
+
+
 0.6.0 (2022-04-15)
 ------------------
 
