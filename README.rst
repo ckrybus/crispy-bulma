@@ -32,7 +32,7 @@ Officially supported versions:
 Older versions might work, but are not officially supported.
 For example django-crispy-forms >= 1.9.0, Bulma >= 0.7.5 and Django 3.0 are still likely to work.
 
-If you depend on django 3.0 or django-crispy-forms < 1.12.0 use the 0.4.0 version.
+If you depend on django-crispy-forms < 1.12.0 use the 0.4.0 version.
 
 This project aims to support the latest django and django-crispy-forms versions in the main branch.
 
