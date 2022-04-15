@@ -139,7 +139,7 @@ class CrispyBulmaFieldNode(template.Node):
                 attributes = template.Variable(attribute).resolve(context)
 
                 if attribute_name in widget.attrs:
-                    # multiple attribtes are in a single string, e.g.
+                    # multiple attributes are in a single string, e.g.
                     # "form-control is-invalid"
                     for attr in attributes.split():
                         if attr not in widget.attrs[attribute_name].split():
