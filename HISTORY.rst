@@ -3,9 +3,10 @@ History
 =======
 
 
-Unreleased
-----------
+0.6.0 (2022-04-15)
+------------------
 
+* Add support for Django 4.0
 * Fix SelectMultiple widget rendering
 
 
