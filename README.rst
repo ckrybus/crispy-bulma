@@ -22,12 +22,19 @@ Documentation: https://crispy-bulma.readthedocs.io.
 Requirements
 ------------
 
+Officially supported versions:
+
 * Django: 2.2, 3.1, 3.2
 * Python 3.6, 3.7, 3.8, 3.9
-* django-crispy-forms >= 1.12.0
-* Bulma.css 0.7.5 - 0.9.3
+* django-crispy-forms 1.12, 1.13
+* Bulma.css 0.9.3
+
+Older versions might work, but are not officially supported.
+For example django-crispy-forms >= 1.9.0, Bulma >= 0.7.5 and Django 3.0 are still likely to work.
 
 If you depend on django 3.0 or django-crispy-forms < 1.12.0 use the 0.4.0 version.
+
+This project aims to support the latest django and django-crispy-forms versions in the main branch.
 
 
 Quickstart
