@@ -16,7 +16,11 @@
 
         <div class="control {% if icon_prepend %}has-icons-left{% endif %}
                             {% if icon_append %} has-icons-right {% endif %}">
-            {% crispy_field field %}
+            {% if field.errors %}
+                {% crispy_field field "class" "is-danger" %}
+            {% else %}
+                {% crispy_field field %}
+            {% endif %}
             {% if icon_prepend %}
                 <span class="icon is-small is-left">
                     <i class="fa fa-{{ icon_prepend }}"></i>

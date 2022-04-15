@@ -2,7 +2,11 @@
 
 <div class="control">
   <label {% if field.id_for_label %}for="{{ field.id_for_label }}" {% endif %}class="checkbox">
-    {% crispy_field field %}
+    {% if field.errors %}
+        {% crispy_field field "class" "is-danger" %}
+    {% else %}
+        {% crispy_field field %}
+    {% endif %}
     {{ field.label }}
     {% if field.field.required %}
       <span class="asterisk">*</span>

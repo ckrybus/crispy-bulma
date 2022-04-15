@@ -2,6 +2,10 @@
 
 <div class="control">
   <div class="select{% if field|is_selectmultiple %} is-multiple{%endif%}">
-    {% crispy_field field %}
+    {% if field.errors %}
+        {% crispy_field field "class" "is-danger" %}
+    {% else %}
+        {% crispy_field field %}
+    {% endif %}
   </div>
 </div>

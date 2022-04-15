@@ -5,8 +5,6 @@
 from django import forms, template
 from django.conf import settings
 
-from crispy_forms.utils import TEMPLATE_PACK
-
 register = template.Library()
 
 
@@ -98,9 +96,6 @@ class CrispyBulmaFieldNode(template.Node):
         field, attrs = context.render_context[self]
         field = field.resolve(context)
 
-        # If template pack has been overridden in FormHelper we can pick it from context
-        template_pack = context.get("template_pack", TEMPLATE_PACK)
-
         # There are special django widgets that wrap actual widgets,
         # such as forms.widgets.MultiWidget, admin.widgets.RelatedFieldWidgetWrapper
         widgets = getattr(
@@ -133,10 +128,6 @@ class CrispyBulmaFieldNode(template.Node):
             else:
                 css_class = class_name
 
-            if template_pack == "bulma":
-                if field.errors:
-                    css_class += " is-danger"
-
             widget.attrs["class"] = css_class
 
             if "class" in widget.attrs and not widget.attrs["class"]:
@@ -145,13 +136,16 @@ class CrispyBulmaFieldNode(template.Node):
 
             for attribute_name, attribute in attr.items():
                 attribute_name = template.Variable(attribute_name).resolve(context)
-                attribute = template.Variable(attribute).resolve(context)
+                attributes = template.Variable(attribute).resolve(context)
 
                 if attribute_name in widget.attrs:
-                    if attribute not in widget.attrs[attribute_name]:
-                        widget.attrs[attribute_name] += " " + attribute
+                    # multiple attribtes are in a single string, e.g.
+                    # "form-control is-invalid"
+                    for attr in attributes.split():
+                        if attr not in widget.attrs[attribute_name].split():
+                            widget.attrs[attribute_name] += " " + attr
                 else:
-                    widget.attrs[attribute_name] = attribute
+                    widget.attrs[attribute_name] = attributes
 
         return str(field)
 

@@ -33,7 +33,11 @@
 
       {% else %}
         <div class="control">
-          {% crispy_field field %}
+          {% if field.errors %}
+              {% crispy_field field "class" "is-danger" %}
+          {% else %}
+              {% crispy_field field %}
+          {% endif %}
         </div>
       {% endif %}
 
