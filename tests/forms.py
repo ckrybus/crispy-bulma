@@ -200,19 +200,26 @@ class InputsForm(forms.Form):
     ]
     text_input = forms.CharField()
     text_area = forms.CharField(widget=forms.Textarea())
+
+    checkbox = forms.CharField(
+        label="company", required=False, widget=forms.CheckboxInput()
+    )
     checkboxes = forms.MultipleChoiceField(
         choices=choices[:3],
         initial=(1,),
         widget=forms.CheckboxSelectMultiple,
     )
+    inline_checkboxes = forms.MultipleChoiceField(
+        choices=choices[:3],
+        initial=(1,),
+        widget=forms.CheckboxSelectMultiple,
+    )
+
     radio = forms.ChoiceField(widget=forms.RadioSelect, choices=choices[:3])
     inline_radios = forms.ChoiceField(
         widget=forms.RadioSelect, choices=choices[:3], initial=2
     )
 
-    checkbox = forms.CharField(
-        label="company", required=False, widget=forms.CheckboxInput()
-    )
     select_input = forms.ChoiceField(choices=choices[:3])
     select_multiple = forms.MultipleChoiceField(choices=choices)
 

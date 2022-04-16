@@ -5,12 +5,11 @@ from django.template import Context, Template
 from django.utils.translation import activate, deactivate
 from django.utils.translation import gettext as _
 
-from crispy_bulma.bulma import InlineRadios
+from crispy_bulma.bulma import InlineCheckboxes, InlineRadios
 from crispy_forms.bootstrap import (
     Alert,
     AppendedText,
     FieldWithButtons,
-    InlineCheckboxes,
     InlineField,
     PrependedAppendedText,
     PrependedText,
@@ -168,6 +167,7 @@ def test_remove_labels():
         ("inline_radios", "test_inline_radios.html"),
         ("checkbox", "test_checkbox.html"),
         ("checkboxes", "test_checkboxes.html"),
+        ("inline_checkboxes", "test_inline_checkboxes.html"),
         ("select_input", "test_select.html"),
         ("select_multiple", "test_selectmultiple.html"),
     ],
@@ -364,20 +364,17 @@ def test_hidden_fields():
     assert html.count("<label") == 0
 
 
-@pytest.mark.skip(reason="InlineCheckboxes")
 def test_multiplecheckboxes():
     test_form = CheckboxesSampleForm()
     html = render_crispy_form(test_form)
-    assert html.count("checked") == 6
+    assert html.count("checked") == 5
 
     test_form.helper = FormHelper(test_form)
-    test_form.helper[1].wrap(InlineCheckboxes, inline=True)
+    test_form.helper[1].wrap(InlineCheckboxes)
     html = render_crispy_form(test_form)
-    # TODO Fix this test
-    # assert html.count('form-check-input"') == 3
+    assert html.count('class="control"') == 7
 
 
-@pytest.mark.skip(reason="InlineCheckboxes")
 def test_multiple_checkboxes_unique_ids():
     test_form = CheckboxesSampleForm()
     html = render_crispy_form(test_form)

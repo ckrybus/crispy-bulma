@@ -6,6 +6,7 @@ History
 Unreleased
 ----------
 
+* Feature: add InlineCheckboxes field
 * Feature: add InlineRadios field
 * Add support for django-crispy-forms 1.14.0
 * Add support for Python 3.10
