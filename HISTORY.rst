@@ -6,6 +6,7 @@ History
 Unreleased
 ----------
 
+* Fix FormHelper.field_template attribute
 * Feature: add InlineCheckboxes field
 * Feature: add InlineRadios field
 * Add support for django-crispy-forms 1.14.0

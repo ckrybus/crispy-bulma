@@ -450,7 +450,6 @@ def test_helper_custom_field_template():
     assert html.count("<h1>Special custom field</h1>") == 2
 
 
-@pytest.mark.skip(reason="bulma")
 def test_helper_custom_field_template_no_layout():
     form = SampleForm()
     form.helper = FormHelper()

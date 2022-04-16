@@ -6,6 +6,6 @@
         {% include "bulma/errors.html" %}
     {% endif %}
     {% for field in form %}
-        {% include "bulma/field.html" %}
+        {% include field_template %}
     {% endfor %}
 {% endspecialspaceless %}
