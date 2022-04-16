@@ -9,6 +9,7 @@ Welcome to crispy-bulma's documentation!
    installation
    usage
    form_helper
+   layouts
    contributing
    history
 

@@ -1,19 +1,14 @@
-{% if field.is_hidden %}
-    {{ field }}
-{% else %}
-    <div id="div_{{ field.auto_id }}"
-         class="field{% if wrapper_class %} {{ wrapper_class }}{% endif %}{% if field.css_classes %} {{ field.css_classes }}{% endif %}">
+{% extends "../field.html" %}
+{% load crispy_forms_filters %}
+{% load l10n %}
 
-        {% if field.label %}
-            <label for="{{ field.auto_id }}" class="label
-                    {{ label_class }}{% if field.field.required %} requiredField{% endif %}">
-                {{ field.label }}{% if field.field.required %}
-                    <span class="asteriskField">*</span>{% endif %}
-            </label>
-        {% endif %}
-
-        <div class="control">
-            {% include 'bulma/layout/radioselect.html' %}
-        </div>
-    </div>
-{% endif %}
+{% block field-body %}
+  <div class="control">
+  {% for choice in field.field.choices %}
+    <label class="radio" for="id_{{ field.html_name }}_{{ forloop.counter0 }}">
+      <input type="radio"{% if choice.0|stringformat:"s" == field.value|default_if_none:""|stringformat:"s" %} checked{% endif %} name="{{ field.html_name }}" id="id_{{ field.html_name }}_{{   forloop.counter0 }}" value="{{ choice.0|unlocalize }}" {% if field.field.disabled %}disabled{% endif %} {{ field.field.widget.attrs|flatatt }}>
+        {{ choice.1|unlocalize }}
+    </label>
+  {% endfor %}
+  </div>
+{% endblock %}

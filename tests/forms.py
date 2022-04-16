@@ -63,15 +63,6 @@ class CheckboxesSampleForm(forms.Form):
         widget=forms.CheckboxSelectMultiple,
     )
 
-    inline_radios = forms.ChoiceField(
-        choices=(
-            ("option_one", "Option one"),
-            ("option_two", "Option two"),
-        ),
-        widget=forms.RadioSelect,
-        initial="option_two",
-    )
-
 
 class CrispyTestModel(models.Model):
     email = models.CharField(max_length=20)
@@ -215,6 +206,10 @@ class InputsForm(forms.Form):
         widget=forms.CheckboxSelectMultiple,
     )
     radio = forms.ChoiceField(widget=forms.RadioSelect, choices=choices[:3])
+    inline_radios = forms.ChoiceField(
+        widget=forms.RadioSelect, choices=choices[:3], initial=2
+    )
+
     checkbox = forms.CharField(
         label="company", required=False, widget=forms.CheckboxInput()
     )

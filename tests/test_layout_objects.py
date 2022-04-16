@@ -5,7 +5,7 @@ from django.template import Context, Template
 from django.utils.translation import activate, deactivate
 from django.utils.translation import gettext as _
 
-from crispy_forms.bootstrap import InlineRadios  # # TODO switch to bulma specific
+from crispy_bulma.bulma import InlineRadios
 from crispy_forms.bootstrap import (
     Alert,
     AppendedText,
@@ -165,6 +165,7 @@ def test_remove_labels():
         ("text_input", "test_text_input.html"),
         ("text_area", "test_text_area.html"),
         ("radio", "test_radio.html"),
+        ("inline_radios", "test_inline_radios.html"),
         ("checkbox", "test_checkbox.html"),
         ("checkboxes", "test_checkboxes.html"),
         ("select_input", "test_select.html"),
@@ -176,27 +177,28 @@ def test_inputs(form_field, expected):
     form.helper = FormHelper()
     if form_field == "select_multiple":
         form_field = Field(form_field, size="5")
+    if form_field == "inline_radios":
+        form_field = InlineRadios(form_field)
     form.helper.layout = Layout(form_field)
 
     assert parse_form(form) == parse_expected(expected)
 
 
-@pytest.mark.skip(reason="InlineRadios")
 def test_custom_django_widget():
-    # Make sure an inherited RadioSelect gets rendered as it
     form = SampleFormCustomWidgets()
+
+    # Make sure an inherited RadioSelect gets rendered as it
     assert isinstance(form.fields["inline_radios"].widget, CustomRadioSelect)
     form.helper = FormHelper()
     form.helper.layout = Layout("inline_radios")
-
     html = render_crispy_form(form)
-    assert 'class="form-check-input"' in html
+    assert 'class="radio"' in html
 
     # Make sure an inherited CheckboxSelectMultiple gets rendered as it
     assert isinstance(form.fields["checkboxes"].widget, CustomCheckboxSelectMultiple)
     form.helper.layout = Layout("checkboxes")
     html = render_crispy_form(form)
-    assert 'class="form-check-input"' in html
+    assert 'class="checkbox"' in html
 
 
 @pytest.mark.skip(reason="prepended_appended_text")
@@ -211,15 +213,6 @@ def test_prepended_appended_text():
         PrependedText("password2", "$"),
     )
     assert parse_form(test_form) == parse_expected("test_prepended_appended_text.html")
-
-
-@pytest.mark.skip(reason="InlineRadios")
-def test_inline_radios():
-    test_form = CheckboxesSampleForm()
-    test_form.helper = FormHelper()
-    test_form.helper.layout = Layout(InlineRadios("inline_radios"))
-    html = render_crispy_form(test_form)
-    assert html.count('form-check-inline"') == 2
 
 
 @pytest.mark.skip(reason="bootstrap")
@@ -310,9 +303,8 @@ def test_tab_helper_reuse():
     assert html.count('<div id="two" \n    class="{} active'.format(tab_class)) == 1
 
 
-@pytest.mark.skip(reason="InlineRadios")
 def test_radio_attrs():
-    form = CheckboxesSampleForm()
+    form = InputsForm()
     form.fields["inline_radios"].widget.attrs = {"class": "first"}
     form.fields["checkboxes"].widget.attrs = {"class": "second"}
     html = render_crispy_form(form)

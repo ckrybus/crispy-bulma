@@ -19,6 +19,9 @@
     {% if form_horizontal %}</div>{% endif %}
 
     {% if form_horizontal %}<div class="field-body"><div class="field">{% endif %}
+
+      {% block field-body %}
+
       {% if field|is_select %}
         {% include 'bulma/layout/select.html' %}
 
@@ -40,6 +43,8 @@
           {% endif %}
         </div>
       {% endif %}
+
+      {% endblock %}
 
       {% if form_show_errors %}
         {% for error in field.errors %}
