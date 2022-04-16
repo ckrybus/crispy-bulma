@@ -3,8 +3,8 @@ History
 =======
 
 
-Unreleased
-----------
+0.7.0 (2022-04-17)
+------------------
 
 * Fix FormHelper.field_template attribute
 * Feature: add InlineCheckboxes field
