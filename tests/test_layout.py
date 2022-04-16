@@ -3,23 +3,16 @@ import pytest
 from django import forms
 from django.forms.models import formset_factory, modelformset_factory
 from django.middleware.csrf import _get_new_csrf_string
-from django.shortcuts import render
 from django.template import Context, Template
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
-from crispy_forms.bootstrap import (
-    Field,
-    FieldWithButtons,
-    InlineCheckboxes,
-    StrictButton,
-)
+from crispy_forms.bootstrap import Field, FieldWithButtons, StrictButton
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import HTML, Column, Fieldset, Layout, Row
 from crispy_forms.utils import render_crispy_form
 
 from .forms import (
-    CheckboxesSampleForm,
     CrispyEmptyChoiceTestModel,
     CrispyTestModel,
     FileForm,
@@ -508,26 +501,6 @@ def test_choice_with_none_is_selected():
     test_form = SampleForm6(instance=model_instance)
     html = render_crispy_form(test_form)
     assert "checked" in html
-
-
-@pytest.mark.skip(reason="InlineCheckboxes")
-def test_keepcontext_context_manager():
-    # Test case for issue #180
-    # Apparently it only manifest when using render_to_response this exact way
-    form = CheckboxesSampleForm()
-    form.helper = FormHelper()
-    # We use here InlineCheckboxes as it updates context in an unsafe way
-    form.helper.layout = Layout(
-        "checkboxes", InlineCheckboxes("alphacheckboxes"), "numeric_multiple_checkboxes"
-    )
-    context = {"form": form}
-
-    response = render(
-        request=None, template_name="crispy_render_template.html", context=context
-    )
-    print(response.content)
-    assert response.content.count(b"form-check-inline") == 3
-    assert response.content.count(b"form-check-input") > 0
 
 
 @pytest.mark.skip(reason="bootstrap")
