@@ -10,6 +10,12 @@ crispy-bulma
 .. image:: https://img.shields.io/pypi/v/crispy-bulma
         :target: https://pypi.python.org/pypi/crispy-bulma
         :alt: PyPI
+.. image:: https://img.shields.io/pypi/pyversions/crispy-bulma
+        :target: https://pypi.python.org/pypi/crispy-bulma
+        :alt: PyPI - Python Version
+.. image:: https://img.shields.io/pypi/djversions/crispy-bulma
+        :target: https://pypi.python.org/pypi/crispy-bulma
+        :alt: PyPI - Django Version
 
 Bulma_ template pack for django-crispy-forms_
 
