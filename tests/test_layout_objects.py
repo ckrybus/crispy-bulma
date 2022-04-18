@@ -6,6 +6,7 @@ from django.utils.translation import activate, deactivate
 from django.utils.translation import gettext as _
 
 from crispy_bulma.bulma import InlineCheckboxes, InlineRadios
+from crispy_bulma.layout import IconField
 from crispy_forms.bootstrap import (
     Alert,
     AppendedText,
@@ -170,6 +171,7 @@ def test_remove_labels():
         ("inline_checkboxes", "test_inline_checkboxes.html"),
         ("select_input", "test_select.html"),
         ("select_multiple", "test_selectmultiple.html"),
+        ("input_with_icon", "test_input_with_icon.html"),
     ],
 )
 def test_inputs(form_field, expected):
@@ -179,6 +181,9 @@ def test_inputs(form_field, expected):
         form_field = Field(form_field, size="5")
     if form_field == "inline_radios":
         form_field = InlineRadios(form_field)
+    if form_field == "input_with_icon":
+        form_field = IconField(form_field, icon_prepend="envelope", icon_append="check")
+
     form.helper.layout = Layout(form_field)
 
     assert parse_form(form) == parse_expected(expected)
