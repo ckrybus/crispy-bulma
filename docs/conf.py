@@ -21,6 +21,9 @@ import os
 import sys
 
 sys.path.insert(0, os.path.abspath(".."))
+sys.path.insert(0, os.path.abspath("../crispy_bulma"))
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "tests.test_settings")
 
 import crispy_bulma  # noqa
 

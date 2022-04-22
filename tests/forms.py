@@ -200,6 +200,7 @@ class InputsForm(forms.Form):
     ]
     text_input = forms.CharField()
     text_area = forms.CharField(widget=forms.Textarea())
+    input_with_icon = forms.CharField()
 
     checkbox = forms.CharField(
         label="company", required=False, widget=forms.CheckboxInput()

@@ -12,7 +12,20 @@ The layout objects below are bulma specific. The complete list of all layout obj
 .. _here: https://django-crispy-forms.readthedocs.io/en/latest/layouts.html#universal-layout-objects
 
 
+These ones live under module ``crispy_bulma.layouts``.
+
+
+- **IconField**: It renders an input with optional icon left and/or icon right. Note that `IconField`
+  also supports an `icon_append` keyword argument. This field has been tested only with font-awesome icons::
+
+    IconField('field_name', icon_prepend="fa-solid fa-envelope")
+
+.. image:: images/icon_field.png
+   :align: center
+
+
 These ones live under module ``crispy_bulma.bulma``.
+
 
 - **InlineCheckboxes**: It renders a Django ``forms.MultipleChoiceField`` field using inline checkboxes::
 

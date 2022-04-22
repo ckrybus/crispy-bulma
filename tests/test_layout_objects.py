@@ -182,7 +182,11 @@ def test_inputs(form_field, expected):
     if form_field == "inline_radios":
         form_field = InlineRadios(form_field)
     if form_field == "input_with_icon":
-        form_field = IconField(form_field, icon_prepend="envelope", icon_append="check")
+        form_field = IconField(
+            form_field,
+            icon_prepend="fa-solid fa-envelope",
+            icon_append="fa-duotone fa-check-double",
+        )
 
     form.helper.layout = Layout(form_field)
 

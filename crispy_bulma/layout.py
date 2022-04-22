@@ -100,6 +100,51 @@ class Column(Div):
 
 
 class IconField(Field):
+    """
+    Layout object for rendering icons left and/or right of an input field.
+
+    Attributes
+    ----------
+    template : str
+        The default template which this Layout Object will be rendered
+        with.
+    attrs : dict
+        Attributes to be applied to the field. These are converted into html
+        attributes. e.g. ``data_id: 'test'`` in the attrs dict will become
+        ``data-id='test'`` on the field's ``<input>``.
+
+    Parameters
+    ----------
+    *fields: str
+        Usually a single field, but can be any number of fields, to be rendered
+        with the same attributes applied.
+    icon_prepend: str, optional
+        Icon class of supported by Bulma icon font libraries e.g. ``fas fa-home``.
+        By default ``None``.
+    icon_append: str, optional
+        Icon class of supported by Bulma icon font libraries e.g. ``fas fa-home``.
+        By default ``None``.
+    css_class: str, optional
+        CSS classes to be applied to the field. These are added to any classes
+        included in the ``attrs`` dict. By default ``None``.
+    wrapper_class: str, optional
+        CSS classes to be used when rendering the Field. This class is usually
+        applied to the ``<div>`` which wraps the Field's ``<label>`` and
+        ``<input>`` tags. By default ``None``.
+    template : str, optional
+        Overrides the default template, if provided. By default ``None``.
+    **kwargs : dict, optional
+        Additional attributes are converted into key="value", pairs. These
+        attributes are added to the ``<div>``.
+
+    Examples
+    --------
+
+    Example::
+
+        IconField('field_name', icon_prepend="fa-solid fa-envelope")
+    """
+
     template = "%s/layout/input_with_icon.html"
 
     def __init__(self, field, icon_prepend=None, icon_append=None, *args, **kwargs):
