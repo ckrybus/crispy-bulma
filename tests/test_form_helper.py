@@ -9,6 +9,7 @@ from django.template import Context, Template
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
+from crispy_bulma.layout import Button, Hidden, Reset, Submit
 from crispy_forms.bootstrap import (
     AppendedText,
     FieldWithButtons,
@@ -17,7 +18,7 @@ from crispy_forms.bootstrap import (
     StrictButton,
 )
 from crispy_forms.helper import FormHelper, FormHelpersException
-from crispy_forms.layout import Button, Hidden, Layout, Reset, Submit
+from crispy_forms.layout import Layout
 from crispy_forms.templatetags.crispy_forms_tags import CrispyFormNode
 from crispy_forms.utils import render_crispy_form
 
@@ -25,33 +26,72 @@ from .forms import SampleForm, SampleForm7, SampleForm8, SampleFormWithMedia
 from .utils import parse_expected, parse_form
 
 
-@pytest.mark.skip(reason="bulma")
-def test_inputs():
-    form_helper = FormHelper()
-    form_helper.add_input(Submit("my-submit", "Submit", css_class="button white"))
-    form_helper.add_input(Reset("my-reset", "Reset"))
-    form_helper.add_input(Hidden("my-hidden", "Hidden"))
-    form_helper.add_input(Button("my-button", "Button"))
+@pytest.mark.parametrize(
+    "form_field,expected",
+    [
+        (
+            Submit(
+                "my-submit",
+                "Submit",
+                css_class="is-danger",
+                control_class="is-expanded",
+            ),
+            "test_submit.html",
+        ),
+        (
+            Reset(
+                "my-reset", "Reset", css_class="is-danger", control_class="is-expanded"
+            ),
+            "test_reset.html",
+        ),
+        (Hidden("my-hidden", "Hidden"), "test_hidden.html"),
+        (
+            Button(
+                "My Button",
+                css_class="is-primary",
+                control_class="is-expanded",
+                css_id="button-id",
+            ),
+            "test_button.html",
+        ),
+    ],
+)
+def test_inputs(form_field, expected):
+    form = SampleForm()
+    form.helper = FormHelper()
+    form.helper.layout = Layout(form_field)
+    assert parse_form(form) == parse_expected(expected)
 
-    template = Template(
-        """
-        {% load crispy_forms_tags %}
-        {% crispy form form_helper %}
-    """
-    )
-    c = Context({"form": SampleForm(), "form_helper": form_helper})
-    html = template.render(c)
 
-    assert "button white" in html
-    assert 'id="submit-id-my-submit"' in html
-    assert 'id="reset-id-my-reset"' in html
-    assert 'name="my-hidden"' in html
-    assert 'id="button-id-my-button"' in html
-
-    assert 'class="btn"' in html
-    assert "btn btn-primary" in html
-    assert "btn btn-inverse" in html
-    assert len(re.findall(r"<input[^>]+> <", html)) == 9
+@pytest.mark.parametrize(
+    "form_field,expected",
+    [
+        (
+            Submit(
+                "my-submit",
+                "Submit",
+                css_class="is-danger",
+                control_class="is-expanded",
+            ),
+            "test_submit_horizontal.html",
+        ),
+        (
+            Button(
+                "My Button",
+                css_class="is-primary",
+                control_class="is-expanded",
+                css_id="button-id",
+            ),
+            "test_button_horizontal.html",
+        ),
+    ],
+)
+def test_inputs_horizontal(form_field, expected):
+    form = SampleForm()
+    form.helper = FormHelper()
+    form.helper.form_horizontal = True
+    form.helper.layout = Layout(form_field)
+    assert parse_form(form) == parse_expected(expected)
 
 
 def test_invalid_form_method():

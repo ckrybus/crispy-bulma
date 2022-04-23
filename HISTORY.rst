@@ -6,6 +6,9 @@ History
 Unreleased
 ----------
 
+* Fix ``Submit`` and ``Reset`` input rendering
+* BREAKING CHANGE: ``Button`` is now rendered as ``<button></button>``.
+  For ``<input type="submit" />`` use ``Submit``.
 * BREAKING CHANGE: Redesign IconField. Instead of ``IconField("envelope")`` call it with the
   full icon class e.g. ``IconField("fa fa-envelope")``.
 * Drop support for Django 3.1

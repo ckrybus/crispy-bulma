@@ -1,3 +1,6 @@
+from django.template import Template
+from django.template.loader import render_to_string
+
 from crispy_forms.layout import (
     HTML,
     BaseInput,
@@ -9,8 +12,9 @@ from crispy_forms.layout import (
     Layout,
     MultiField,
     MultiWidgetField,
+    TemplateNameMixin,
 )
-from crispy_forms.utils import TEMPLATE_PACK, render_field
+from crispy_forms.utils import TEMPLATE_PACK, flatatt, render_field
 
 __all__ = [
     # Defined in this file
@@ -44,7 +48,25 @@ class UploadField(Field):
         super().__init__(*args, **kwargs)
 
 
-class Submit(BaseInput):
+class BulmaBaseInput(BaseInput):
+    def __init__(self, *args, **kwargs):
+        self.control_class = kwargs.pop("control_class", None)
+        super().__init__(*args, **kwargs)
+
+    def render(self, form, form_style, context, template_pack=TEMPLATE_PACK, **kwargs):
+        """
+        Renders an `<input />` if container is used as a Layout object.
+        Input button value can be a variable in context.
+
+        """
+        if self.control_class:
+            context["control_class"] = self.control_class
+        return super().render(
+            form, form_style, context, template_pack=template_pack, **kwargs
+        )
+
+
+class Submit(BulmaBaseInput):
     """
     Used to create a Submit button descriptor for the {% crispy %} template tag.
     >>> submit = Submit("Search the Site", "search this site")
@@ -52,23 +74,47 @@ class Submit(BaseInput):
     The first argument is also slugified and turned into the id for the submit button.
     """
 
-    field_classes = "button is-primary"
+    field_classes = "button"
     input_type = "submit"
 
 
-class Button(BaseInput):
+class Button(TemplateNameMixin):
     """
-    Used to create a Submit input descriptor for the {% crispy %} template tag.
-    >>> button = Button("Button 1", "Press Me!")
+    Layout object for rendering an HTML button::
+        Button("button content", css_class="extra")
 
-    The first argument is also slugified and turned into the id for the button.
     """
 
+    template = "%s/layout/button.html"
     field_classes = "button"
-    input_type = "button"
+
+    def __init__(self, content, **kwargs):
+        self.content = content
+        self.template = kwargs.pop("template", self.template)
+        self.control_class = kwargs.pop("control_class", None)
+
+        # We turn css_id and css_class into id and class
+        if "css_id" in kwargs:
+            kwargs["id"] = kwargs.pop("css_id")
+        kwargs["class"] = self.field_classes
+        if "css_class" in kwargs:
+            kwargs["class"] += " %s" % kwargs.pop("css_class")
+
+        self.flat_attrs = flatatt(kwargs)
+
+    def render(self, form, form_style, context, template_pack=TEMPLATE_PACK, **kwargs):
+        self.content = Template(str(self.content)).render(context)
+        template = self.get_template_name(template_pack)
+
+        extra_context = {"button": self}
+        if self.control_class:
+            extra_context["control_class"] = self.control_class
+
+        context.update(extra_context)
+        return render_to_string(template, context.flatten())
 
 
-class Reset(BaseInput):
+class Reset(BulmaBaseInput):
     """
     Used to create a Reset button input descriptor for the {% crispy %} template tag.
     >>> reset = Reset("Reset This Form", "Revert Me!")
@@ -76,7 +122,7 @@ class Reset(BaseInput):
     The first argument is also slugified and turned into the id for the button.
     """
 
-    field_classes = "button is-text"
+    field_classes = "button"
     input_type = "reset"
 
 
