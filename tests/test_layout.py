@@ -7,6 +7,7 @@ from django.template import Context, Template
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
+from crispy_bulma.layout import Button, FormGroup, Submit
 from crispy_forms.bootstrap import Field, FieldWithButtons, StrictButton
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import HTML, Column, Fieldset, Layout, Row
@@ -17,6 +18,7 @@ from .forms import (
     CrispyTestModel,
     FileForm,
     FileFormRequired,
+    FormGroupForm,
     HelpTextForm,
     LabelForm,
     SampleForm,
@@ -615,3 +617,20 @@ def test_help_text_is_not_escaped():
     form = HelpTextForm()
     form.helper = FormHelper()
     assert parse_form(form) == parse_expected("help_text_escape.html")
+
+
+def test_form_group_form():
+    form = FormGroupForm()
+    form.helper = FormHelper()
+    form.helper.layout = Layout(
+        Field("text_input"),
+        FormGroup(
+            Field("fruit"),
+            Submit("accept", "Accept", css_class="is-primary"),
+            Button("Reject", css_class="is-danger"),
+        ),
+    )
+    assert parse_form(form) == parse_expected("test_form_group.html")
+
+    form.helper.form_horizontal = True
+    assert parse_form(form) == parse_expected("test_form_group_horizontal.html")

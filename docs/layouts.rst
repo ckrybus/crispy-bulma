@@ -39,6 +39,16 @@ Renders to::
 
     Reset('name', 'value')
 
+- **FormGroup**: It wraps fields in a ``<div class="field is-grouped>``. It is usually used to wrap form's buttons::
+
+    FormGroup(
+        Submit('accept', 'Accept'),
+        Button('Reject')
+    )
+
+.. image:: images/form_group.png
+   :align: center
+
 - **IconField**: It renders an input with optional icon left and/or icon right. Note that `IconField`
   also supports an `icon_append` keyword argument. This field has been tested only with font-awesome icons::
 

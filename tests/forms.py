@@ -283,3 +283,12 @@ class HelpTextForm(forms.Form):
         label="email",
         help_text="Insert your <b>email</b>",
     )
+
+
+class FormGroupForm(forms.Form):
+    text_input = forms.CharField(
+        help_text="help on a text_input",
+    )
+    fruit = forms.ChoiceField(
+        choices=[("apple", "Apple"), ("pear", "Pear")],
+    )

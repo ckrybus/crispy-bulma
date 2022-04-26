@@ -6,6 +6,7 @@ History
 Unreleased
 ----------
 
+* Feature: add ``FormGroup`` layout object
 * Fix ``Submit`` and ``Reset`` input rendering
 * BREAKING CHANGE: ``Button`` is now rendered as ``<button></button>``.
   For ``<input type="submit" />`` use ``Submit``.

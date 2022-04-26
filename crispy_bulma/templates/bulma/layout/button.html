@@ -1,5 +1,7 @@
 {% load crispy_forms_bulma_field %}
 
+{# use a negated variable, so it get's rendered by default and we don't need to modify the FormHelper #}
+{% if not exclude_field_wrapper %}
 <div class="field{% if wrapper_class %} {{ wrapper_class }}{% endif %}{% if form_horizontal %} is-horizontal{% endif %}">
 {% if form_horizontal %}
 <div class="field-label">
@@ -8,13 +10,16 @@
 <div class="field-body">
   <div class="field">
 {% endif %}
+{% endif %}
 
 <div class="control{% if control_class %} {{ control_class }}{% endif %}">
   <button {{ button.flat_attrs|safe }}>{{ button.content|safe }}</button>
 </div>
 
+{% if not exclude_field_wrapper %}
 {% if form_horizontal %}
   </div>
 </div>
 {% endif %}
 </div>
+{% endif %}

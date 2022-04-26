@@ -10,6 +10,7 @@ from crispy_forms.layout import (
     Fieldset,
     Hidden,
     Layout,
+    LayoutObject,
     MultiField,
     MultiWidgetField,
     TemplateNameMixin,
@@ -24,6 +25,7 @@ __all__ = [
     "Reset",
     "Row",
     "Submit",
+    "FormGroup",
     "UploadField",
     # Imported from CrispyForms itself
     "ButtonHolder",
@@ -227,3 +229,60 @@ class IconField(Field):
             extra_context=extra_context,
             **kwargs
         )
+
+
+class FormGroup(LayoutObject):
+    """
+    Bulma layout object. It wraps fields in a <div class="field is-grouped">
+    Attributes
+    ----------
+    template: str
+        The default template which this Layout Object will be rendered with.
+    Parameters
+    ----------
+    *fields : HTML or BaseInput
+        The layout objects to render within the ``FormGroup``. It should
+        only hold `HTML` and `BaseInput` inherited objects.
+    css_id : str, optional
+        A custom DOM id for the layout object which will be added to the
+        ``<div>`` if provided. By default None.
+    css_class : str, optional
+        Additional CSS classes to be applied to the ``<div>``. By default
+        None.
+    template : str, optional
+        Overrides the default template, if provided. By default None.
+    **kwargs : dict, optional
+        Additional attributes are passed to ``flatatt`` and converted into
+        key="value", pairs. These attributes are added to the ``<div>``.
+    Examples
+    --------
+    An example using ``FormGroup`` in your layout::
+        FormGroup(
+            Button('Save', 'Save', css_class='is-primary'),
+            Button('Delete', 'Delete', css_class='is-danger'),
+            css_class="is-grouped-centered"
+        )
+    """
+
+    template = "%s/layout/formgroup.html"
+
+    def __init__(self, *fields, css_id=None, css_class=None, template=None, **kwargs):
+        self.fields = list(fields)
+        self.id = css_id
+        self.css_class = css_class
+        self.template = template or self.template
+        self.flat_attrs = flatatt(kwargs)
+
+    def render(self, form, form_style, context, template_pack=TEMPLATE_PACK, **kwargs):
+        # TODO use extra_context
+        # There seem to be a bug in crispy_forms, the `extra_context` kwarg is not being
+        # passed on to `field.render` in `render_field` which is called by `get_rendered_fields`.
+        # Right now `exclude_field_wrapper` is being passed on also to `formgroup.html`,
+        # but it does not break anything.
+        context["exclude_field_wrapper"] = True
+        html = self.get_rendered_fields(
+            form, form_style, context, template_pack, **kwargs
+        )
+        template = self.get_template_name(template_pack)
+        context.update({"formgroup": self, "fields_output": html})
+        return render_to_string(template, context.flatten())

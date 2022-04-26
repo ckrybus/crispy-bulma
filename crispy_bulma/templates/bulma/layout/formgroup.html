@@ -1,0 +1,16 @@
+{% if form_horizontal %}
+<div class="field is-horizontal">
+  <div class="field-label">
+    <!-- Left empty for spacing -->
+  </div>
+  <div class="field-body">
+{% endif %}
+
+<div class="field is-grouped {% if formgroup.css_class %} {{ formgroup.css_class }}{% endif %}">
+  {{ fields_output|safe }}
+</div>
+
+{% if form_horizontal %}
+  </div>
+</div>
+{% endif %}

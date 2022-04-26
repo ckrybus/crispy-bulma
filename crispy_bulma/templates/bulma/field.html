@@ -3,6 +3,9 @@
 {% if field.is_hidden %}
   {{ field }}
 {% else %}
+
+{# use a negated variable, so it get's rendered by default and we don't need to modify the FormHelper #}
+{% if not exclude_field_wrapper %}
   <div
     id="div_{{ field.auto_id }}"
     class="field{% if wrapper_class %} {{ wrapper_class }}{% endif %}{% if form_horizontal %} is-horizontal{% endif %}"
@@ -19,6 +22,7 @@
     {% if form_horizontal %}</div>{% endif %}
 
     {% if form_horizontal %}<div class="field-body"><div class="field">{% endif %}
+{% endif %}
 
       {% block field-body %}
 
@@ -46,6 +50,7 @@
 
       {% endblock %}
 
+{% if not exclude_field_wrapper %}
       {% if form_show_errors %}
         {% for error in field.errors %}
           <p id="error_{{ forloop.counter }}_{{ field.auto_id }}"
@@ -58,4 +63,6 @@
       {% include 'bulma/layout/help_text.html' %}
     {% if form_horizontal %}</div></div>{% endif %}
   </div>
+{% endif %}
+
 {% endif %}

@@ -1,0 +1,37 @@
+<form method="post">
+  <div class="field" id="div_id_text_input">
+    <label class="label" for="id_text_input">
+    Text input<span class="asterisk">
+    *
+    </span>
+    </label>
+    <div class="control">
+      <input class="input" id="id_text_input" name="text_input" required type="text">
+    </div>
+    <p class="help" id="hint_id_text_input">
+      help on a text_input
+    </p>
+  </div>
+  <div class="field is-grouped">
+    <div class="control">
+      <div class="select">
+        <select id="id_fruit" name="fruit">
+          <option value="apple">
+            Apple
+          </option>
+          <option value="pear">
+            Pear
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="control">
+      <input class="button is-primary" id="submit-id-accept" name="accept" type="submit" value="Accept">
+    </div>
+    <div class="control">
+      <button class="button is-danger">
+      Reject
+      </button>
+    </div>
+  </div>
+</form>
