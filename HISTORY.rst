@@ -3,8 +3,8 @@ History
 =======
 
 
-Unreleased
-----------
+0.8.0 (2022-04-28)
+------------------
 
 * Feature: add ``FormGroup`` layout object
 * Fix ``Submit`` and ``Reset`` input rendering
