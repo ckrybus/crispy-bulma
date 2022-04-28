@@ -39,7 +39,7 @@ Renders to::
 
     Reset('name', 'value')
 
-- **FormGroup**: It wraps fields in a ``<div class="field is-grouped>``. It is usually used to wrap form's buttons::
+- **FormGroup**: It wraps fields in a ``<div class="field is-grouped">``. It is usually used to wrap form's buttons::
 
     FormGroup(
         Submit('accept', 'Accept'),
