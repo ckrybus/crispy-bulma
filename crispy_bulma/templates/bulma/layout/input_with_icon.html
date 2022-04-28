@@ -2,8 +2,7 @@
 {% load crispy_forms_bulma_field %}
 
 {% block field-body %}
-  <div class="control {% if icon_prepend %}has-icons-left{% endif %}
-    {% if icon_append %} has-icons-right{% endif %}">
+  <div class="control{% if icon_prepend %} has-icons-left{% endif %}{% if icon_append %} has-icons-right{% endif %}">
 
     {% if field.errors %}
       {% crispy_field field "class" "is-danger" %}
