@@ -258,8 +258,8 @@ class FormGroup(LayoutObject):
     --------
     An example using ``FormGroup`` in your layout::
         FormGroup(
-            Button('Save', 'Save', css_class='is-primary'),
-            Button('Delete', 'Delete', css_class='is-danger'),
+            Submit('Save', 'Save', css_class='is-primary'),
+            Button('Delete', css_class='is-danger'),
             css_class="is-grouped-centered"
         )
     """
