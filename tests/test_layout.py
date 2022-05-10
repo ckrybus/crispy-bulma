@@ -7,10 +7,10 @@ from django.template import Context, Template
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
-from crispy_bulma.layout import Button, FormGroup, Submit
+from crispy_bulma.layout import Button, Column, FormGroup, Row, Submit
 from crispy_forms.bootstrap import Field, FieldWithButtons, StrictButton
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import HTML, Column, Fieldset, Layout, Row
+from crispy_forms.layout import HTML, Fieldset, Layout
 from crispy_forms.utils import render_crispy_form
 
 from .forms import (
@@ -273,32 +273,6 @@ def test_column_has_css_classes():
 
 
 @pytest.mark.skip(reason="bootstrap")
-def test_bs5_column_css_classes():
-    template = Template(
-        """
-        {% load crispy_forms_tags %}
-        {% crispy form form_helper %}
-    """
-    )
-
-    form = SampleForm()
-    form_helper = FormHelper()
-    form_helper.add_layout(
-        Layout(
-            Column("first_name", "last_name"),
-            Column("first_name", "last_name", css_class="col-sm"),
-            Column("first_name", "last_name", css_class="mb-4"),
-        )
-    )
-
-    c = Context({"form": form, "form_helper": form_helper})
-    html = template.render(c)
-
-    assert html.count("col-md") == 2
-    assert html.count("col-sm") == 1
-
-
-@pytest.mark.skip(reason="bootstrap")
 def test_bs5_field_with_buttons_css_classes():
     form = SampleForm()
     form.helper = FormHelper()
@@ -557,15 +531,17 @@ def test_file_field():
     assert parse_form(form) == parse_expected("test_file_field_failing.html")
 
 
-@pytest.mark.skip(reason="bootstrap")
 def test_row():
     form = SampleForm()
     form.helper = FormHelper()
     form.helper.layout = Layout(
         Row(
+            Column("first_name", css_class="is-full"),
+        ),
+        Row(
             Column("first_name"),
             Column("last_name"),
-        )
+        ),
     )
     assert parse_form(form) == parse_expected("row.html")
 
