@@ -228,7 +228,7 @@ class IconField(Field):
             template=template,
             template_pack=template_pack,
             extra_context=extra_context,
-            attrs=self.attrs
+            attrs=self.attrs,
             **kwargs
         )
 
