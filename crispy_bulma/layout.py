@@ -195,10 +195,11 @@ class IconField(Field):
 
     template = "%s/layout/input_with_icon.html"
 
-    def __init__(self, field, icon_prepend=None, icon_append=None, *args, **kwargs):
+    def __init__(self, field, icon_prepend=None, icon_append=None, attrs=None, *args, **kwargs):
         self.field = field
         self.icon_prepend = icon_prepend
         self.icon_append = icon_append
+        self.attrs = attrs or {}
         super().__init__(*args, **kwargs)
 
     def render(
@@ -227,6 +228,7 @@ class IconField(Field):
             template=template,
             template_pack=template_pack,
             extra_context=extra_context,
+            attrs=self.attrs,
             **kwargs
         )
 
