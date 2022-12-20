@@ -186,6 +186,7 @@ def test_inputs(form_field, expected):
             form_field,
             icon_prepend="fa-solid fa-envelope",
             icon_append="fa-duotone fa-check-double",
+            css_class="is-large",
         )
 
     form.helper.layout = Layout(form_field)
