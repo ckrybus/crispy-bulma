@@ -3,6 +3,13 @@ History
 =======
 
 
+Unreleased
+----------
+
+* Fix FileUploadInput widget rendering. Fix contributed by pythonbrad
+* Fix passing attributes to IconField. Fix contributed by davy39.
+
+
 0.8.0 (2022-04-28)
 ------------------
 
