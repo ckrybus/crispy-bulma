@@ -10,19 +10,18 @@
   </label>
   {% endif %}
 {% endif %}
-<div class="field">
-  <div class="file is-primary has-name is-small">
+  <div class="file has-name">
     <label class="file-label">
-      <input type="file" name="{{ widget.name }}"{% include "django/forms/widgets/attrs.html" %} data-target="{{ widget.attrs.id }}_{{ widget.name }}">
+      <input type="file" name="{{ widget.name }}"{% include "django/forms/widgets/attrs.html" %} >
       <span class="file-cta">
         <span class="file-icon">
           <i class="fas fa-upload"></i>
         </span>
         <span class="file-label">
           {% if widget.is_initial %}
-          {{ widget.input_text }}
+            {{ widget.input_text }}
           {% else %}
-          Upload file
+            Choose a file ...
           {% endif %}
         </span>
       </span>
@@ -31,4 +30,3 @@
       </span>
     </label>
   </div>
-</div>
