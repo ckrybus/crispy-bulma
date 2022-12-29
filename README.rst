@@ -4,7 +4,7 @@ crispy-bulma
 
 .. image:: https://img.shields.io/badge/license-MIT-blue.svg
         :target: https://github.com/ckrybus/crispy-bulma/blob/main/LICENSE
-.. image:: https://img.shields.io/github/workflow/status/ckrybus/crispy-bulma/Test
+.. image:: https://img.shields.io/github/actions/workflow/status/ckrybus/crispy-bulma/test.yml?branch=main
         :target: https://github.com/ckrybus/crispy-bulma/actions
         :alt: GitHub Workflow Status
 .. image:: https://img.shields.io/pypi/v/crispy-bulma
