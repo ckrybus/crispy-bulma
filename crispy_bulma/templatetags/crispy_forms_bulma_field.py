@@ -108,15 +108,19 @@ class CrispyBulmaFieldNode(template.Node):
             attrs = [attrs] * len(widgets)
 
         converters = {
+            "dateinput": "dateinput input",
+            "datetimeinput": "datetimeinput input",
             "textinput": "input",
-            "fileinput": "fileinput fileUpload",
             "fileuploadinput": "file-input",
+            "fileinput": "fileinput",
+            "clearablefileinput": "clearablefileinput",
             "passwordinput": "input",
             "emailinput": "input",
             "checkboxinput": "",
             "select": "",
             "selectmultiple": "",
             "numberinput": "input",
+            "timeinput": "timeinput input",
             "urlinput": "input",
         }
         converters.update(getattr(settings, "CRISPY_CLASS_CONVERTERS", {}))

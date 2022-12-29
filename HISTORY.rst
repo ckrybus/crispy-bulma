@@ -6,7 +6,9 @@ History
 Unreleased
 ----------
 
-* Fix FileUploadInput widget rendering. Fix contributed by pythonbrad
+* Fix DateField, DateTimeField and TimeField widget rendering
+* Fix DecimalField, FloatField, IntegerField and URLField widget rendering. Fix contributed by pythonbrad.
+* Fix FileUploadInput widget rendering. Fix contributed by pythonbrad.
 * Fix passing attributes to IconField. Fix contributed by davy39.
 
 
