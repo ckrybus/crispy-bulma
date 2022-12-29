@@ -111,7 +111,6 @@ class CrispyBulmaFieldNode(template.Node):
             "dateinput": "dateinput input",
             "datetimeinput": "datetimeinput input",
             "textinput": "input",
-            "fileuploadinput": "file-input",
             "fileinput": "fileinput",
             "clearablefileinput": "clearablefileinput",
             "passwordinput": "input",
@@ -122,6 +121,8 @@ class CrispyBulmaFieldNode(template.Node):
             "numberinput": "input",
             "timeinput": "timeinput input",
             "urlinput": "input",
+            # custom widget
+            "fileuploadinput": "file-input",
         }
         converters.update(getattr(settings, "CRISPY_CLASS_CONVERTERS", {}))
 
