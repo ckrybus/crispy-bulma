@@ -1,17 +1,33 @@
+{% if widget.is_initial %}
+  {{ widget.initial_text }}:
+  <a href="{{ widget.value.url }}">
+    {{ widget.value }}
+  </a>
+  {% if not widget.required %}
+  <input type="checkbox" name="{{ widget.checkbox_name }}" id="{{ widget.checkbox_id }}"{% if widget.attrs.disabled %} disabled{% endif %}>
+  <label for="{{ widget.checkbox_id }}">
+    {{ widget.clear_checkbox_label }}
+  </label>
+  {% endif %}
+{% endif %}
 <div class="field">
-  <div class="file is-primary has-name">
+  <div class="file is-primary has-name is-small">
     <label class="file-label">
-      <input type="file" name="{{ widget.checkbox_name }}"{% include "django/forms/widgets/attrs.html" %}>
+      <input type="file" name="{{ widget.name }}"{% include "django/forms/widgets/attrs.html" %} data-target="{{ widget.attrs.id }}_{{ widget.name }}">
       <span class="file-cta">
         <span class="file-icon">
           <i class="fas fa-upload"></i>
         </span>
         <span class="file-label">
+          {% if widget.is_initial %}
+          {{ widget.input_text }}
+          {% else %}
           Upload file
+          {% endif %}
         </span>
       </span>
-      <span class="file-name">
-          ...
+      <span id="{{ widget.attrs.id }}_{{ widget.name }}" class="file-name">
+        {{ widget.value|default:"..."|stringformat:'s' }}
       </span>
     </label>
   </div>
