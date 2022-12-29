@@ -118,9 +118,9 @@ class CrispyBulmaFieldNode(template.Node):
             "checkboxinput": "",
             "select": "",
             "selectmultiple": "",
-            "numberinput": "input",
+            "numberinput": "numberinput input",
             "timeinput": "timeinput input",
-            "urlinput": "input",
+            "urlinput": "urlinput input",
             # custom widget
             "fileuploadinput": "file-input",
         }
