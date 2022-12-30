@@ -79,6 +79,16 @@ Credits
 .. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
 
 
+Related projects
+----------------
+
+crispy-bulma's focus is on form handling. This project assumes that you have already integrated bulma into your project, either manually or using some other package. If crispy-bulma does not meet your needs maybe one of these projects is of interest to you:
+
+* `django-bulma <https://github.com/timonweb/django-bulma>`__ - an alternative way to use bulma forms. Does not use crispy forms.
+
+* `django-simple-bulma <https://github.com/lemonsaurus/django-simple-bulma>`__ - can be used together with this project. Provides bulma integration and ads support for bulma extensions.
+
+
 License
 -------
 
