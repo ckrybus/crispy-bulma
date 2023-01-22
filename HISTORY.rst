@@ -3,8 +3,8 @@ History
 =======
 
 
-Unreleased
-----------
+0.8.1 (2023-01-22)
+------------------
 
 * Fix DateField, DateTimeField and TimeField widget rendering
 * Fix DecimalField, FloatField, IntegerField and URLField widget rendering. Fix contributed by pythonbrad.
