@@ -55,7 +55,7 @@ class BulmaBaseInput(BaseInput):
         self.control_class = kwargs.pop("control_class", None)
         super().__init__(*args, **kwargs)
 
-    def render(self, form, form_style, context, template_pack=TEMPLATE_PACK, **kwargs):
+    def render(self, form, context, template_pack=TEMPLATE_PACK, **kwargs):
         """
         Renders an `<input />` if container is used as a Layout object.
         Input button value can be a variable in context.
@@ -63,9 +63,7 @@ class BulmaBaseInput(BaseInput):
         """
         if self.control_class:
             context["control_class"] = self.control_class
-        return super().render(
-            form, form_style, context, template_pack=template_pack, **kwargs
-        )
+        return super().render(form, context, template_pack=template_pack, **kwargs)
 
 
 class Submit(BulmaBaseInput):
@@ -104,7 +102,7 @@ class Button(TemplateNameMixin):
 
         self.flat_attrs = flatatt(kwargs)
 
-    def render(self, form, form_style, context, template_pack=TEMPLATE_PACK, **kwargs):
+    def render(self, form, context, template_pack=TEMPLATE_PACK, **kwargs):
         self.content = Template(str(self.content)).render(context)
         template = self.get_template_name(template_pack)
 
@@ -202,13 +200,7 @@ class IconField(Field):
         super().__init__(*args, **kwargs)
 
     def render(
-        self,
-        form,
-        form_style,
-        context,
-        template_pack=TEMPLATE_PACK,
-        extra_context=None,
-        **kwargs
+        self, form, context, template_pack=TEMPLATE_PACK, extra_context=None, **kwargs
     ):
         extra_context = extra_context.copy() if extra_context is not None else {}
         extra_context.update(
@@ -222,7 +214,6 @@ class IconField(Field):
         return render_field(
             self.field,
             form,
-            form_style,
             context,
             template=template,
             template_pack=template_pack,
@@ -274,16 +265,14 @@ class FormGroup(LayoutObject):
         self.template = template or self.template
         self.flat_attrs = flatatt(kwargs)
 
-    def render(self, form, form_style, context, template_pack=TEMPLATE_PACK, **kwargs):
+    def render(self, form, context, template_pack=TEMPLATE_PACK, **kwargs):
         # TODO use extra_context
         # There seem to be a bug in crispy_forms, the `extra_context` kwarg is not being
         # passed on to `field.render` in `render_field` which is called by `get_rendered_fields`.
         # Right now `exclude_field_wrapper` is being passed on also to `formgroup.html`,
         # but it does not break anything.
         context["exclude_field_wrapper"] = True
-        html = self.get_rendered_fields(
-            form, form_style, context, template_pack, **kwargs
-        )
+        html = self.get_rendered_fields(form, context, template_pack, **kwargs)
         template = self.get_template_name(template_pack)
         context.update({"formgroup": self, "fields_output": html})
         return render_to_string(template, context.flatten())
