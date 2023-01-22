@@ -10,6 +10,7 @@ Welcome to crispy-bulma's documentation!
    usage
    form_helper
    layouts
+   widgets
    contributing
    history
 
