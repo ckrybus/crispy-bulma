@@ -12,7 +12,7 @@
 {% endif %}
   <div class="file has-name">
     <label class="file-label">
-      <input type="file" name="{{ widget.name }}"{% include "django/forms/widgets/attrs.html" %} >
+      <input type="file" name="{{ widget.name }}"{% include "django/forms/widgets/attrs.html" %} data-target="{{ widget.attrs.id }}_{{ widget.name }}">
       <span class="file-cta">
         <span class="file-icon">
           <i class="fas fa-upload"></i>
