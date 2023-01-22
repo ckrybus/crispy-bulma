@@ -30,7 +30,7 @@ Requirements
 
 Officially supported versions:
 
-* Django: 2.2, 3.2, 4.0
+* Django: 3.2, 4.0
 * Python 3.7, 3.8, 3.9, 3.10
 * django-crispy-forms 1.12, 1.13, 1.14
 * Bulma.css 0.9.4
