@@ -128,9 +128,6 @@ def test_form_with_helper_without_layout(settings):
     assert 'id="this-form-rocks"' in html
     assert 'action="%s"' % reverse("simpleAction") in html
 
-    if settings.CRISPY_TEMPLATE_PACK == "uni_form":
-        assert 'class="uniForm' in html
-
     assert "ERRORS" in html
     assert "<li>Passwords dont match</li>" in html
 
@@ -333,8 +330,6 @@ def test_formset_with_helper_without_layout(settings):
     assert 'method="post"' in html
     assert 'id="thisFormsetRocks"' in html
     assert 'action="%s"' % reverse("simpleAction") in html
-    if settings.CRISPY_TEMPLATE_PACK == "uni_form":
-        assert 'class="uniForm' in html
 
 
 def test_CSRF_token_POST_form():
