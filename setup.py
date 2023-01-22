@@ -11,7 +11,7 @@ with open("HISTORY.rst") as history_file:
 
 setup(
     name="crispy-bulma",
-    version="0.8.0",
+    version="0.8.1",
     description="Bulma template pack for django-crispy-forms",
     long_description=readme + "\n\n" + history,
     author="Christoph Krybus",
