@@ -13,7 +13,7 @@
 {% endif %}
 
 <div class="control{% if control_class %} {{ control_class }}{% endif %}">
-  <button {{ button.flat_attrs|safe }}>{{ button.content|safe }}</button>
+  <button {{ button.flat_attrs }}>{{ button.content|safe }}</button>
 </div>
 
 {% if not exclude_field_wrapper %}
