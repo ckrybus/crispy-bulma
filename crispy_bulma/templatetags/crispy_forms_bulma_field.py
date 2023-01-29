@@ -164,13 +164,13 @@ def crispy_field(parser, token):
     """
     {% crispy_field field attrs %}
     """
-    token = token.split_contents()
-    field = token.pop(1)
+    tokens = token.split_contents()
+    field = tokens.pop(1)
     attrs = {}
 
     # We need to pop tag name, or pairwise would fail
-    token.pop(0)
-    for attribute_name, value in pairwise(token):
+    tokens.pop(0)
+    for attribute_name, value in pairwise(tokens):
         attrs[attribute_name] = value
 
     return CrispyBulmaFieldNode(field, attrs)
