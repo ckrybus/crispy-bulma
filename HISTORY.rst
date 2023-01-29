@@ -3,8 +3,8 @@ History
 =======
 
 
-Unreleased
-----------
+0.8.2 (2023-01-29)
+------------------
 
 * Add support for Django 4.1
 * Add support for Python 3.11
