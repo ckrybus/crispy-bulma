@@ -7,6 +7,7 @@ Unreleased
 ----------
 
 * Add support for Django 4.1
+* Add support for Python 3.11
 
 
 0.8.1 (2023-01-22)
