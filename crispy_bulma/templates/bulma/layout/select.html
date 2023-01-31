@@ -1,11 +1,7 @@
 {% load crispy_forms_bulma_field %}
 
 <div class="control">
-  <div class="select{% if field|is_selectmultiple %} is-multiple{%endif%}">
-    {% if field.errors %}
-        {% crispy_field field "class" "is-danger" %}
-    {% else %}
-        {% crispy_field field %}
-    {% endif %}
+  <div class="select{% if field|is_selectmultiple %} is-multiple{%endif%}{% if field.errors %} is-danger{% endif %}">
+    {% crispy_field field %}
   </div>
 </div>

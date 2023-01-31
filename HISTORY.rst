@@ -3,6 +3,12 @@ History
 =======
 
 
+0.8.3 (2023-01-31)
+------------------
+
+* Fix Select widget error state rendering (the red border was missing).
+
+
 0.8.2 (2023-01-29)
 ------------------
 
