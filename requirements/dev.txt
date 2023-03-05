@@ -1,5 +1,5 @@
 pre-commit
-Sphinx
+Sphinx>=5
 bump2version
 twine
 wheel
