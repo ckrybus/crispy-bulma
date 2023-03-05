@@ -1,0 +1,7 @@
+[tool.isort]
+profile = "black"
+default_section = "THIRDPARTY"
+known_django = "django"
+known_first_party = ["crispy_bulma", "crispy_forms"]
+sections = ["FUTURE", "STDLIB", "THIRDPARTY", "DJANGO", "FIRSTPARTY", "LOCALFOLDER"]
+skip = [".tox", "docs"]
