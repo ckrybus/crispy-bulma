@@ -13,14 +13,12 @@ jobs:
       matrix:
         python-version: [3.7, 3.8, 3.9, "3.10", "3.11"]
         django: [3.2.*, 4.0.*, 4.1.*]
-        crispy-forms: [1.12.*, 1.13.*, 1.14.*]
+        crispy-forms: [2.0.*]
         exclude:
           - python-version: 3.7
             django: 4.0.*
           - python-version: 3.7
             django: 4.1.*
-          - python-version: "3.11"
-            django: 2.2.*
           - python-version: "3.11"
             django: 3.2.*
           - python-version: "3.11"

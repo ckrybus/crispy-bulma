@@ -20,7 +20,7 @@ setup(
     url="https://github.com/ckrybus/crispy-bulma",
     license="MIT",
     packages=["crispy_bulma"],
-    install_requires=["Django>=3.2", "django-crispy-forms>=1.12.0"],
+    install_requires=["Django>=3.2", "django-crispy-forms>=2.0"],
     extras_require={"test": ["pytest", "pytest-django"]},
     tests_require=["crispy-bulma[test]"],
     python_requires=">=3.7",

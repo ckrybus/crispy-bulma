@@ -6,6 +6,8 @@ History
 Unreleased
 ----------
 
+* Drop support for django-crispy-forms 1.12.0, 1.13.0 and 1.14.0
+* Add support for django-crispy-forms 2.0
 * Drop support for Django 2.2
 
 
