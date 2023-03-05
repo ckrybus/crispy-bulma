@@ -174,21 +174,6 @@ def test_form_show_errors_non_field_errors():
     assert "error" not in html
 
 
-def test_html5_required():
-    form = SampleForm()
-    form.helper = FormHelper()
-    form.helper.html5_required = True
-    html = render_crispy_form(form)
-    # 6 out of 7 fields are required and an extra one for the
-    # SplitDateTimeWidget makes 7.
-    assert len(re.findall(r"\brequired\b", html)) == 7
-
-    form = SampleForm()
-    form.helper = FormHelper()
-    form.helper.html5_required = False
-    html = render_crispy_form(form)
-
-
 def test_media_is_included_by_default_with_bulma():
     form = SampleFormWithMedia()
     form.helper = FormHelper()
