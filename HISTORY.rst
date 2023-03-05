@@ -3,8 +3,8 @@ History
 =======
 
 
-Unreleased
-----------
+0.9.0 (2023-03-05)
+------------------
 
 * Drop support for django-crispy-forms 1.12.0, 1.13.0 and 1.14.0
 * Add support for django-crispy-forms 2.0
