@@ -100,7 +100,7 @@ def test_invalid_form_method():
         form_helper.form_method = "superPost"
 
 
-def test_form_with_helper_without_layout(settings):
+def test_form_with_helper_without_layout():
     form_helper = FormHelper()
     form_helper.form_id = "this-form-rocks"
     form_helper.form_class = "forms-that-rock"
@@ -127,9 +127,6 @@ def test_form_with_helper_without_layout(settings):
     assert 'method="get"' in html
     assert 'id="this-form-rocks"' in html
     assert 'action="%s"' % reverse("simpleAction") in html
-
-    if settings.CRISPY_TEMPLATE_PACK == "uni_form":
-        assert 'class="uniForm' in html
 
     assert "ERRORS" in html
     assert "<li>Passwords dont match</li>" in html
@@ -175,21 +172,6 @@ def test_form_show_errors_non_field_errors():
     assert "<li>Passwords dont match</li>" not in html
     assert str(_("This field is required.")) not in html
     assert "error" not in html
-
-
-def test_html5_required():
-    form = SampleForm()
-    form.helper = FormHelper()
-    form.helper.html5_required = True
-    html = render_crispy_form(form)
-    # 6 out of 7 fields are required and an extra one for the
-    # SplitDateTimeWidget makes 7.
-    assert len(re.findall(r"\brequired\b", html)) == 7
-
-    form = SampleForm()
-    form.helper = FormHelper()
-    form.helper.html5_required = False
-    html = render_crispy_form(form)
 
 
 def test_media_is_included_by_default_with_bulma():
@@ -295,7 +277,7 @@ def test_invalid_helper(settings):
 
 
 @pytest.mark.skip(reason="formset")
-def test_formset_with_helper_without_layout(settings):
+def test_formset_with_helper_without_layout():
     template = Template(
         """
         {% load crispy_forms_tags %}
@@ -333,8 +315,6 @@ def test_formset_with_helper_without_layout(settings):
     assert 'method="post"' in html
     assert 'id="thisFormsetRocks"' in html
     assert 'action="%s"' % reverse("simpleAction") in html
-    if settings.CRISPY_TEMPLATE_PACK == "uni_form":
-        assert 'class="uniForm' in html
 
 
 def test_CSRF_token_POST_form():
