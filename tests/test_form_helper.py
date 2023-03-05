@@ -100,7 +100,7 @@ def test_invalid_form_method():
         form_helper.form_method = "superPost"
 
 
-def test_form_with_helper_without_layout(settings):
+def test_form_with_helper_without_layout():
     form_helper = FormHelper()
     form_helper.form_id = "this-form-rocks"
     form_helper.form_class = "forms-that-rock"
@@ -292,7 +292,7 @@ def test_invalid_helper(settings):
 
 
 @pytest.mark.skip(reason="formset")
-def test_formset_with_helper_without_layout(settings):
+def test_formset_with_helper_without_layout():
     template = Template(
         """
         {% load crispy_forms_tags %}
