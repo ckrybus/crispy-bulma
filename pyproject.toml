@@ -9,3 +9,4 @@ skip = [".tox", "docs"]
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "tests.test_settings"
 norecursedirs = [".git", ".tox", "docs"]
+pythonpath = "."
