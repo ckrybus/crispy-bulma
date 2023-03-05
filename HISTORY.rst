@@ -3,6 +3,12 @@ History
 =======
 
 
+Unreleased
+----------
+
+* Drop support for Django 2.2
+
+
 0.8.3 (2023-01-31)
 ------------------
 
