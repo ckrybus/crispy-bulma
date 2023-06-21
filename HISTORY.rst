@@ -7,6 +7,7 @@ Unreleased
 ----------
 
 * Drop support for Python 3.7
+* Add support for Python 3.12
 
 
 0.9.0 (2023-03-05)
