@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         python-version: [3.8, 3.9, "3.10", "3.11", "3.12-dev"]
-        django: [3.2.*, 4.0.*, 4.1.*]
+        django: [3.2.*, 4.0.*, 4.1.*, 4.2.*]
         crispy-forms: [2.0.*]
         exclude:
           - python-version: "3.11"
