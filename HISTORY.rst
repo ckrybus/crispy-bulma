@@ -3,6 +3,12 @@ History
 =======
 
 
+Unreleased
+----------
+
+* Drop support for Python 3.7
+
+
 0.9.0 (2023-03-05)
 ------------------
 

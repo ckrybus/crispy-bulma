@@ -31,7 +31,7 @@ Requirements
 Officially supported versions:
 
 * Django: 3.2, 4.0, 4.1
-* Python 3.7, 3.8, 3.9, 3.10, 3.11
+* Python 3.8, 3.9, 3.10, 3.11
 * django-crispy-forms 2.0
 * Bulma.css 0.9.4
 

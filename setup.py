@@ -23,7 +23,7 @@ setup(
     install_requires=["Django>=3.2", "django-crispy-forms>=2.0"],
     extras_require={"test": ["pytest", "pytest-django"]},
     tests_require=["crispy-bulma[test]"],
-    python_requires=">=3.7",
+    python_requires=">=3.8",
     project_urls={
         "Documentation": "https://crispy-bulma.readthedocs.io/en/latest/",
         "Source": "https://github.com/ckrybus/crispy-bulma",
@@ -43,7 +43,6 @@ setup(
         "Operating System :: OS Independent",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
