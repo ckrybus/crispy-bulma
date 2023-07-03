@@ -6,7 +6,6 @@ from django.template import Context, Template
 from django.test import override_settings
 
 from crispy_forms.exceptions import CrispyError
-from crispy_forms.templatetags.crispy_forms_field import crispy_addon
 
 from .forms import SampleForm
 
@@ -208,23 +207,3 @@ def test_crispy_field_and_class_converters():
     html = template.render(c)
     assert "error" in html
     assert "inputtext" in html
-
-
-@pytest.mark.skip(reason="prepended_appended_text")
-def test_crispy_addon():
-    test_form = SampleForm()
-    field_instance = test_form.fields["email"]
-    bound_field = BoundField(test_form, field_instance, "email")
-
-    assert "input-group-text" in crispy_addon(
-        bound_field, prepend="Work", append="Primary"
-    )
-    assert "input-group-text" in crispy_addon(
-        bound_field, prepend="Work", append="Secondary"
-    )
-
-    # errors
-    with pytest.raises(TypeError):
-        crispy_addon()
-    with pytest.raises(TypeError):
-        crispy_addon(bound_field)

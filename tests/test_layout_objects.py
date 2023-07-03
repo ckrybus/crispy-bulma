@@ -7,17 +7,7 @@ from django.utils.translation import gettext as _
 
 from crispy_bulma.bulma import InlineCheckboxes, InlineRadios
 from crispy_bulma.layout import IconField
-from crispy_forms.bootstrap import (
-    Alert,
-    AppendedText,
-    FieldWithButtons,
-    InlineField,
-    PrependedAppendedText,
-    PrependedText,
-    StrictButton,
-    Tab,
-    TabHolder,
-)
+from crispy_forms.bootstrap import Tab, TabHolder
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import HTML, Field, Layout, MultiWidgetField
 from crispy_forms.utils import render_crispy_form
@@ -211,32 +201,6 @@ def test_custom_django_widget():
     assert 'class="checkbox"' in html
 
 
-@pytest.mark.skip(reason="prepended_appended_text")
-def test_prepended_appended_text():
-    test_form = SampleForm()
-    test_form.helper = FormHelper()
-    test_form.helper.layout = Layout(
-        PrependedAppendedText(
-            "email", "@<>&", "gmail.com", css_class="form-control-lg"
-        ),
-        AppendedText("password1", "#"),
-        PrependedText("password2", "$"),
-    )
-    assert parse_form(test_form) == parse_expected("test_prepended_appended_text.html")
-
-
-@pytest.mark.skip(reason="bootstrap")
-def test_alert():
-    test_form = SampleForm()
-    test_form.helper = FormHelper()
-    test_form.helper.form_tag = False
-    test_form.helper.layout = Layout(
-        Alert(content="Testing...", css_class="alert-primary"),
-        Alert(content="Testing...", css_class="alert-primary", dismiss=False),
-    )
-    assert parse_form(test_form) == parse_expected("alert.html")
-
-
 @pytest.mark.skip(reason="bootstrap")
 def test_tab_and_tab_holder():
     test_form = SampleForm()
@@ -303,10 +267,6 @@ def test_tab_helper_reuse():
     test_form = SampleForm(data={"val1": "foo"})
     html = render_crispy_form(test_form)
     tab_class = "tab-pane"
-    # if settings.CRISPY_TEMPLATE_PACK == 'bootstrap4':
-    # tab_class = 'nav-link'
-    # else:
-    # tab_class = 'tab-pane'
     # tab 1 should not be active
     assert html.count('<div id="one" \n    class="{} active'.format(tab_class)) == 0
     # tab 2 should be active
@@ -322,38 +282,6 @@ def test_radio_attrs():
     assert 'class="second"' in html
 
 
-@pytest.mark.skip(reason="button")
-def test_field_with_buttons():
-    form = SampleForm()
-    form.helper = FormHelper()
-    form.helper.layout = Layout(
-        FieldWithButtons(
-            Field("password1", css_class="span4"),
-            StrictButton("Go!", css_id="go-button"),
-            StrictButton("No!", css_class="extra"),
-            StrictButton("Test", type="submit", name="whatever", value="something"),
-            css_class="extra",
-            autocomplete="off",
-        )
-    )
-    html = render_crispy_form(form)
-
-    form_group_class = "mb-3"
-
-    assert html.count('class="%s extra"' % form_group_class) == 1
-    assert html.count('autocomplete="off"') == 1
-    assert html.count('class="span4') == 1
-    assert html.count('id="go-button"') == 1
-    assert html.count("Go!") == 1
-    assert html.count("No!") == 1
-    assert html.count('class="btn"') == 2
-    assert html.count('class="btn extra"') == 1
-    assert html.count('type="submit"') == 1
-    assert html.count('name="whatever"') == 1
-    assert html.count('value="something"') == 1
-
-
-@pytest.mark.skip(reason="prepended_appended_text")
 def test_hidden_fields():
     form = SampleForm()
     # All fields hidden
@@ -362,15 +290,13 @@ def test_hidden_fields():
 
     form.helper = FormHelper()
     form.helper.layout = Layout(
-        AppendedText("password1", "foo"),
-        PrependedText("password2", "bar"),
-        PrependedAppendedText("email", "bar"),
+        Field("email"),
         InlineCheckboxes("first_name"),
         InlineRadios("last_name"),
     )
     html = render_crispy_form(form)
-    assert html.count("<input") == 5
-    assert html.count('type="hidden"') == 5
+    assert html.count("<input") == 3
+    assert html.count('type="hidden"') == 3
     assert html.count("<label") == 0
 
 
@@ -403,18 +329,6 @@ def test_multiple_checkboxes_unique_ids():
     for id_suffix in expected_ids:
         expected_str = f'id="id_{id_suffix}"'
         assert html.count(expected_str) == 1
-
-
-@pytest.mark.skip(reason="bootstrap")
-def test_inline_field():
-    form = SampleForm()
-    form.helper = FormHelper()
-    form.helper.layout = Layout(
-        InlineField("first_name", wrapper_class="col-4"),
-        InlineField("is_company", wrapper_class="col-4"),
-    )
-    form.helper.form_class = "row row-cols-lg-auto align-items-center"
-    assert parse_form(form) == parse_expected("test_inline_field.html")
 
 
 @pytest.mark.skip(reason="bootstrap")

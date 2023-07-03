@@ -1,5 +1,3 @@
-import re
-
 import pytest
 
 from django import forms
@@ -10,15 +8,8 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
 from crispy_bulma.layout import Button, Hidden, Reset, Submit
-from crispy_forms.bootstrap import (
-    AppendedText,
-    FieldWithButtons,
-    PrependedAppendedText,
-    PrependedText,
-    StrictButton,
-)
 from crispy_forms.helper import FormHelper, FormHelpersException
-from crispy_forms.layout import Layout
+from crispy_forms.layout import Field, Layout
 from crispy_forms.templatetags.crispy_forms_tags import CrispyFormNode
 from crispy_forms.utils import render_crispy_form
 
@@ -490,8 +481,7 @@ def test_helper_std_field_template_no_layout():
         assert html.count('id="div_id_%s"' % field) == 1
 
 
-@pytest.mark.skip(reason="prepended_appended_text")
-def test_bootstrap_form_show_errors_bs5():
+def test_form_show_errors():
     form = SampleForm(
         {
             "email": "invalidemail",
@@ -503,11 +493,11 @@ def test_bootstrap_form_show_errors_bs5():
     )
     form.helper = FormHelper()
     form.helper.layout = Layout(
-        AppendedText("email", "whatever"),
-        PrependedText("first_name", "blabla"),
-        PrependedAppendedText("last_name", "foo", "bar"),
-        AppendedText("password1", "whatever"),
-        PrependedText("password2", "blabla"),
+        Field("email"),
+        Field("first_name"),
+        Field("last_name"),
+        Field("password1"),
+        Field("password2"),
     )
     form.is_valid()
 
@@ -520,91 +510,6 @@ def test_bootstrap_form_show_errors_bs5():
     assert html.count("error") == 0
 
 
-@pytest.mark.skip(reason="prepended_appended_text")
-def test_error_text_inline():
-    form = SampleForm({"email": "invalidemail"})
-    form.helper = FormHelper()
-    layout = Layout(
-        AppendedText("first_name", "wat"),
-        PrependedText("email", "@"),
-        PrependedAppendedText("last_name", "@", "wat"),
-    )
-    form.helper.layout = layout
-    form.is_valid()
-    html = render_crispy_form(form)
-
-    help_class = "invalid-feedback"
-    help_tag_name = "div"
-
-    matches = re.findall(
-        r'<span id="error_\d_\w*" class="%s"' % help_class, html, re.MULTILINE
-    )
-    assert len(matches) == 3
-
-    form = SampleForm({"email": "invalidemail"})
-    form.helper = FormHelper()
-    form.helper.layout = layout
-    form.helper.error_text_inline = False
-    html = render_crispy_form(form)
-
-    help_class = "invalid-feedback"
-    help_tag_name = "p"
-
-    matches = re.findall(
-        r'<{} id="error_\d_\w*" class="{}"'.format(help_tag_name, help_class),
-        html,
-        re.MULTILINE,
-    )
-    assert len(matches) == 3
-
-
-@pytest.mark.skip(reason="bootstrap specific")
-def test_error_and_help_inline():
-    form = SampleForm({"email": "invalidemail"})
-    form.helper = FormHelper()
-    form.helper.error_text_inline = False
-    form.helper.help_text_inline = True
-    form.helper.layout = Layout("email")
-    form.is_valid()
-    html = render_crispy_form(form)
-
-    # Check that help goes before error, otherwise CSS won't work
-    help_position = html.find('<span id="hint_id_email" class="help-inline">')
-    error_position = html.find('<p id="error_1_id_email" class="invalid-feedback">')
-    assert help_position < error_position
-
-    # Viceversa
-    form = SampleForm({"email": "invalidemail"})
-    form.helper = FormHelper()
-    form.helper.error_text_inline = True
-    form.helper.help_text_inline = False
-    form.helper.layout = Layout("email")
-    form.is_valid()
-    html = render_crispy_form(form)
-
-    # Check that error goes before help, otherwise CSS won't work
-    error_position = html.find('<span id="error_1_id_email" class="help-inline">')
-    help_position = html.find('<small id="hint_id_email" class="form-text text-muted">')
-    assert error_position < help_position
-
-
-@pytest.mark.skip(reason="button")
-def test_form_show_labels():
-    form = SampleForm()
-    form.helper = FormHelper()
-    form.helper.layout = Layout(
-        "password1",
-        FieldWithButtons("password2", StrictButton("Confirm")),
-        PrependedText("first_name", "Mr."),
-        AppendedText("last_name", "@"),
-        PrependedAppendedText("datetime_field", "on", "secs"),
-    )
-    form.helper.form_show_labels = False
-
-    html = render_crispy_form(form)
-    assert html.count("<label") == 0
-
-
 def test_label_class_bulma():
     form = SampleForm()
     form.helper = FormHelper()
@@ -613,22 +518,6 @@ def test_label_class_bulma():
     assert 'class="label is-pulled-left"' in html
     # there are 7 form fields, but one of them is a checkbox without a label
     assert html.count("is-pulled-left") == 6
-
-
-@pytest.mark.skip(reason="bootstrap")
-def test_form_group_with_form_inline_bs5():
-    form = SampleForm()
-    form.helper = FormHelper()
-    html = render_crispy_form(form)
-    assert '<div class="mb-3">' in html
-
-    # .row class shouldn't be together with .form-group in inline forms
-    form = SampleForm()
-    form.helper = FormHelper()
-    form.helper.form_class = "form-inline"
-    form.helper.field_template = "bootstrap5/layout/inline_field.html"
-    html = render_crispy_form(form)
-    assert '<div class="mb-3 row">' not in html
 
 
 def test_passthrough_context():

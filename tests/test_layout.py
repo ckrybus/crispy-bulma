@@ -7,8 +7,7 @@ from django.template import Context, Template
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
-from crispy_bulma.layout import Button, Column, FormGroup, Row, Submit
-from crispy_forms.bootstrap import Field, FieldWithButtons, StrictButton
+from crispy_bulma.layout import Button, Column, Field, FormGroup, Row, Submit
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import HTML, Fieldset, Layout
 from crispy_forms.utils import render_crispy_form
@@ -272,37 +271,6 @@ def test_column_has_css_classes():
     assert html.count("col-md") == 1
 
 
-@pytest.mark.skip(reason="bootstrap")
-def test_bs5_field_with_buttons_css_classes():
-    form = SampleForm()
-    form.helper = FormHelper()
-    form.helper.add_layout(
-        Layout(
-            Column(
-                FieldWithButtons(
-                    "email",
-                    HTML("""<a role='button' class='btn btn-primary'>click me</a>"""),
-                )
-            ),
-        )
-    )
-
-    assert parse_form(form) == parse_expected("field_with_buttons.html")
-
-    form = SampleForm3({})
-    form.helper = FormHelper()
-    form.helper.add_layout(
-        Layout(
-            Column(
-                FieldWithButtons(
-                    "email", StrictButton("Go!", css_class="btn-outline-secondary")
-                )
-            ),
-        )
-    )
-    assert parse_form(form) == parse_expected("field_with_buttons_failing.html")
-
-
 @pytest.mark.skip(reason="formset")
 def test_formset_layout():
     SampleFormSet = formset_factory(SampleForm, extra=3)
@@ -479,17 +447,6 @@ def test_choice_with_none_is_selected():
     assert "checked" in html
 
 
-@pytest.mark.skip(reason="bootstrap")
-def test_bootstrap5_form_inline():
-    form = SampleForm()
-    form.helper = FormHelper()
-    form.helper.form_class = "form-inline"
-    form.helper.field_template = "bootstrap5/layout/inline_field.html"
-    form.helper.layout = Layout("email", "password1", "last_name")
-    form.helper.form_class = "row row-cols-lg-auto"
-    assert parse_form(form) == parse_expected("test_bootstrap5_form_inline.html")
-
-
 def test_update_attributes_class():
     form = SampleForm()
     form.helper = FormHelper()
@@ -575,7 +532,6 @@ def test_tabular_formset_layout():
     )
 
 
-@pytest.mark.skip(reason="bootstrap")
 def test_flat_attrs_safe():
     form = SampleForm()
     form.helper = FormHelper()
