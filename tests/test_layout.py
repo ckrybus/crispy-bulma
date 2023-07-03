@@ -1,5 +1,6 @@
 import pytest
 
+import django
 from django import forms
 from django.forms.models import formset_factory, modelformset_factory
 from django.middleware.csrf import _get_new_csrf_string
@@ -548,7 +549,10 @@ def test_help_text_is_not_escaped():
     # in django this value is also not HTML-escaped in automatically-generated forms
     form = HelpTextForm()
     form.helper = FormHelper()
-    assert parse_form(form) == parse_expected("help_text_escape.html")
+    if django.VERSION < (4, 2):
+        assert parse_form(form) == parse_expected("help_text_escape_legacy.html")
+    else:
+        assert parse_form(form) == parse_expected("help_text_escape.html")
 
 
 def test_form_group_form():
