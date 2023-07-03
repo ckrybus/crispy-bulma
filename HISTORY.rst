@@ -3,8 +3,8 @@ History
 =======
 
 
-Unreleased
-----------
+0.10.0 (2023-07-03)
+-------------------
 
 * Drop support for Python 3.7
 * Add support for Python 3.12
