@@ -549,7 +549,8 @@ def test_help_text_is_not_escaped():
     # in django this value is also not HTML-escaped in automatically-generated forms
     form = HelpTextForm()
     form.helper = FormHelper()
-    if django.VERSION < (4, 2):
+
+    if django.VERSION >= (4, 0) and django.VERSION < (4, 1):
         assert parse_form(form) == parse_expected("help_text_escape_legacy.html")
     else:
         assert parse_form(form) == parse_expected("help_text_escape.html")
