@@ -551,7 +551,7 @@ def test_help_text_is_not_escaped():
     form.helper = FormHelper()
 
     if django.VERSION < (5, 0):
-        result = "help_text_escape__lt50html"
+        result = "help_text_escape__lt50.html"
     else:
         result = "help_text_escape.html"
     assert parse_form(form) == parse_expected(result)
