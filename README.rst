@@ -30,14 +30,10 @@ Requirements
 
 Officially supported versions:
 
-* Django: 3.2, 4.2
+* Django: 4.2
 * Python 3.8, 3.9, 3.10, 3.11, 3.12
 * django-crispy-forms 2.0
 * Bulma.css 0.9.4
-
-**Django 4.0+ requires crispy-bulma version 0.6.0+ and django-crispy-forms version 1.13+.**
-
-**For django-crispy-forms versions older than 2.0 use crispy-bulma<=0.8.3**
 
 
 Quickstart
