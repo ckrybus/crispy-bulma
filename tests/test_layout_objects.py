@@ -1,5 +1,6 @@
 import pytest
 
+import django
 from django import forms
 from django.template import Context, Template
 from django.utils.translation import activate, deactivate
@@ -28,7 +29,12 @@ def test_email_field():
     form = SampleForm()
     form.helper = FormHelper()
     form.helper.layout = Layout("email")
-    assert parse_form(form) == parse_expected("test_email_field.html")
+
+    if django.VERSION < (5, 0):
+        result = "test_email_field__lt50.html"
+    else:
+        result = "test_email_field.html"
+    assert parse_form(form) == parse_expected(result)
 
 
 def test_field_with_custom_template():

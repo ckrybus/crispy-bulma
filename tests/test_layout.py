@@ -550,10 +550,11 @@ def test_help_text_is_not_escaped():
     form = HelpTextForm()
     form.helper = FormHelper()
 
-    if django.VERSION >= (4, 0) and django.VERSION < (4, 1):
-        assert parse_form(form) == parse_expected("help_text_escape_legacy.html")
+    if django.VERSION < (5, 0):
+        result = "help_text_escape__lt50html"
     else:
-        assert parse_form(form) == parse_expected("help_text_escape.html")
+        result = "help_text_escape.html"
+    assert parse_form(form) == parse_expected(result)
 
 
 def test_form_group_form():
@@ -567,7 +568,16 @@ def test_form_group_form():
             Button("Reject", css_class="is-danger"),
         ),
     )
-    assert parse_form(form) == parse_expected("test_form_group.html")
+
+    if django.VERSION < (5, 0):
+        result = "test_form_group__lt50.html"
+    else:
+        result = "test_form_group.html"
+    assert parse_form(form) == parse_expected(result)
 
     form.helper.form_horizontal = True
-    assert parse_form(form) == parse_expected("test_form_group_horizontal.html")
+    if django.VERSION < (5, 0):
+        result = "test_form_group_horizontal__lt50.html"
+    else:
+        result = "test_form_group_horizontal.html"
+    assert parse_form(form) == parse_expected(result)
