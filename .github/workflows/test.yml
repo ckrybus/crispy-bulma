@@ -12,15 +12,15 @@ jobs:
     strategy:
       matrix:
         python-version: [3.8, 3.9, "3.10", "3.11", "3.12"]
-        django: [4.2.*, "5.0rc1"]
+        django: [4.2.*, "5.0"]
         crispy-forms: [2.0.*, 2.1.*]
         exclude:
           - python-version: "3.12"
             django: "4.2"
           - python-version: "3.8"
-            django: "5.0rc1"
+            django: "5.0"
           - python-version: "3.9"
-            django: "5.0rc1"
+            django: "5.0"
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.python-version }}
