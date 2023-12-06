@@ -9,6 +9,8 @@ Unreleased
 * Add support for Django 5.0
 * Drop support for Django 3.2, 4.0 and 4.1
 * Add support for django-crispy-forms 2.1
+* BREAKING CHANGE: help text id attribute is now differently named:
+  ``hint_{{ field.auto_id }}`` -> ``{{ field.auto_id }}_helptext``
 
 
 0.10.0 (2023-07-03)
