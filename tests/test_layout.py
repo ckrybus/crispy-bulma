@@ -201,7 +201,6 @@ def test_layout_fieldset_row_html_with_unicode_fieldnames():
     assert "testLink" in html
 
 
-@pytest.mark.skip(reason="fieldset")
 def test_change_layout_dynamically_delete_field():
     template = Template(
         """
@@ -240,7 +239,6 @@ def test_change_layout_dynamically_delete_field():
     assert "email" not in html
 
 
-@pytest.mark.skip(reason="fieldset")
 def test_column_has_css_classes():
     template = Template(
         """
@@ -269,10 +267,9 @@ def test_column_has_css_classes():
     html = template.render(c)
 
     assert html.count("formColumn") == 0
-    assert html.count("col-md") == 1
+    assert html.count("column") == 1
 
 
-@pytest.mark.skip(reason="formset")
 def test_formset_layout():
     SampleFormSet = formset_factory(SampleForm, extra=3)
     formset = SampleFormSet()
@@ -332,12 +329,11 @@ def test_formset_layout():
     assert "Item 2" in html
     assert "Item 3" in html
     assert html.count("Note for first form only") == 1
-    assert html.count("row") == 3
+    assert html.count("columns") == 3
 
-    assert html.count("mb-3") == 21
+    assert html.count("control") == 18
 
 
-@pytest.mark.skip(reason="formset")
 def test_modelformset_layout():
     CrispyModelFormSet = modelformset_factory(
         CrispyTestModel, form=SampleForm4, extra=3
@@ -375,7 +371,6 @@ def test_modelformset_layout():
     assert html.count("password") == 0
 
 
-@pytest.mark.skip(reason="fieldset")
 def test_i18n():
     template = Template(
         """
