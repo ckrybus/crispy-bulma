@@ -512,7 +512,7 @@ def test_tabular_formset_layout():
     SampleFormSet = formset_factory(SampleForm, extra=3)
     formset = SampleFormSet()
     formset.helper = FormHelper()
-    formset.helper.template = "bootstrap5/table_inline_formset.html"
+    formset.helper.template = "bulma/table_inline_formset.html"
     assert parse_form(formset) == parse_expected("test_tabular_formset_layout.html")
 
     SampleFormSet = formset_factory(SampleForm, extra=3)
@@ -522,7 +522,7 @@ def test_tabular_formset_layout():
     }
     formset = SampleFormSet(data)
     formset.helper = FormHelper()
-    formset.helper.template = "bootstrap5/table_inline_formset.html"
+    formset.helper.template = "bulma/table_inline_formset.html"
     assert parse_form(formset) == parse_expected(
         "test_tabular_formset_layout_failing.html"
     )
