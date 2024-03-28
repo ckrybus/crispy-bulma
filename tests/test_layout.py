@@ -137,7 +137,6 @@ def test_context_pollution():
     assert html.count('name="is_company"') == 1
 
 
-@pytest.mark.skip(reason="fieldset")
 def test_layout_fieldset_row_html_with_unicode_fieldnames():
     form_helper = FormHelper()
     form_helper.add_layout(
@@ -154,8 +153,8 @@ def test_layout_fieldset_row_html_with_unicode_fieldnames():
                 "User Data",
                 "email",
                 Row(
-                    "password1",
-                    "password2",
+                    Column("password1"),
+                    Column("password2"),
                     css_id="row_passwords",
                     css_class="rows",
                 ),
@@ -194,8 +193,8 @@ def test_layout_fieldset_row_html_with_unicode_fieldnames():
     assert 'id="row_passwords"' in html
     assert html.count("<label") == 6
 
-    assert 'class="row rows"' in html
-    assert 'class="form-label' in html
+    assert 'class="columns rows"' in html
+    assert 'class="label"' in html
 
     assert "Hello!" in html
     assert "testLink" in html
@@ -266,8 +265,7 @@ def test_column_has_css_classes():
     c = Context({"form": form, "form_helper": form_helper})
     html = template.render(c)
 
-    assert html.count("formColumn") == 0
-    assert html.count("column") == 1
+    assert html.count('"column"') == 1
 
 
 def test_formset_layout():
@@ -285,7 +283,7 @@ def test_formset_layout():
             "email",
         ),
         HTML("{% if forloop.first %}Note for first form only{% endif %}"),
-        Row("password1", "password2"),
+        Row(Column("password1"), Column("password2")),
         Fieldset("", "first_name", "last_name"),
     )
 
@@ -389,7 +387,6 @@ def test_i18n():
         ),
     )
     form.helper = form_helper
-
     html = template.render(Context({"form": form}))
     assert html.count("i18n legend") == 1
 
