@@ -507,27 +507,6 @@ def test_html_label_escape():
     assert "&lt;b&gt;escape&lt;/b&gt;" in html
 
 
-@pytest.mark.skip(reason="formset")
-def test_tabular_formset_layout():
-    SampleFormSet = formset_factory(SampleForm, extra=3)
-    formset = SampleFormSet()
-    formset.helper = FormHelper()
-    formset.helper.template = "bulma/table_inline_formset.html"
-    assert parse_form(formset) == parse_expected("test_tabular_formset_layout.html")
-
-    SampleFormSet = formset_factory(SampleForm, extra=3)
-    data = {
-        "form-TOTAL_FORMS": "1",
-        "form-INITIAL_FORMS": "0",
-    }
-    formset = SampleFormSet(data)
-    formset.helper = FormHelper()
-    formset.helper.template = "bulma/table_inline_formset.html"
-    assert parse_form(formset) == parse_expected(
-        "test_tabular_formset_layout_failing.html"
-    )
-
-
 def test_flat_attrs_safe():
     form = SampleForm()
     form.helper = FormHelper()
