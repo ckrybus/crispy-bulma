@@ -3,6 +3,12 @@ History
 =======
 
 
+Unreleased
+----------
+
+* Feature: add support for ``Fieldset``. Feature contributed by DaeronAlagos.
+
+
 0.11.0 (2023-12-06)
 -------------------
 
