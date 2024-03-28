@@ -1,7 +1,8 @@
 {% if formset.non_form_errors %}
-    <div class="alert alert-block alert-danger">
-        {% if formset_error_title %}<h4 class="alert-heading">{{ formset_error_title }}</h4>{% endif %}
-        <ul class="m-0">
+    <div class="notification is-danger">
+        <button class="delete"></button>
+        {% if formset_error_title %}<div class="has-text-weight-bold">{{ formset_error_title }}</div>{% endif %}
+        <ul>
             {{ formset.non_form_errors|unordered_list }}
         </ul>
     </div>
