@@ -39,7 +39,7 @@ Officially supported versions:
 Quickstart
 ----------
 
-Install this plugin using `pip`::
+Install this plugin using ``pip``::
 
     $ pip install crispy-bulma
 
