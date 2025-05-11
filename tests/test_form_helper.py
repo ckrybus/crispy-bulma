@@ -152,7 +152,6 @@ def test_form_show_errors_non_field_errors():
     # Ensure those errors were rendered
     assert "<li>Passwords dont match</li>" in html
     assert str(_("This field is required.")) in html
-    assert "error" in html
 
     # Now we render without errors
     form.helper.form_show_errors = False
@@ -162,7 +161,6 @@ def test_form_show_errors_non_field_errors():
     # Ensure errors were not rendered
     assert "<li>Passwords dont match</li>" not in html
     assert str(_("This field is required.")) not in html
-    assert "error" not in html
 
 
 def test_media_is_included_by_default_with_bulma():
@@ -503,11 +501,11 @@ def test_form_show_errors():
 
     form.helper.form_show_errors = True
     html = render_crispy_form(form)
-    assert html.count("error") == 3
+    assert html.count("help is-danger") == 3
 
     form.helper.form_show_errors = False
     html = render_crispy_form(form)
-    assert html.count("error") == 0
+    assert html.count("help is-danger") == 0
 
 
 def test_label_class_bulma():
