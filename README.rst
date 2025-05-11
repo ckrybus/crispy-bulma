@@ -33,7 +33,7 @@ Officially supported versions:
 * Django: 4.2, 5.0, 5.1, 5.2
 * Python 3.8, 3.9, 3.10, 3.11, 3.12, 3.13
 * django-crispy-forms 2.0, 2.1, 2.2, 2.3, 2.4
-* Bulma.css 0.9.4, 1.0.0
+* Bulma.css >= 0.9.4 (tested until 1.0.4)
 
 
 Quickstart
