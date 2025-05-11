@@ -11,6 +11,7 @@ Unreleased
 * Add support for Django 5.1
 * Add support for Django 5.2
 * Add support for Python 3.13
+* Add support for django-crispy-forms 2.2, 2.3, 2.4
 
 
 0.11.0 (2023-12-06)
