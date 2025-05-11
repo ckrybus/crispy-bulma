@@ -9,6 +9,7 @@ Unreleased
 * Feature: add support for ``Fieldset``. Feature contributed by DaeronAlagos.
 * Add support for Bulma 1.0.0
 * Add support for Django 5.1
+* Add support for Django 5.2
 * Add support for Python 3.13
 
 
