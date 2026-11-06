@@ -5,6 +5,7 @@ from django import forms
 from django.forms.models import formset_factory, modelformset_factory
 from django.middleware.csrf import _get_new_csrf_string
 from django.template import Context, Template
+from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
@@ -552,3 +553,34 @@ def test_form_group_form():
     else:
         result = "test_form_group_horizontal.html"
     assert parse_form(form) == parse_expected(result)
+
+
+def test_field_errors_ids_with_multiple_errors():
+    class MultiErrorForm(forms.Form):
+        email = forms.EmailField(max_length=5)
+
+    form = MultiErrorForm({"email": "not-an-email-at-all"})
+    assert not form.is_valid()
+    assert len(form.errors["email"]) == 2
+
+    # bulma/field.html: the first error carries the id referenced by
+    # Django's aria-describedby, following errors get unique unreferenced ids
+    form.helper = FormHelper()
+    form.helper.layout = Layout(Field("email"))
+    html = render_crispy_form(form)
+    assert '<p id="id_email_error"' in html
+    assert '<p id="id_email_error_2"' in html
+    assert 'class="help is-danger"' in html
+    if django.VERSION >= (5, 0):
+        assert 'aria-describedby="id_email_error"' in html
+
+    # bulma/layout/field_errors.html and bulma/layout/field_errors_block.html
+    for template_name, tag in (
+        ("bulma/layout/field_errors.html", "span"),
+        ("bulma/layout/field_errors_block.html", "p"),
+    ):
+        html = render_to_string(
+            template_name, {"field": form["email"], "form_show_errors": True}
+        )
+        assert f'<{tag} id="id_email_error" class="invalid-feedback">' in html
+        assert f'<{tag} id="id_email_error_2" class="invalid-feedback">' in html
