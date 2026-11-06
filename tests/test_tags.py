@@ -50,12 +50,11 @@ def test_as_crispy_errors_form_with_non_field_errors():
 
     c = Context({"form": form})
     html = template.render(c)
-    assert "notification is-danger" in html
+    assert "message is-danger" in html
     assert "<li>Passwords dont match</li>" in html
     assert "<h3>" not in html
 
 
-@pytest.mark.skip(reason="formset")
 def test_as_crispy_errors_formset_without_non_form_errors():
     template = Template(
         """
@@ -70,10 +69,10 @@ def test_as_crispy_errors_formset_without_non_form_errors():
 
     c = Context({"formset": formset})
     html = template.render(c)
-    assert not ("errorMsg" in html or "alert" in html)
+    assert "message is-danger" not in html
+    assert "notification is-danger" not in html
 
 
-@pytest.mark.skip(reason="formset")
 def test_as_crispy_errors_formset_with_non_form_errors():
     template = Template(
         """
@@ -96,7 +95,10 @@ def test_as_crispy_errors_formset_with_non_form_errors():
 
     c = Context({"formset": formset})
     html = template.render(c)
-    assert "errorMsg" in html or "alert" in html
+    assert 'article class="message is-danger"' in html
+    assert 'div class="message-body"' in html
+    assert "notification is-danger" not in html
+    assert '<button class="delete">' not in html
     assert "<li>Please submit at most 1 form.</li>" in html
     assert "<h3>" not in html
 
@@ -150,7 +152,10 @@ def test_crispy_filter_with_form():
 
     assert "<td>" not in html
     assert "id_is_company" in html
-    assert html.count("<label") == 7
+    # 6 field labels + 1 checkbox label; the SplitDateTimeField group label
+    # is rendered as a <legend> (widget.use_fieldset)
+    assert html.count("<label") == 6
+    assert html.count("<legend") == 1
 
 
 @pytest.mark.skip(reason="formset")

@@ -1,10 +1,10 @@
 {% if form.non_field_errors %}
-    <div class="notification is-danger">
-        <button class="delete"></button>
-
+    <article class="message is-danger">
+      <div class="message-body">
         {% if form_error_title %}<div class="has-text-weight-bold">{{ form_error_title }}</div>{% endif %}
         <ul>
             {{ form.non_field_errors|unordered_list }}
         </ul>
-    </div>
+      </div>
+    </article>
 {% endif %}
