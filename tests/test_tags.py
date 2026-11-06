@@ -152,7 +152,10 @@ def test_crispy_filter_with_form():
 
     assert "<td>" not in html
     assert "id_is_company" in html
-    assert html.count("<label") == 7
+    # 6 field labels + 1 checkbox label; the SplitDateTimeField group label
+    # is rendered as a <legend> (widget.use_fieldset)
+    assert html.count("<label") == 6
+    assert html.count("<legend") == 1
 
 
 @pytest.mark.skip(reason="formset")
