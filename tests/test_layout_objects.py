@@ -128,7 +128,7 @@ def test_html_with_carriage_returns(settings):
         )
     )
     html = render_crispy_form(test_form)
-    assert html.count("\n") == 24
+    assert html.count("\n") == 25
 
 
 def test_i18n():
