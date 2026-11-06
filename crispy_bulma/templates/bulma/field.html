@@ -53,7 +53,7 @@
 {% if not exclude_field_wrapper %}
       {% if form_show_errors %}
         {% for error in field.errors %}
-          <p id="{% if forloop.first %}{{ field.auto_id }}_error{% else %}error_{{ forloop.counter }}_{{ field.auto_id }}{% endif %}"
+          <p id="{{ field.auto_id }}_error{% if not forloop.first %}_{{ forloop.counter }}{% endif %}"
              class="help is-danger">
             {{ error }}
           </p>
